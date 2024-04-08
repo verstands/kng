@@ -27,13 +27,13 @@ const Login = () => {
         navigate('/dashboad');
       })
       .catch(() => {
-        navigate('/dashboad');
-
+        // Gérer l'échec de la connexion ici si nécessaire
       })
       .finally(() => {
         setLoading(false);
       });
   };
+  
   return (
     <div className="container">
       <div className="authentication-wrapper authentication-basic container-p-y">

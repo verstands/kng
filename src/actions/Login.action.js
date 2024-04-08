@@ -5,19 +5,20 @@ export const LOGIN_USER = "LOGIN_USER";
 
 
 export const getLogin = (formData) => {
-  return (dispatch) => {
-    return axioClient.post(`SignInUser`, formData).then((response) => {
+  return async (dispatch) => {
+    try {
+      const response = await axioClient.post(`SignInUser`, formData);
       const token = response.data.token; 
       localStorage.setItem('token', token);
-      localStorage.setItem('ville', response.data.data.id_ville);
-      dispatch({ type: LOGIN_USER, payload: response.data.data });
-    }).catch((error) => {
+      localStorage.setItem('data', JSON.stringify(response.data.data));
+      return response.data; // Retourne les données si la connexion réussit
+    } catch (error) {
       Swal.fire({
         icon: "error",
         title: `${error.response.data.message}`,
         text: "Veuillez vérifier vos informations de connexion.",
       });
-      throw error;
-    });
+      throw error; // Renvoie l'erreur pour le traitement ultérieur
+    }
   };
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Spinner from '../Components/Spinner';
 import { Link } from 'react-router-dom';
-import { getEntre, getEntreJourne } from '../actions/EntreAction';
+import { getEntre, getEntreJourne, getEntreJourneKinshasa, getEntreKinshasa } from '../actions/EntreAction';
 import EntrerTable from '../Components/EntrerTable';
 import { getDepense } from '../actions/DepenseAction';
 import DepnseTable from '../Components/DepnseTable';
@@ -27,7 +27,7 @@ const Sortir = () => {
     }, []);
 
     useEffect(() => {
-        getEntre(dataId).then((membre) => {
+        getEntreKinshasa().then((membre) => {
             setetatData(membre);
             setloading(false)
         }).catch((error) => {
@@ -36,7 +36,7 @@ const Sortir = () => {
     }, []);
 
     useEffect(() => {
-        getEntreJourne(dataId).then((membre) => {
+        getEntreJourneKinshasa().then((membre) => {
             setetatDataJ(membre);
             setloading(false)
         }).catch((error) => {

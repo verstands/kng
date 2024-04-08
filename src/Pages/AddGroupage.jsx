@@ -5,7 +5,7 @@ const AddGroupage = () => {
     <>
         <div className='container mt-4'>
             <div class="card mb-4">
-                <h5 class="card-header">Modifié le client : </h5>
+                <h5 class="card-header">Creer un Groupage : </h5>
                 <div class="card-body">
 
                 </div>
@@ -14,10 +14,10 @@ const AddGroupage = () => {
                     <form id="formAccountSettings" method="POST" onsubmit="return false">
                         <div class="row">
                             <div class="mb-3 col-md-12">
-                                <label for="firstName" class="form-label">Montant</label>
+                                <label for="firstName" class="form-label">Nom</label>
                                 <input
                                     class="form-control"
-                                    type="number"
+                                    type="text"
                                     id="firstName"
                                     name="firstName"
                                     value=""
@@ -26,7 +26,7 @@ const AddGroupage = () => {
                             </div>
                         </div>
                         <div class="mt-2">
-                            <button type="submit" class="btn btn-primary me-2"><i className='bx bx-plus'></i> Ajouter</button>
+                            <button type="submit" class="btn btn-primary me-2"><i className='bx bx-plus'></i> Enregistrer</button>
                             <button type="reset" class="btn btn-outline-secondary">Annuler</button>
                         </div>
                     </form>

@@ -3,6 +3,8 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 
 const Layout = () => {
     const location = useLocation();
+    let profileData = localStorage.getItem('data')
+    profileData = JSON.parse(profileData);
     return (
         <>
             <div class="layout-wrapper layout-content-navbar">
@@ -119,8 +121,8 @@ const Layout = () => {
                                     <div data-i18n="Analytics">Mon compte</div>
                                 </Link>
                             </li>
-                            <li className={`menu-item ${location.pathname === '/dettePartenaire' ? 'active' : ''}`}>
-                                <Link to="/dettePartenaire" class="menu-link">
+                            <li className={`menu-item ${location.pathname === '/cloture' ? 'active' : ''}`}>
+                                <Link to="/cloture" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-x"></i>
                                     <div data-i18n="Analytics">Cloture</div>
                                 </Link>
@@ -167,7 +169,7 @@ const Layout = () => {
                                             data-size="large"
                                             data-show-count="true"
                                             aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                                        >Star</a
+                                        >{profileData.nom} {profileData.postnom}</a
                                         >
                                     </li>
 
@@ -187,7 +189,7 @@ const Layout = () => {
                                                             </div>
                                                         </div>
                                                         <div class="flex-grow-1">
-                                                            <span class="fw-semibold d-block">John Doe</span>
+                                                            <span class="fw-semibold d-block">{profileData.nom} {profileData.postnom}</span>
                                                             <small class="text-muted">Admin</small>
                                                         </div>
                                                     </div>
@@ -199,32 +201,18 @@ const Layout = () => {
                                             <li>
                                                 <a class="dropdown-item" href="#">
                                                     <i class="bx bx-user me-2"></i>
-                                                    <span class="align-middle">My Profile</span>
+                                                    <span class="align-middle">Mon profile</span>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="bx bx-cog me-2"></i>
-                                                    <span class="align-middle">Settings</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">
-                                                    <span class="d-flex align-items-center align-middle">
-                                                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                        <span class="flex-grow-1 align-middle">Billing</span>
-                                                        <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                                    </span>
-                                                </a>
-                                            </li>
+                                            
                                             <li>
                                                 <div class="dropdown-divider"></div>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="auth-login-basic.html">
+                                                <Link to="/deconnextion" class="dropdown-item" href="auth-login-basic.html">
                                                     <i class="bx bx-power-off me-2"></i>
-                                                    <span class="align-middle">Log Out</span>
-                                                </a>
+                                                    <span class="align-middle">Se deconnecter</span>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </li>

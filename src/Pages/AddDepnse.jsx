@@ -12,7 +12,18 @@ const AddDepnse = () => {
                 <div class="card-body">
                     <form id="formAccountSettings" method="POST" onsubmit="return false">
                         <div class="row">
-                            <div class="mb-3 col-md-12">
+                            <div class="mb-3 col-md-6">
+                                <label for="firstName" class="form-label">Nom</label>
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="firstName"
+                                    name="firstName"
+                                    value=""
+                                    autofocus
+                                />
+                            </div>
+                            <div class="mb-3 col-md-6">
                                 <label for="firstName" class="form-label">Montant</label>
                                 <input
                                     class="form-control"
@@ -23,7 +34,7 @@ const AddDepnse = () => {
                                     autofocus
                                 />
                             </div>
-                            <div class="mb-3 col-md-12">
+                            <div class="mb-3 col-md-6">
                                 <label for="timeZones" class="form-label">MOTIF</label>
                                 <textarea id="organization" name="" class="form-control" cols="10" rows="2"></textarea>
                             </div>

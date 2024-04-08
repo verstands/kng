@@ -18,12 +18,17 @@ import DepenseDetail from '../Pages/DepenseDetail'
 import DepenseUpdate from '../Pages/DepenseUpdate'
 import AddSorti from '../Pages/DepenseUpdate'
 import AddDepenseKinshasa from '../Pages/AddDepenseKinshasa'
+import AddGroupage from '../Pages/AddGroupage'
+import Cloture from '../Pages/Cloture'
+import Page404 from '../Pages/Page404'
+import Deconnexion from '../Pages/Deconnexion'
 
 const IndexRoute = () => {
   return (
     <>
       <Routes>
         <Route path='/' element={<Login />} />
+        <Route path='/*' element={<Page404 />} />
         <Route element={<Layout />}>
           <Route path="/dashboad" element={<Dashboad />} />
           <Route path="/entrer" element={<Entre />} />
@@ -41,6 +46,9 @@ const IndexRoute = () => {
           <Route path="/depensedetail/:id" element={<DepenseDetail />} />
           <Route path="/depenseupdate/:id" element={<DepenseUpdate />} />
           <Route path="/addsorti" element={<AddSorti />} />
+          <Route path="/AddGroupage" element={<AddGroupage />} />
+          <Route path="/cloture" element={<Cloture />} />
+          <Route path="/deconnextion" element={<Deconnexion />} />
         </Route>
       </Routes>
     </>
