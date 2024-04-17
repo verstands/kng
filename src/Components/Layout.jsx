@@ -69,16 +69,12 @@ const Layout = () => {
                                 </span>
                                 <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
                             </a>
-
                             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                                 <i class="bx bx-chevron-left bx-sm align-middle"></i>
                             </a>
                         </div>
-
                         <div class="menu-inner-shadow"></div>
-
                         <ul class="menu-inner py-1">
-
                             <li className={`menu-item ${location.pathname === '/dashboad' ? 'active' : ''}`}>
                                 <Link to="/dashboad" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
@@ -109,12 +105,7 @@ const Layout = () => {
                                     <div data-i18n="Analytics">Conteneur</div>
                                 </Link>
                             </li>
-                            <li className={`menu-item ${location.pathname === '/depense' ? 'active' : ''}`}>
-                                <Link to="/depense" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-money"></i>
-                                    <div data-i18n="Analytics">Depense</div>
-                                </Link>
-                            </li>
+                            
                             <li className={`menu-item ${location.pathname === '/compte' ? 'active' : ''}`}>
                                 <Link to="/compte" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-user-circle"></i>

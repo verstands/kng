@@ -1,10 +1,10 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import Spinner from '../Components/Spinner';
 import { Link } from 'react-router-dom';
-import { getEntre, getEntreJourne } from '../actions/EntreAction';
+import { balanceDubai, getCounrDepotDoubai, getCounrRetraitDoubai, getEntre, getEntreJourne, totalaJourCount } from '../actions/EntreAction';
 import EntrerTable from '../Components/EntrerTable';
-import { getDepense } from '../actions/DepenseAction';
 import DepnseTable from '../Components/DepnseTable';
+import { getDepenseDubai } from '../actions/DepenseAction';
 const LesTransaction = React.lazy(() => import('../Components/LesTransaction'));
 
 const Entre = () => {
@@ -16,11 +16,49 @@ const Entre = () => {
     const [etatDataJ, setetatDataJ] = useState([]);
     const [depenseData, setdepenseData] = useState([]);
     const [showTransaction, setShowTransaction] = useState(true);
+    const [coutndepot, setcountdepot] = useState(0);
+    const [coutnretrait, setcountretrait] = useState(0);
+    const [balance, setbalance] = useState(0);
+    const [total, settotal] = useState(0);
 
 
     const dataId = localStorage.getItem('ville');
+
     useEffect(() => {
-        getDepense().then((membre) => {
+        totalaJourCount().then((membre) => {
+            settotal(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    useEffect(() => {
+        getCounrDepotDoubai().then((membre) => {
+            setcountdepot(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    useEffect(() => {
+        balanceDubai().then((membre) => {
+            setbalance(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    useEffect(() => {
+        getCounrRetraitDoubai().then((membre) => {
+            setcountretrait(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    //depense dubai
+    useEffect(() => {
+        getDepenseDubai().then((membre) => {
             setdepenseData(membre);
             setloading(false)
         }).catch((error) => {
@@ -79,25 +117,25 @@ const Entre = () => {
                                         <div className="card btn btn-sm btn-outline-primary col-md-3">
                                             <div className="card-body ">
                                                 <p className='font-weight-bold'>Dépôt</p>
-                                                <span className='font-weight-bold'>2$</span>
+                                                <span className='font-weight-bold'>{coutndepot}</span>
                                             </div>
                                         </div>
                                         <div className="card btn btn-sm btn-outline-primary col-md-3">
                                             <div className="card-body ">
                                                 <p className='font-weight-bold'>Sorti</p>
-                                                <span className='font-weight-bold'>2$</span>
+                                                <span className='font-weight-bold'>{coutnretrait}</span>
                                             </div>
                                         </div>
                                         <div className="card btn btn-sm btn-outline-primary col-md-3">
                                             <div className="card-body ">
                                                 <p className='font-weight-bold'>Balance</p>
-                                                <span className='font-weight-bold'>2$</span>
+                                                <span className='font-weight-bold'>{balance}</span>
                                             </div>
                                         </div>
                                         <div className="card btn btn-sm btn-outline-primary col-md-3">
                                             <div className="card-body ">
                                                 <p className='font-weight-bold'>Total</p>
-                                                <span className='font-weight-bold'>2$</span>
+                                                <span className='font-weight-bold'>{total}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +181,7 @@ const Entre = () => {
                                             </div>
                                         ) : (
                                             <div className="table-responsive text-nowrap">
-                                                <table className="table table-borderless">
+                                                <table className="table table-borderle">
                                                     <thead>
                                                         <tr>
                                                             <th>N°</th>
@@ -209,7 +247,7 @@ const Entre = () => {
                                     <Spinner />
                                 </div>
                             ) : (
-                                <table className="table table-borderless">
+                                <table className="table table-borderle">
                                     <thead>
                                         <tr>
                                             <th>Montant</th>
@@ -220,10 +258,15 @@ const Entre = () => {
                                     <tbody>
                                         {Array.isArray(depenseData) && depenseData
                                             .filter((data) => {
-                                                if (typeof data.created_at !== 'string') {
+                                                if (
+                                                    typeof data.created_at !== 'string' || 
+                                                    typeof data.montant !== 'string'
+                                                ) {
                                                     return false;
                                                 }
-                                                return data.created_at.toLowerCase().includes(searchDepense.toLowerCase())
+                                                return data.created_at.toLowerCase().includes(searchDepense.toLowerCase()) ||
+                                                data.montant.toLowerCase().includes(searchDepense.toLowerCase())
+
                                             })
                                             .map((data, index) => (
                                                 <DepnseTable

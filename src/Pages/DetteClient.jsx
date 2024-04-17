@@ -1,8 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import EntrerTable from '../Components/EntrerTable'
 import {Link} from 'react-router-dom'
+import DetteTablea from '../Components/DetteTablea';
+import { getDette } from '../actions/DetteClientAction';
+import Spinner from '../Components/Spinner';
 
 const DetteClient = () => {
+
+    const [searchTerm, setSearchTerm] = useState("");
+    const [dataDette, setdataDette] = useState([]);
+    const [isLoading, setloading] = useState(true)
+
+    useEffect(() => {
+        getDette().then((membre) => {
+            setdataDette(membre); 
+      
+            setloading(false)
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    const handleSearchDette = (event) => {
+        setSearchTerm(event.target.value);
+    };
     return (
         <>
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -44,8 +65,14 @@ const DetteClient = () => {
                                         <div className="p-20">
                                             <div className='row'>
                                                 <div className='col-md-3'>
-                                                    <input type="text" className='form-control' placeholder='Recherche'
-                                                        value="" />
+                                                    <input 
+                                                    type="text"
+                                                    className='form-control' 
+                                                    value={searchTerm}
+                                                    onChange={handleSearchDette}
+                                                    placeholder='Recherche'
+
+                                                 />
                                                 </div>
                                                 <div className='col-md-3'>
                                                     <input type="date" className='form-control' />
@@ -61,6 +88,11 @@ const DetteClient = () => {
                                         </div>
                                         <hr />
                                         <div className="card">
+                                        {isLoading ? (
+                                            <div className="text-center">
+                                                <Spinner />
+                                            </div>
+                                        ) : (
                                             <table className="table table-borderless">
                                                 <thead>
                                                     <tr>
@@ -72,9 +104,33 @@ const DetteClient = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                {Array.isArray(dataDette) && dataDette
+                                                    .filter((data) => {
+                                                        if (
+                                                            typeof data.id_transaction.nom_emateur !== 'string' ||
+                                                            typeof data.id_transaction.nom_recepteur !== 'string' ||
+                                                            typeof data.id_transaction.matricule !== 'string' 
+                                                        
+                                                        ) {
+                                                            return false;
+                                                        }
+                                                        return data.id_transaction.nom_emateur.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                                        data.id_transaction.nom_recepteur.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                                         data.id_transaction.matricule.toLowerCase().includes(searchTerm.toLowerCase()) 
+                                                    })
+                                                    .map((data, index) => (
+                                                        <DetteTablea
+                                                            id={data.id}
+                                                            nom_emateur={data.id_transaction.nom_emateur}
+                                                            nom_recepteur={data.id_transaction.nom_recepteur}
+                                                            matricule={data.id_transaction.matricule}
+                                                            key={index}
+                                                        />
+                                                    ))
+                                                }
                                                 </tbody>
                                             </table>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="tab-pane p-20" id="profile" role="tabpanel">

@@ -7,10 +7,10 @@ export const GET_ENTRE_JOURNEE = "GET_ENTRE_JOURNEE";
 export const DELETE_ENTRE = "DELETE_ENTRE";
 
 //const ville = localStorage.getItem('ville');
-export const getEntre = (dataId) => {
-    return axioClient.get(`Entres/${dataId}`)
+export const getDette = (dataId) => {
+    return axioClient.get(`Dette`)
         .then((response) => {
-            return response.data.data.data;
+            return response.data.data;
         })
         .catch((error) => {
             Swal.fire({

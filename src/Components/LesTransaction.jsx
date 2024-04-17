@@ -13,11 +13,11 @@ const LesTransaction = ({ isLoading, setLoading }) => { // Passer isLoading et s
     useEffect(() => {
         getEntre().then((membre) => {
             setEtatData(membre);
-            setLoading(false); // Utilisation de setLoading pour mettre à jour isLoading
+            setLoading(false); 
         }).catch((error) => {
             console.log(error);
         });
-    }, [setLoading]); // Ajout de setLoading dans les dépendances du useEffect
+    }, [setLoading]);
 
     return (
         <>
@@ -53,7 +53,7 @@ const LesTransaction = ({ isLoading, setLoading }) => { // Passer isLoading et s
                             </div>
                         ) : (
                             <div className="table-responsive text-nowrap">
-                                <table className="table table-borderless">
+                                <table className="table table-borderle">
                                     <thead>
                                         <tr>
                                             <th>N°</th>
@@ -66,10 +66,16 @@ const LesTransaction = ({ isLoading, setLoading }) => { // Passer isLoading et s
                                     <tbody>
                                         {Array.isArray(etatData) && etatData
                                             .filter((data) => {
-                                                if (typeof data.matricule !== 'string') {
+                                                if (
+                                                    typeof data.matricule !== 'string' || 
+                                                    typeof data.nom_emateur !== 'string' ||
+                                                    typeof data.nom_recepteur !== 'string' 
+                                                ) {
                                                     return false;
                                                 }
-                                                return data.matricule.toLowerCase().includes(searchTermJourne.toLowerCase())
+                                                return data.matricule.toLowerCase().includes(searchTermJourne.toLowerCase()) ||
+                                                data.nom_emateur.toLowerCase().includes(searchTermJourne.toLowerCase()) ||
+                                                data.nom_recepteur.toLowerCase().includes(searchTermJourne.toLowerCase())
                                             })
                                             .map((data, index) => (
                                                 <EntrerTable

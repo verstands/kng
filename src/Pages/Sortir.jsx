@@ -3,8 +3,11 @@ import Spinner from '../Components/Spinner';
 import { Link } from 'react-router-dom';
 import { getEntre, getEntreJourne, getEntreJourneKinshasa, getEntreKinshasa } from '../actions/EntreAction';
 import EntrerTable from '../Components/EntrerTable';
-import { getDepense } from '../actions/DepenseAction';
+
 import DepnseTable from '../Components/DepnseTable';
+import { getCounrDepotKinshasa, getCounrRetraitKinshasa } from '../actions/SortieAction';
+import { ListeKinshasaJourCountTotal, getCounrDepenseKinshasa } from '../actions/DepenseAction';
+import DepnseTableKinshasa from '../Components/DepenseTableKinshasa';
 
 const Sortir = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -14,17 +17,54 @@ const Sortir = () => {
     const [isLoading, setloading] = useState(true)
     const [etatDataJ, setetatDataJ] = useState([]);
     const [depenseData, setdepenseData] = useState([]);
+    const [countDepot, setCountDepot] = useState(0);
+    const [countSorti, setCountSorti] = useState(0);
+    const [countDepense, setCountDepense] = useState(0);
+    const [countTotal, setcountTotal] = useState(0);
 
 
     const dataId = localStorage.getItem('ville');
+    
     useEffect(() => {
-        getDepense(dataId).then((membre) => {
+        ListeKinshasaJourCountTotal().then((membre) => {
             setdepenseData(membre);
-            setloading(false)
         }).catch((error) => {
             console.log(error);
         });
     }, []);
+
+    useEffect(() => {
+        getCounrRetraitKinshasa().then((membre) => {
+            setcountTotal(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    useEffect(() => {
+        getCounrDepenseKinshasa().then((membre) => {
+            setCountDepense(membre); 
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    useEffect(() => {
+        getCounrDepotKinshasa().then((membre) => {
+            setCountDepot(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    useEffect(() => {
+        getCounrRetraitKinshasa().then((membre) => {
+            setCountSorti(membre);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
 
     useEffect(() => {
         getEntreKinshasa().then((membre) => {
@@ -77,25 +117,25 @@ const Sortir = () => {
                                         <div className="card btn btn-sm btn-outline-primary col-md-3">
                                             <div className="card-body ">
                                                 <p className='font-weight-bold'>Dépôt</p>
-                                                <span className='font-weight-bold'>2$</span>
+                                                <span className='font-weight-bold'>{countDepot}$</span>
                                             </div>
                                         </div>
                                         <div className="card btn btn-sm btn-outline-primary col-md-3">
                                             <div className="card-body ">
-                                                <p className='font-weight-bold'>Dépôt</p>
-                                                <span className='font-weight-bold'>2$</span>
+                                                <p className='font-weight-bold'>Sorti</p>
+                                                <span className='font-weight-bold'>{countSorti}$</span>
                                             </div>
                                         </div>
                                         <div className="card btn btn-sm btn-outline-primary col-md-3">
                                             <div className="card-body ">
-                                                <p className='font-weight-bold'>Dépôt</p>
-                                                <span className='font-weight-bold'>2$</span>
+                                                <p className='font-weight-bold'>Balance</p>
+                                                <span className='font-weight-bold'>{countTotal}$</span>
                                             </div>
                                         </div>
                                         <div className="card btn btn-sm btn-outline-primary col-md-3">
                                             <div className="card-body ">
-                                                <p className='font-weight-bold'>Dépôt</p>
-                                                <span className='font-weight-bold'>2$</span>
+                                                <p className='font-weight-bold'>Total depense</p>
+                                                <span className='font-weight-bold'>{countDepense}$</span>
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +328,7 @@ const Sortir = () => {
                                                 return data.created_at.toLowerCase().includes(searchDepense.toLowerCase())
                                             })
                                             .map((data, index) => (
-                                                <DepnseTable
+                                                <DepnseTableKinshasa
                                                     id={data.id}
                                                     montant={data.montant}
                                                     created_at={data.created_at}

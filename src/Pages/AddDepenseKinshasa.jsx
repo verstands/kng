@@ -1,6 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { postDepenseDubai } from '../actions/DepenseAction';
 
 const AddDepenseKinshasa = () => {
+    const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    nom: '',
+    montant: '',
+    motif: '',
+    id_client : '2'
+  });
+  const [loading, setLoading] = useState(false);
+  let navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    dispatch(postDepenseDubai(formData))
+      .then(() => {
+        setFormData({
+          nom: '',
+          montant: '',
+          motif: '',
+          id_client: '2'
+        });
+      })
+      .catch(() => {
+        
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
     return (
         <>
             <div className='container mt-4'>
@@ -11,29 +50,56 @@ const AddDepenseKinshasa = () => {
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
-                        <form id="formAccountSettings" method="POST" onsubmit="return false">
-                            <div class="row">
-                                <div class="mb-3 col-md-12">
-                                    <label for="firstName" class="form-label">Montant</label>
-                                    <input
-                                        class="form-control"
-                                        type="number"
-                                        id="firstName"
-                                        name="firstName"
-                                        value=""
-                                        autofocus
-                                    />
-                                </div>
-                                <div class="mb-3 col-md-12">
-                                    <label for="timeZones" class="form-label">MOTIF</label>
-                                    <textarea id="organization" name="" class="form-control" cols="10" rows="2"></textarea>
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <button type="submit" class="btn btn-primary me-2"><i className='bx bx-plus'></i> Ajouter</button>
-                                <button type="reset" class="btn btn-outline-secondary">Annuler</button>
-                            </div>
-                        </form>
+                    <form id="formAccountSettings" method="POST" onSubmit={handleSubmit}>
+                    <div className="row">
+                      <div className="mb-3 col-md-6">
+                        <label htmlFor="nom" className="form-label">Nom</label>
+                        <input
+                        type="text"
+                        className="form-control"
+                        id="email"
+                        name="nom"
+                        value={formData.nom}
+                        onChange={handleChange}
+                        placeholder=""
+                        autoFocus
+                      />
+                      </div>
+                      <div className="mb-3 col-md-6">
+                        <label htmlFor="montant" className="form-label">Montant</label>
+                        <input
+                          className="form-control"
+                          type="number"
+                          id="montant"
+                          name="montant"
+                          value={formData.montant}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className="mb-3 col-md-6">
+                        <label htmlFor="motif" className="form-label">Motif</label>
+                        <textarea
+                          id="motif"
+                          name="motif"
+                          className="form-control"
+                          cols="10"
+                          value={formData.motif}
+                          onChange={handleChange}
+                          rows="2"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      {loading ? (
+                        <center>
+                          <div className="spinner-border" role="status"></div>
+                        </center>
+                      ) : (
+                        <button type="submit" className="btn btn-primary me-2"><i className='bx bx-plus'></i> Ajouter</button>
+                      )}
+                      <button type="reset" className="btn btn-outline-secondary">Annuler</button>
+                    </div>
+                  </form>
                     </div>
                 </div>
             </div>

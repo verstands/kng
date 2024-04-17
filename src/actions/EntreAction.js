@@ -117,3 +117,94 @@ export const getEntreDetailKinshasa = () => {
             }
         });
 };
+
+export const getCounrDepotDoubai = () => {
+    return axioClient.get(`depenseDubaiJourCountEntre`)
+        .then((response) => {
+            return response.data.data;
+        })
+        .catch((error) => {
+            if (error.response.status === 401) {
+                alert('ok')
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Erreur lors de la récupération des données",
+                    text: `${error}`
+                });
+            }
+        });
+};
+
+export const getCounrRetraitDoubai = () => {
+    return axioClient.get(`depenseDubaiJourCountSorti`)
+        .then((response) => {
+            return response.data.data;
+        })
+        .catch((error) => {
+            if (error.response.status === 401) {
+                alert('ok')
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Erreur lors de la récupération des données",
+                    text: `${error}`
+                });
+            }
+        });
+};
+
+export const balanceDubai = () => {
+    return axioClient.get(`balanceDubai`)
+        .then((response) => {
+            return response.data.data;
+        })
+        .catch((error) => {
+            if (error.response.status === 401) {
+                alert('ok')
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Erreur lors de la récupération des données",
+                    text: `${error}` 
+                });
+            }
+        });
+};
+
+export const totalaJourCount = () => {
+    return axioClient.get(`totalaJourCount`)
+        .then((response) => {
+            return response.data.data;
+        })
+        .catch((error) => {
+            if (error.response.status === 401) {
+                alert('ok')
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Erreur lors de la récupération des données",
+                    text: `${error}`
+                });
+            }
+        });
+};
+
+export const postTransaction = (formData) => {
+    return async (dispatch) => {
+      try {
+        const response = await axioClient.post(`Entre`, formData);
+        Swal.fire({
+            icon: "success",
+            title: `${response.data.message}`,
+          });
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: `${error.response.data.message}`,
+          text: "Veuillez vérifier vos informations de connexion.",
+        });
+        throw error;
+      }
+    };
+  };

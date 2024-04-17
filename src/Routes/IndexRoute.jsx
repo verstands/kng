@@ -22,6 +22,7 @@ import AddGroupage from '../Pages/AddGroupage'
 import Cloture from '../Pages/Cloture'
 import Page404 from '../Pages/Page404'
 import Deconnexion from '../Pages/Deconnexion'
+import AffecterUser from '../Pages/AffecterUser'
 
 const IndexRoute = () => {
   return (
@@ -49,6 +50,7 @@ const IndexRoute = () => {
           <Route path="/AddGroupage" element={<AddGroupage />} />
           <Route path="/cloture" element={<Cloture />} />
           <Route path="/deconnextion" element={<Deconnexion />} />
+          <Route path="/AffecterUser" element={<AffecterUser />} />
         </Route>
       </Routes>
     </>

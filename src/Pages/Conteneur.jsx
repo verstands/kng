@@ -1,8 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import EntrerTable from '../Components/EntrerTable'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import DetteTablea from '../Components/DetteTablea';
+import { getConteneur } from '../actions/ConteneurAction';
+import Spinner from '../Components/Spinner';
+import ConteneurTable from '../Components/ConteneurTable';
 
 const Conteneur = () => {
+    const [searchTerm, setSearchTerm] = useState("");
+    const [dataDette, setdataDette] = useState([]);
+    const [isLoading, setloading] = useState(true)
+
+    
+    useEffect(() => {
+        getConteneur().then((membre) => {
+            setdataDette(membre); 
+            setloading(false)
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+    const handleSearchDette = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
     return (
         <>
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -14,7 +36,7 @@ const Conteneur = () => {
                                     <div class="card-body">
                                         <h5 class="card-title text-primary"><i className='bx bx-archive'></i> Les contaneur (Groupage)</h5>
                                         <Link to="/AddGroupage" class="btn btn-sm btn-outline-primary">+ Creer un conteneur</Link>
-                                        <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i className='bx bx-user'></i>Affecter un client dans un conteneur</a>
+                                        <Link to="/AffecterUser" class="btn btn-sm btn-outline-primary"><i className='bx bx-user'></i>Affecter un client dans un conteneur</Link>
 
                                     </div>
                                 </div>
@@ -40,15 +62,63 @@ const Conteneur = () => {
                                     <div class="p-20">
                                         <div className='row'>
                                             <div className='col-md-9'>
-                                                <input type="text" className='form-control' placeholder='Recherche' />
+                                                <input 
+                                                    type="text" 
+                                                    className='form-control' 
+                                                    placeholder='Recherche'
+                                                    value={searchTerm}
+                                                    onChange={handleSearchDette}
+                                                 />
                                             </div>
-                                            <div className='col-md-3'>
-                                                <button className='btn btn-primary'>Recherche</button>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <hr />
-                                    <EntrerTable />
+                                    <div className="card">
+                                        {isLoading ? (
+                                            <div className="text-center">
+                                                <Spinner />
+                                            </div>
+                                        ) : (
+                                            <table className="table table-borderle">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Nom</th>
+                                                        <th>Numero</th>
+                                                        <th>Date</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {Array.isArray(dataDette) && dataDette
+                                                    .filter((data) => {
+                                                        if (
+                                                            typeof data.nom_conteneur !== 'string' ||
+                                                            typeof data.numero !== 'string' ||
+                                                            typeof data.created_at !== 'string' 
+                                                        
+                                                        ) {
+                                                            return false;
+                                                        }
+                                                        return data.nom_conteneur.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                                        data.numero.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                                         data.created_at.toLowerCase().includes(searchTerm.toLowerCase()) 
+                                                    })
+                                                    .map((data, index) => (
+                                                        <ConteneurTable
+                                                            id={data.id}
+                                                            nom_conteneur={data.nom_conteneur}
+                                                            numero={data.numero}
+                                                            matricule={data.created_at}
+                                                            key={index}
+                                                        />
+                                                    ))
+                                                }
+                                                </tbody>
+                                            </table>
+                                            )}
+                                        </div>
                                 </div>
                             </div>
                         </div>

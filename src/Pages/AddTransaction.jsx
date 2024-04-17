@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { getVille } from '../actions/PaysAction';
+import { postTransaction } from '../actions/EntreAction';
+import { useDispatch } from 'react-redux';
 
 const AddTransaction = () => {
     const [etatData, setetatData] = useState([]);
-    const [showForm, setShowForm] = useState(true);
+    const [showForm, setShowForm] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const form = useRef();
+    const dispatch = useDispatch();
+
+
 
     useEffect(() => {
         getVille().then((membre) => {
@@ -13,10 +20,40 @@ const AddTransaction = () => {
         });
     }, []);
 
-
-    const handleToggleForm = () => {
-        setShowForm(!showForm);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        const formData = {
+            nom_emateur:  form.current[1].value,
+            nom_recepteur: form.current[2].value,
+            matricule:  form.current[3].value,
+            telephone:  form.current[4].value,
+            pays_provenance:  form.current[5].value,
+            pays_destinateut:  form.current[6].value,
+            montant:  form.current[7].value,
+            motif:  form.current[8].value,
+            etat:  form.current[0].value,
+            montant_dette:  form.current[10].value,
+            motif_dette:  form.current[11].value,
+            id_transaction:  ""
+        };
+      
+      await dispatch(postTransaction(formData))
+            .then(() => {
+                form.current.reset();
+                setLoading(false);
+            })
+            .catch(() => {
+                
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
+
+    const toggleForm = () => {
+        setShowForm(!showForm);
+      };
     return (
         <>
             <div className='container mt-4'>
@@ -27,13 +64,14 @@ const AddTransaction = () => {
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
-                        <form id="formAccountSettings" method="POST" onsubmit="return false">
+                        <form id="formAccountSettings" ref={form} method="POST" onSubmit={handleSubmit}>
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label for="timeZones" class="form-label">Type de transaction</label>
                                     <select id="country" class="select2 form-select">
+                                        <option value="0">Selectionnez le type de transaction</option>
                                         <option value="1">Entrer</option>
-                                        <option value="0">Sorti</option>
+                                        <option value="2">Sorti</option>
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -43,22 +81,15 @@ const AddTransaction = () => {
                                         type="text"
                                         id="firstName"
                                         name="firstName"
-                                        value=""
                                         autofocus
                                     />
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="lastName" class="form-label">NOM RECEPETEUR</label>
-                                    <input class="form-control" type="text" name="lastName" id="lastName" value="Doe" />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="email" class="form-label">E-mail</label>
+                                    <label for="email" class="form-label">NOM RECEPETEUR</label>
                                     <input
                                         class="form-control"
                                         type="text"
                                         id="email"
-                                        name="email"
-                                        value=""
                                         placeholder=""
                                     />
                                 </div>
@@ -69,7 +100,6 @@ const AddTransaction = () => {
                                         class="form-control"
                                         id="organization"
                                         name="organization"
-                                        value=""
                                     />
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -87,7 +117,7 @@ const AddTransaction = () => {
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="address" class="form-label">PAYS PROVENANCE</label>
-                                    <select id="country" class="select2 form-select">
+                                    <select id="country"  class="select2 form-select">
                                         <option value="">Select</option>
                                         {
                                             etatData.map((d) => {
@@ -100,7 +130,7 @@ const AddTransaction = () => {
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="zipCode" class="form-label">PAYS DESTINATEUR</label>
-                                    <select id="country" class="select2 form-select">
+                                    <select id="country"  class="select2 form-select">
                                         <option value="">Select</option>
                                         {
                                             etatData.map((d) => {
@@ -118,7 +148,6 @@ const AddTransaction = () => {
                                         class="form-control"
                                         id="organization"
                                         name="organization"
-                                        value=""
                                     />
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -127,28 +156,28 @@ const AddTransaction = () => {
                                 </div>
                             </div>
                             <div className=' col-md-12'>
-                               
+
                                 <div class="form-check form-switch">
-                                    <input 
+                                    <input
                                         class="form-check-input"
-                                        type="checkbox" 
-                                        id="flexSwitchCheckDefault" 
-                                        onChange={handleToggleForm} 
+                                        type="checkbox"
+                                        id="flexSwitchCheckDefault"
+                                        checked={showForm}
+                                        onChange={toggleForm}
                                     />
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Dette</label>
                                 </div>
                             </div>
                             {
-                                !showForm && (
+                                showForm && (
                                     <div className='row'>
                                         <div class="mb-3 col-md-6">
-                                            <label for="timeZones" class="form-label">MOMontantTIF</label>
+                                            <label for="timeZones" class="form-label">Montant</label>
                                             <input
                                                 type="number"
                                                 class="form-control"
                                                 id="organization"
                                                 name="organization"
-                                                value=""
                                             />
                                         </div>
                                         <div class="mb-3 col-md-6">
@@ -158,14 +187,20 @@ const AddTransaction = () => {
                                                 class="form-control"
                                                 id="organization"
                                                 name="organization"
-                                                value=""
+                                            
                                             />
                                         </div>
                                     </div>
                                 )
                             }
                             <div class="mt-2">
-                                <button type="submit" class="btn btn-primary me-2">Enregistrer</button>
+                                {loading ? (
+                                    <center>
+                                        <div className="spinner-border" role="status"></div>
+                                    </center>
+                                ) : (
+                                    <button type="submit" class="btn btn-primary me-2">Enregistrer</button>
+                                )}
                                 <button type="reset" class="btn btn-outline-secondary">Annuler</button>
                             </div>
                         </form>
