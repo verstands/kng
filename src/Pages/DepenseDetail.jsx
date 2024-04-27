@@ -28,7 +28,7 @@ const DepenseDetail = () => {
                         MODIFIER <i className='bx bx-edit'></i>
                         </Link>
                       </p>
-                      <p className='text-danger'>Date : {dateFormat(etatData.created_at, 'dd-mmm-yyyy')}</p>
+                      <p className='text-danger'>Date : {dateFormat(etatData.created_at, 'dd-mm-yyyy')}</p>
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
@@ -42,7 +42,7 @@ const DepenseDetail = () => {
                                         id="firstName"
                                         name="firstName"
                                         value={etatData.montant}
-                                        autofocus
+                                        readOnly
                                     />
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -52,7 +52,8 @@ const DepenseDetail = () => {
                                         type="text" 
                                         name="lastName" 
                                         id="lastName" 
-                                        value={etatData.motif}    
+                                        value={etatData.motif} 
+                                        readOnly   
                                     />
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -62,8 +63,10 @@ const DepenseDetail = () => {
                                         type="text"
                                         id="email"
                                         name="email"
-                                        value={etatData.ville_id}
-                                        placeholder=""
+                                        value={`${
+                                            etatData.id_client?.id_pays?.intitule || ""
+                                          } - ${etatData.id_client?.intitule || ""}`}
+                                        readOnly
                                     />
                                 </div>
                             </div>

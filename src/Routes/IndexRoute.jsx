@@ -23,6 +23,9 @@ import Cloture from '../Pages/Cloture'
 import Page404 from '../Pages/Page404'
 import Deconnexion from '../Pages/Deconnexion'
 import AffecterUser from '../Pages/AffecterUser'
+import PrintTransaction from '../Pages/Print/PintTransaction'
+import PrintTrasanctionAll from '../Pages/Print/PrintTrasanctionAll'
+import PrintTrasanctionAlls from '../Pages/Print/PrintTrasanctionAlls'
 
 const IndexRoute = () => {
   return (
@@ -30,6 +33,9 @@ const IndexRoute = () => {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/*' element={<Page404 />} />
+        <Route path="/ImprimerTransaction/:id" element={<PrintTransaction />} />
+        <Route path="/ImprimerTransactionAll" element={<PrintTrasanctionAll />} />
+        <Route path="/ImprimerTransactionAlls" element={<PrintTrasanctionAlls />} />
         <Route element={<Layout />}>
           <Route path="/dashboad" element={<Dashboad />} />
           <Route path="/entrer" element={<Entre />} />

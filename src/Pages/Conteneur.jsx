@@ -34,7 +34,7 @@ const Conteneur = () => {
                             <div class="d-flex align-items-end row">
                                 <div class="col-sm-7">
                                     <div class="card-body">
-                                        <h5 class="card-title text-primary"><i className='bx bx-archive'></i> Les contaneur (Groupage)</h5>
+                                        <h5 class="card-title text-primary"><i className='bx bx-archive'></i> Les Groupages</h5>
                                         <Link to="/AddGroupage" class="btn btn-sm btn-outline-primary">+ Creer un conteneur</Link>
                                         <Link to="/AffecterUser" class="btn btn-sm btn-outline-primary"><i className='bx bx-user'></i>Affecter un client dans un conteneur</Link>
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import { getConteneur } from '../actions/ConteneurAction';
 import { useDispatch } from 'react-redux';
 import { postClient } from '../actions/ClientAction';
@@ -6,13 +6,31 @@ import { postClient } from '../actions/ClientAction';
 const AffecterUser = () => {
     const [dataDette, setdataDette] = useState([]);
     const [isLoading, setloading] = useState(true);
+    const [inputList, setInputList] = useState([{ marchandise: '', montant: '' }]);
     const dispatch = useDispatch();
     const form = useRef();
 
+    const handleRemoveClick = index => {
+        const list = [...inputList];
+        list.splice(index, 1);
+        setInputList(list);
+    };
+
+    const handleAddClick = () => {
+        setInputList([...inputList, { marchandise: '', montant: '' }]);
+    };
+
+    const handleChangeInput = (index, event) => {
+        const { name, value } = event.target;
+        const list = [...inputList];
+        list[index][name] = value;
+        setInputList(list);
+    };
+
     useEffect(() => {
         getConteneur().then((membre) => {
-            setdataDette(membre); 
-            setloading(false)
+            setdataDette(membre);
+            setloading(false);
         }).catch((error) => {
             console.log(error);
         });
@@ -22,12 +40,11 @@ const AffecterUser = () => {
         e.preventDefault();
         setloading(true);
         const formData = {
-            nom_client: form.current[0].value,
-            telephone: form.current[1].value,
-            marchandise: form.current[2].value,
-            qte: form.current[3].value,
-            montant: form.current[4].value,
-            id_conteneur: form.current[5].value,
+            nom_client: form.current['nom_client'].value,
+            telephone: form.current['telephone'].value,
+            qte: form.current['qte'].value,
+            marchandise: inputList.map(item => item.marchandise).join(', '),
+            montant: inputList.map(item => item.montant).join(', '),
         };
         await dispatch(postClient(formData))
             .then(() => {
@@ -44,66 +61,42 @@ const AffecterUser = () => {
 
     return (
         <div className='container mt-4'>
-            <div class="card mb-4">
-                <h5 class="card-header">Affecter un utilisateur dans unn groupage : </h5>
-                <div class="card-body">
-
-                </div>
-                <hr class="my-0" />
-                <div class="card-body">
+            <div className="card mb-4">
+                <h5 className="card-header">Affecter un utilisateur :</h5>
+                <div className="card-body"></div>
+                <hr className="my-0" />
+                <div className="card-body">
                     <form id="formAccountSettings" ref={form} method="POST" onSubmit={handleSubmitEnvoie}>
-                        <div class="row">
-                            <div class="mb-3 col-md-4">
-                                <label for="firstName" class="form-label">Nom client</label>
+                        <div className="row">
+                            <div className="mb-3 col-md-6">
+                                <label htmlFor="nom_client" className="form-label">Nom client</label>
                                 <input
-                                    class="form-control"
+                                    className="form-control"
                                     type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    autofocus
+                                    id="nom_client"
+                                    name="nom_client"
+                                    autoFocus
                                 />
                             </div>
-                            <div class="mb-3 col-md-4">
-                                <label for="firstName" class="form-label">Telephone</label>
+                            <div className="mb-3 col-md-6">
+                                <label htmlFor="telephone" className="form-label">Telephone</label>
                                 <input
-                                    class="form-control"
+                                    className="form-control"
                                     type="number"
-                                    id="firstName"
-                                    name="firstName"
-                                    autofocus
+                                    id="telephone"
+                                    name="telephone"
                                 />
                             </div>
-                            <div class="mb-3 col-md-4">
-                                <label for="firstName" class="form-label">Marchandise</label>
+                            <div className="mb-3 col-md-6">
+                                <label htmlFor="qte" className="form-label">Qte</label>
                                 <input
-                                    class="form-control"
-                                    type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    autofocus
-                                />
-                            </div>
-                            <div class="mb-3 col-md-4">
-                                <label for="firstName" class="form-label">Qte</label>
-                                <input
-                                    class="form-control"
+                                    className="form-control"
                                     type="number"
-                                    id="firstName"
-                                    name="firstName"
-                                    autofocus
+                                    id="qte"
+                                    name="qte"
                                 />
                             </div>
-                            <div class="mb-3 col-md-4">
-                                <label for="firstName" class="form-label">Montant</label>
-                                <input
-                                    class="form-control"
-                                    type="number"
-                                    id="firstName"
-                                    name="firstName"
-                                    autofocus
-                                />
-                            </div>
-                            <div class="mb-3 col-md-4">
+                            <div class="mb-3 col-md-6">
                                 <label for="firstName" class="form-label">Groupage</label>
                                 <select class="form-control" type="number">
                                     {
@@ -115,14 +108,46 @@ const AffecterUser = () => {
                                     }
                                 </select>
                             </div>
+                            {inputList.map((x, i) => (
+                                <React.Fragment key={i}>
+                                    <div className="mb-3 col-md-5">
+                                        <label htmlFor={`marchandise-${i}`} className="form-label">Marchandise</label>
+                                        <input
+                                            value={x.marchandise}
+                                            className="form-control"
+                                            type="text"
+                                            id={`marchandise-${i}`}
+                                            name={`marchandise-${i}`}
+                                            onChange={e => handleChangeInput(i, e)}
+                                        />
+                                    </div>
+                                    <div className="mb-3 col-md-5">
+                                        <label htmlFor={`montant-${i}`} className="form-label">Montant</label>
+                                        <input
+                                            value={x.montant}
+                                            className="form-control"
+                                            type="number"
+                                            id={`montant-${i}`}
+                                            name={`montant-${i}`}
+                                            onChange={e => handleChangeInput(i, e)}
+                                        />
+                                    </div>
+                                    {inputList.length - 1 === i && (
+                                        <div className="mb-3 col-md-2">
+                                            <br />
+                                            <button className='btn btn-primary' onClick={handleAddClick}>+</button>
+                                        </div>
+                                    )}
+                                </React.Fragment>
+                            ))}
                         </div>
-                        <div class="mt-2">
-                        {isLoading ? (
-                            <div className="spinner-border mr-4" role="status"></div>
-                        ) : (
-                            <button type="submit" class="btn btn-primary me-2"><i className='bx bx-plus'></i> Ajouter</button>
+                        <div className="mt-2">
+                            {isLoading ? (
+                                <div className="spinner-border mr-4" role="status"></div>
+                            ) : (
+                                <button type="submit" className="btn btn-primary me-2"><i className='bx bx-plus'></i> Ajouter</button>
                             )}
-                            <button type="reset" class="btn btn-outline-secondary">Annuler</button>
+                            <button type="reset" className="btn btn-outline-secondary">Annuler</button>
                         </div>
                     </form>
                 </div>
@@ -131,4 +156,4 @@ const AffecterUser = () => {
     )
 }
 
-export default AffecterUser
+export default AffecterUser;

@@ -26,7 +26,7 @@ const AddTransaction = () => {
         const formData = {
             nom_emateur:  form.current[1].value,
             nom_recepteur: form.current[2].value,
-            matricule:  form.current[3].value,
+            matricule:  generateMatricule(),
             telephone:  form.current[4].value,
             pays_provenance:  form.current[5].value,
             pays_destinateut:  form.current[6].value,
@@ -54,6 +54,16 @@ const AddTransaction = () => {
     const toggleForm = () => {
         setShowForm(!showForm);
       };
+
+      const generateMatricule = () => {
+        const date = new Date();
+        const matricule = `ABG-${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+        return matricule;
+    };
+
+    useEffect(() => {
+        form.current['organization'].value = generateMatricule();
+    }, []);
     return (
         <>
             <div className='container mt-4'>
@@ -72,6 +82,7 @@ const AddTransaction = () => {
                                         <option value="0">Selectionnez le type de transaction</option>
                                         <option value="1">Entrer</option>
                                         <option value="2">Sorti</option>
+                                        <option value="2">Special</option>
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -100,6 +111,8 @@ const AddTransaction = () => {
                                         class="form-control"
                                         id="organization"
                                         name="organization"
+                                        value={generateMatricule()}
+                                        readOnly
                                     />
                                 </div>
                                 <div class="mb-3 col-md-6">

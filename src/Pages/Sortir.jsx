@@ -5,7 +5,7 @@ import { getEntre, getEntreJourne, getEntreJourneKinshasa, getEntreKinshasa } fr
 import EntrerTable from '../Components/EntrerTable';
 
 import DepnseTable from '../Components/DepnseTable';
-import { getCounrDepotKinshasa, getCounrRetraitKinshasa } from '../actions/SortieAction';
+import { getBalancetKinshasa, getCounrDepotKinshasa, getCounrRetraitKinshasa } from '../actions/SortieAction';
 import { ListeKinshasaJourCountTotal, getCounrDepenseKinshasa } from '../actions/DepenseAction';
 import DepnseTableKinshasa from '../Components/DepenseTableKinshasa';
 
@@ -22,8 +22,6 @@ const Sortir = () => {
     const [countDepense, setCountDepense] = useState(0);
     const [countTotal, setcountTotal] = useState(0);
 
-
-    const dataId = localStorage.getItem('ville');
     
     useEffect(() => {
         ListeKinshasaJourCountTotal().then((membre) => {
@@ -34,7 +32,7 @@ const Sortir = () => {
     }, []);
 
     useEffect(() => {
-        getCounrRetraitKinshasa().then((membre) => {
+        getBalancetKinshasa().then((membre) => {
             setcountTotal(membre);
         }).catch((error) => {
             console.log(error);
