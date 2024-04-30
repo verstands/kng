@@ -14,6 +14,7 @@ import {
   getEntreJourneAlls,
 } from "../../actions/EntreAction";
 import { getAllgroupage } from "../../actions/Marchandise";
+import { isArray } from "chart.js/helpers";
 
 const styles = StyleSheet.create({
   page: {
@@ -40,6 +41,8 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#bfbfbf",
     borderWidth: 1,
+    borderRightWidth: 0, 
+    borderBottomWidth: 0 
   },
   tableRow: {
     flexDirection: "row",
@@ -75,12 +78,13 @@ const PrintGroupageUsers = () => {
   const [isLoading, setLoading] = useState(true);
   const [typeText, setTypeText] = useState("");
   let { id } = useParams();
+  let number = 1;
 
   useEffect(() => {
     getAllgroupage(id)
       .then((membre) => {
         setEtatData(membre.data);
-        setclient(membre.dataclient)
+        setclient(membre.dataclient);
         setLoading(false);
       })
       .catch((error) => {
@@ -120,14 +124,14 @@ const PrintGroupageUsers = () => {
                 <View style={styles.table}>
                   <View style={styles.tableRow}>
                     <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>Nom grouapge</Text>
+                      <Text style={styles.tableCellHeader}>NOM GROUPAGE</Text>
                     </View>
                     <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>N°Conteneur</Text>
+                      <Text style={styles.tableCellHeader}>N° CONTENEUR</Text>
                     </View>
                     <View style={styles.tableColHeader}>
                       <Text style={styles.tableCellHeader}>
-                        Date chargement
+                        DATE CHARGEMENT
                       </Text>
                     </View>
                   </View>
@@ -162,13 +166,46 @@ const PrintGroupageUsers = () => {
                       <Text style={styles.tableCellHeader}>MARCHANDISE</Text>
                     </View>
                     <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>Qte</Text>
+                      <Text style={styles.tableCellHeader}>QTE</Text>
                     </View>
                     <View style={styles.tableColHeader}>
                       <Text style={styles.tableCellHeader}>MONTANTS</Text>
                     </View>
                   </View>
                 </View>
+                {client.map((etatDatas, index) => (
+                  <React.Fragment key={index}>
+                    <View style={styles.tableRow}>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{number++}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{etatDatas.client.nom_client}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{etatDatas.client.telephone}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        {etatDatas.client.marchandise.map((marchandise, index) => (
+                          <Text key={index} style={styles.tableCell}>
+                            {marchandise.produit}
+                          </Text>
+                        ))}
+                      </View>
+                      <View style={styles.tableCol}>
+                        {etatDatas.client.marchandise.map((marchandise, index) => (
+                          <Text key={index} style={styles.tableCell}>
+                            {marchandise.montant}
+                          </Text>
+                        ))}
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{etatDatas.client.qte}</Text>
+                        <Text style={[styles.tableCell, { color: 'red' }]}>TOTAL : {etatDatas.client.montant}</Text>
+                      </View>
+                    </View>
+                  </React.Fragment>
+                ))}                
               </View>
             </View>
           </Page>

@@ -194,6 +194,19 @@ const Cloture = () => {
                     autofocus
                   />
                 </div>
+                <div class="mb-3 col-md-3">
+                  <label for="firstName" class="form-label">
+                    Sorti special
+                  </label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="firstName"
+                    name="firstName"
+                    value={datacloture.detteclient}
+                    autofocus
+                  />
+                </div>
               </div>
               <div class="mt-2">
                 {loading ? (
