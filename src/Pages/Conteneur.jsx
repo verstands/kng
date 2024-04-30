@@ -70,7 +70,9 @@ const Conteneur = () => {
                                                     onChange={handleSearchDette}
                                                  />
                                             </div>
-                                            
+                                            <div className='col-md-2'>
+                                                <Link to="/listegroupage"><i className='bx bx-printer me-1' style={{fontSize : "40px"}}></i></Link>
+                                            </div>
                                         </div>
                                     </div>
                                     <hr />

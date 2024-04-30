@@ -68,7 +68,7 @@ const AffecterUser = () => {
                 <div className="card-body">
                     <form id="formAccountSettings" ref={form} method="POST" onSubmit={handleSubmitEnvoie}>
                         <div className="row">
-                            <div className="mb-3 col-md-6">
+                            <div className="mb-3 col-md-5">
                                 <label htmlFor="nom_client" className="form-label">Nom client</label>
                                 <input
                                     className="form-control"
@@ -78,7 +78,7 @@ const AffecterUser = () => {
                                     autoFocus
                                 />
                             </div>
-                            <div className="mb-3 col-md-6">
+                            <div className="mb-3 col-md-5">
                                 <label htmlFor="telephone" className="form-label">Telephone</label>
                                 <input
                                     className="form-control"
@@ -87,7 +87,9 @@ const AffecterUser = () => {
                                     name="telephone"
                                 />
                             </div>
-                            <div className="mb-3 col-md-6">
+                            <div className="mb-3 col-md-2">
+                             </div>
+                            <div className="mb-3 col-md-5">
                                 <label htmlFor="qte" className="form-label">Qte</label>
                                 <input
                                     className="form-control"
@@ -96,7 +98,7 @@ const AffecterUser = () => {
                                     name="qte"
                                 />
                             </div>
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-5">
                                 <label for="firstName" class="form-label">Groupage</label>
                                 <select class="form-control" type="number">
                                     {
@@ -108,6 +110,8 @@ const AffecterUser = () => {
                                     }
                                 </select>
                             </div>
+                            <div className="mb-3 col-md-2">
+                             </div>
                             {inputList.map((x, i) => (
                                 <React.Fragment key={i}>
                                     <div className="mb-3 col-md-5">

@@ -26,6 +26,11 @@ import AffecterUser from '../Pages/AffecterUser'
 import PrintTransaction from '../Pages/Print/PintTransaction'
 import PrintTrasanctionAll from '../Pages/Print/PrintTrasanctionAll'
 import PrintTrasanctionAlls from '../Pages/Print/PrintTrasanctionAlls'
+import Parametre from '../Pages/Parametre'
+import AddTypeTransaction from '../Pages/AddTypeTransaction'
+import ViewCloture from '../Pages/ViewCloture'
+import PrintGroupageAll from '../Pages/Print/printGroupageAlls'
+import PrintGroupageUsers from '../Pages/Print/PrintGroupageUsers'
 
 const IndexRoute = () => {
   return (
@@ -36,6 +41,9 @@ const IndexRoute = () => {
         <Route path="/ImprimerTransaction/:id" element={<PrintTransaction />} />
         <Route path="/ImprimerTransactionAll" element={<PrintTrasanctionAll />} />
         <Route path="/ImprimerTransactionAlls" element={<PrintTrasanctionAlls />} />
+        <Route path="/listegroupage" element={<PrintGroupageAll />} />
+        <Route path="/listegroupageUser/:id" element={<PrintGroupageUsers />} />
+
         <Route element={<Layout />}>
           <Route path="/dashboad" element={<Dashboad />} />
           <Route path="/entrer" element={<Entre />} />
@@ -57,6 +65,9 @@ const IndexRoute = () => {
           <Route path="/cloture" element={<Cloture />} />
           <Route path="/deconnextion" element={<Deconnexion />} />
           <Route path="/AffecterUser" element={<AffecterUser />} />
+          <Route path="/Parametre" element={<Parametre />} />
+          <Route path="/addtypetransaction" element={<AddTypeTransaction />} />
+          <Route path="/listecloture" element={<ViewCloture />} />
         </Route>
       </Routes>
     </>

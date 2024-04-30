@@ -100,59 +100,8 @@ const Compte = () => {
                                         />
                                     </div>
                                 </div>
-                                <span class="fw-semibold d-block mb-1">Balance Kinshasa</span>
-                                <h3 class="card-title mb-2">{balanceKin} $</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title d-flex align-items-start justify-content-between">
-                                    <div class="avatar flex-shrink-0">
-                                        <img
-                                            src="../assets/img/icons/unicons/chart-success.png"
-                                            alt="chart success"
-                                            class="rounded"
-                                        />
-                                    </div>
-                                </div>
-                                <span class="fw-semibold d-block mb-1">Total trasanction</span>
+                                <span class="fw-semibold d-block mb-1">Reste Dubai</span>
                                 <h3 class="card-title mb-2">{balanceDubain} $</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title d-flex align-items-start justify-content-between">
-                                    <div class="avatar flex-shrink-0">
-                                        <img
-                                            src="../assets/img/icons/unicons/chart-success.png"
-                                            alt="chart success"
-                                            class="rounded"
-                                        />
-                                    </div>
-                                </div>
-                                <span class="fw-semibold d-block mb-1">Total conteneur</span>
-                                <h3 class="card-title mb-2">12,628 $</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title d-flex align-items-start justify-content-between">
-                                    <div class="avatar flex-shrink-0">
-                                        <img
-                                            src="../assets/img/icons/unicons/chart-success.png"
-                                            alt="chart success"
-                                            class="rounded"
-                                        />
-                                    </div>
-                                </div>
-                                <span class="fw-semibold d-block mb-1">Nombre de client</span>
-                                <h3 class="card-title mb-2">{clientCompteur}</h3>
                             </div>
                         </div>
                     </div>
@@ -202,6 +151,23 @@ const Compte = () => {
                                         />
                                     </div>
                                 </div>
+                                <span class="fw-semibold d-block mb-1">Reste Kinshasa</span>
+                                <h3 class="card-title mb-2">{balanceKin} $</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title d-flex align-items-start justify-content-between">
+                                    <div class="avatar flex-shrink-0">
+                                        <img
+                                            src="../assets/img/icons/unicons/chart-success.png"
+                                            alt="chart success"
+                                            class="rounded"
+                                        />
+                                    </div>
+                                </div>
                                 <span class="fw-semibold d-block mb-1">Kinshasa Entrer</span>
                                 <h3 class="card-title mb-2">{depotK} $</h3>
                             </div>
@@ -221,6 +187,23 @@ const Compte = () => {
                                 </div>
                                 <span class="fw-semibold d-block mb-1">Kinshasa Sorti</span>
                                 <h3 class="card-title mb-2">{retraitK} $</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title d-flex align-items-start justify-content-between">
+                                    <div class="avatar flex-shrink-0">
+                                        <img
+                                            src="../assets/img/icons/unicons/chart-success.png"
+                                            alt="chart success"
+                                            class="rounded"
+                                        />
+                                    </div>
+                                </div>
+                                <span class="fw-semibold d-block mb-1">Nombre de client</span>
+                                <h3 class="card-title mb-2">{clientCompteur}</h3>
                             </div>
                         </div>
                     </div>

@@ -43,7 +43,7 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
                 <td>
                     <Link to={`/depensedetail/${id}`}><i className="bx bx-trash me-1"></i></Link>
                     <Link to={`/depensedetail/${id}`}><i className='bx bx-dollar me-1'></i></Link>
-                    <Link to={`/depensedetail/${id}`}><i className='bx bx-printer me-1'></i></Link>
+                    <Link to={`/listegroupageUser/${id}`}><i className='bx bx-printer me-1'></i></Link>
                 </td>
             </tr>
             {activeTable === id && (
@@ -80,7 +80,7 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
                                             <td>
                                                 <Link to={`/depensedetail/${id}`}><i className="bx bx-trash me-1"></i></Link>
                                                 <Link to=""><i className='bx bx-dollar-circle me-1'></i></Link>
-                                                <Link to={`/depensedetail/${id}`}><i className='bx bx-printer me-1'></i></Link>
+                                                <Link to={`/listegroupageUser/${id}`}><i className='bx bx-printer me-1'></i></Link>
                                             </td>
                                         </tr>
                                     ))

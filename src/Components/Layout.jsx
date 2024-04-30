@@ -118,11 +118,11 @@ const Layout = () => {
                                     <div data-i18n="Analytics">Cloture</div>
                                 </Link>
                             </li>
-                            <li className={`menu-item ${location.pathname === '/profile/camaradesSuggestion' ? 'active' : ''}`}>
-                                <a href="index.html" class="menu-link">
+                            <li className={`menu-item ${location.pathname === '/Parametre' ? 'active' : ''}`}>
+                                <Link to="/Parametre" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-cog"></i>
                                     <div data-i18n="Analytics">Parametre</div>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </aside>
