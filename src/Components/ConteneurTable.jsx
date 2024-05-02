@@ -42,7 +42,7 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
                 <td><strong>{dateFormat(created_at, 'dd/mm/yyyy')}</strong></td>
                 <td>
                     <Link to={`/depensedetail/${id}`}><i className="bx bx-trash me-1"></i></Link>
-                    <Link to={`/depensedetail/${id}`}><i className='bx bx-dollar me-1'></i></Link>
+                    <Link to={`/depenseConteneur/${id}`}><i className='bx bx-dollar me-1'></i></Link>
                     <Link to={`/listegroupageUser/${id}`}><i className='bx bx-printer me-1'></i></Link>
                 </td>
             </tr>

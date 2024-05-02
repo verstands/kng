@@ -31,6 +31,8 @@ import AddTypeTransaction from '../Pages/AddTypeTransaction'
 import ViewCloture from '../Pages/ViewCloture'
 import PrintGroupageAll from '../Pages/Print/printGroupageAlls'
 import PrintGroupageUsers from '../Pages/Print/PrintGroupageUsers'
+import DepenseConteneur from '../Pages/PayementConteneur'
+import ListPaiementConteneur from '../Pages/ListPaiementConteneur'
 
 const IndexRoute = () => {
   return (
@@ -68,6 +70,8 @@ const IndexRoute = () => {
           <Route path="/Parametre" element={<Parametre />} />
           <Route path="/addtypetransaction" element={<AddTypeTransaction />} />
           <Route path="/listecloture" element={<ViewCloture />} />
+          <Route path="/depenseConteneur/:id" element={<DepenseConteneur />} />
+          <Route path="/ListdepenseConteneur/:id" element={<ListPaiementConteneur />} />
         </Route>
       </Routes>
     </>

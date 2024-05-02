@@ -41,8 +41,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#bfbfbf",
     borderWidth: 1,
-    borderRightWidth: 0, 
-    borderBottomWidth: 0 
+   
   },
   tableRow: {
     flexDirection: "row",
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderStyle: "solid",
     borderColor: "#bfbfbf",
-    borderBottomWidth: 1,
+    borderWidth: 1,
   },
   tableCellHeader: {
     margin: 5,
@@ -116,7 +115,7 @@ const PrintGroupageUsers = () => {
             </View>
             <View style={styles.Titre}>
               <View className="text-center">
-                <Text></Text>
+                <Text>Liste de manifeste</Text>
               </View>
             </View>
             <View style={styles.body}>

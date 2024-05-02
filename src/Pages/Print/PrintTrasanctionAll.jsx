@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
         borderStyle: "solid", 
         borderColor: "#bfbfbf", 
         borderWidth: 1, 
+        borderRightWidth: 0, 
+        borderBottomWidth: 0 
     },
     tableRow: { 
         flexDirection: "row" 

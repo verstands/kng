@@ -83,15 +83,15 @@ const LesTransaction = ({ isLoading, setLoading }) => {
               </div>
             ) : (
               <div className="table-responsive text-nowrap">
-                <table className="table table-borderle">
+                <table className="table table-bordered">
                   <thead>
-                    <tr>
-                      <th>N°</th>
-                      <th>Nom_emeteur</th>
-                      <th>Nom recepeteur</th>
-                      <th>Matricule</th>
-                      <th>Type transaction</th>
-                      <th>Actions</th>
+                    <tr className="bg-primary">
+                      <th className="text-white">N°</th>
+                      <th className="text-white">Nom_emeteur</th>
+                      <th className="text-white">Nom recepeteur</th>
+                      <th className="text-white">Matricule</th>
+                      <th className="text-white">Type transaction</th>
+                      <th className="text-white">Actions</th>
                     </tr>
                   </thead>
                   <tbody>

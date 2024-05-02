@@ -101,7 +101,7 @@ const Compte = () => {
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1">Reste Dubai</span>
-                                <h3 class="card-title mb-2">{balanceDubain} $</h3>
+                                <h3 class="card-title mb-2">{balanceDubain} </h3>
                             </div>
                         </div>
                     </div>
@@ -118,7 +118,7 @@ const Compte = () => {
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1">Dubai Entrer</span>
-                                <h3 class="card-title mb-2">{depot} $</h3>
+                                <h3 class="card-title mb-2">{depot} </h3>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@ const Compte = () => {
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1">Dubai Sorti</span>
-                                <h3 class="card-title mb-2">{retrait} $</h3>
+                                <h3 class="card-title mb-2">{retrait}</h3>
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@ const Compte = () => {
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1">Reste Kinshasa</span>
-                                <h3 class="card-title mb-2">{balanceKin} $</h3>
+                                <h3 class="card-title mb-2">{balanceKin} </h3>
                             </div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@ const Compte = () => {
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1">Kinshasa Entrer</span>
-                                <h3 class="card-title mb-2">{depotK} $</h3>
+                                <h3 class="card-title mb-2">{depotK} </h3>
                             </div>
                         </div>
                     </div>
@@ -186,7 +186,7 @@ const Compte = () => {
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1">Kinshasa Sorti</span>
-                                <h3 class="card-title mb-2">{retraitK} $</h3>
+                                <h3 class="card-title mb-2">{retraitK} </h3>
                             </div>
                         </div>
                     </div>

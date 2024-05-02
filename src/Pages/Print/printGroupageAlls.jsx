@@ -54,17 +54,26 @@ const styles = StyleSheet.create({
         width: "100%", 
         borderStyle: "solid", 
         borderColor: "#bfbfbf", 
-        borderBottomWidth: 1 
+        borderRightWidth: 1, /* Ajoute une ligne verticale à droite de chaque cellule */
+        borderBottomWidth: 1
     },
     tableCellHeader: { 
         margin: 5, 
         fontSize: 12, 
-        fontWeight: 500 
+        fontWeight: 500,
     },
     tableCell: { 
         margin: 5, 
         fontSize: 10 
-    }
+    },
+    tableColHeaderNew: { 
+        width: "100%", 
+        borderStyle: "solid", 
+        borderColor: "#bfbfbf", 
+        borderBottomColor: "#000", 
+        borderWidth: 1, 
+        backgroundColor: "#f0f0f0" 
+    },
 });
 
 const PrintGroupageAll = () => {

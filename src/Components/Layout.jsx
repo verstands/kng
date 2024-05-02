@@ -84,13 +84,13 @@ const Layout = () => {
                             <li className={`menu-item ${location.pathname === '/entrer' ? 'active' : ''}`}>
                                 <Link to="/entrer" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-log-in"></i>
-                                    <div data-i18n="Analytics">Dubai</div>
+                                    <div data-i18n="Analytics">DXB ABS</div>
                                 </Link>
                             </li>
                             <li className={`menu-item ${location.pathname === '/sortir' ? 'active' : ''}`}>
                                 <Link to="/sortir" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-log-out"></i>
-                                    <div data-i18n="Analytics">Kinshasa</div>
+                                    <div data-i18n="Analytics">FIH ABS</div>
                                 </Link>
                             </li>
                             <li className={`menu-item ${location.pathname === '/detteClient' ? 'active' : ''}`}>

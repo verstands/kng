@@ -90,7 +90,7 @@ const AffecterUser = () => {
                             <div className="mb-3 col-md-2">
                              </div>
                             <div className="mb-3 col-md-5">
-                                <label htmlFor="qte" className="form-label">Qte</label>
+                                <label htmlFor="qte" className="form-label">Montant</label>
                                 <input
                                     className="form-control"
                                     type="number"
@@ -126,7 +126,7 @@ const AffecterUser = () => {
                                         />
                                     </div>
                                     <div className="mb-3 col-md-5">
-                                        <label htmlFor={`montant-${i}`} className="form-label">Montant</label>
+                                        <label htmlFor={`montant-${i}`} className="form-label">Qte</label>
                                         <input
                                             value={x.montant}
                                             className="form-control"
