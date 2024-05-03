@@ -128,43 +128,35 @@ const Sortir = () => {
                 <div className="col-sm-4">
                   <div className="card-body">
                     <h5 className="card-title text-primary">
-                      <i className="bx bx-log-in"></i>Dubai
+                      <i className="bx bx-log-out m-1"></i>FIH ABS
                     </h5>
-                    <Link
-                      to="/Addentrer"
-                      className="btn btn-sm btn-outline-primary"
-                    >
-                      Faire une transaction
-                    </Link>
-                    <Link
-                      to="/addDepenseKinshasa"
-                      className="btn btn-sm btn-outline-primary"
-                    >
-                      Depense
-                    </Link>
+                    <div className="col-md-12">
+                      <Link to="/Addentrer" className="btn btn-sm btn-outline-primary m-2">Faire une transaction</Link>
+                      <Link to="/addDepenseKinshasa" className="btn btn-sm btn-outline-primary"> Depense</Link>
+                    </div>
                   </div>
                 </div>
-                <div className="col-sm-8 text-center p-2">
+                <div className="col-md-8 text-center p-2">
                   <div className="row">
-                    <div className="card btn btn-sm btn-outline-primary col-md-3">
+                    <div className="card btn btn-sm btn-success col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Dépôt</p>
                         <span className="font-weight-bold">{countDepot}$</span>
                       </div>
                     </div>
-                    <div className="card btn btn-sm btn-outline-primary col-md-3">
+                    <div className="card btn btn-sm btn-danger col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Sorti</p>
                         <span className="font-weight-bold">{countSorti}$</span>
                       </div>
                     </div>
-                    <div className="card btn btn-sm btn-outline-primary col-md-3">
+                    <div className="card btn btn-sm btn-primary col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Balance</p>
                         <span className="font-weight-bold">{countTotal}$</span>
                       </div>
                     </div>
-                    <div className="card btn btn-sm btn-outline-primary col-md-3">
+                    <div className="card btn btn-sm btn-warning col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Total depense</p>
                         <span className="font-weight-bold">
@@ -180,258 +172,274 @@ const Sortir = () => {
         </div>
         <div className="page-wrapper">
           <div className="row">
-            <div className="card col-md-8">
-              <ul className="nav nav-tabs" role="tablist">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    data-bs-toggle="tab"
-                    href="#home"
-                    role="tab"
-                  >
-                    <span className="hidden-sm-up"></span>
-                    <span className="hidden-xs-down">
-                      <i className="fas fa-list"></i>Transaction du jour
-                    </span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-bs-toggle="tab"
-                    href="#profile"
-                    role="tab"
-                  >
-                    <span className="hidden-sm-up"></span>
-                    <span className="hidden-xs-down">
-                      <i className="fas fa-mobile-alt"></i>Les transactions
-                    </span>
-                  </a>
-                </li>
-              </ul>
-              <div className="tab-content tabcontent-border">
-                <div className="tab-pane active" id="home" role="tabpanel">
-                  <div className="p-20">
-                    <div className="row">
-                      <div className="col-md-10">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={searchTerm}
-                          onChange={handleSearch}
-                          placeholder="Recherche"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="card">
-                    {isLoading ? (
-                      <div className="text-center">
-                        <Spinner />
-                      </div>
-                    ) : (
-                      <div className="table-responsive text-nowrap">
-                        <table className="table table-borderless">
-                          <thead>
-                            <tr>
-                              <th>N°</th>
-                              <th>Nom_emeteur</th>
-                              <th>Nom recepeteur</th>
-                              <th>Matricule</th>
-                              <th>Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {Array.isArray(etatDataJ) &&
-                              etatDataJ
-                                .filter((data) => {
-                                  if (
-                                    typeof data.matricule !== "string" ||
-                                    typeof data.nom_emateur !== "string" ||
-                                    typeof data.nom_recepteur !== "string" ||
-                                    typeof data.etat !== "string"
-                                  ) {
-                                    return false;
-                                  }
-                                  return (
-                                    data.matricule
-                                      .toLowerCase()
-                                      .includes(
-                                        searchTermJourne.toLowerCase()
-                                      ) ||
-                                    data.nom_emateur
-                                      .toLowerCase()
-                                      .includes(
-                                        searchTermJourne.toLowerCase()
-                                      ) ||
-                                    data.nom_recepteur
-                                      .toLowerCase()
-                                      .includes(
-                                        searchTermJourne.toLowerCase()
-                                      ) ||
-                                    data.etat
-                                      .toLowerCase()
-                                      .includes(searchTermJourne.toLowerCase())
-                                  );
-                                })
-                                .map((data, index) => (
-                                  <EntrerTable
-                                    id={data.id}
-                                    nombre={nombre++}
-                                    nom_emateur={data.nom_emateur}
-                                    nom_recepteur={data.nom_recepteur}
-                                    type={data.etat}
-                                    matricule={data.matricule}
-                                    key={data.id}
-                                  />
-                                ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="tab-pane p-20" id="profile" role="tabpanel">
-                  <div className="p-20">
-                    <div className="tab-pane active" id="home" role="tabpanel">
-                      <div className="p-20">
-                        <div className="row">
-                          <div className="col-md-3">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Recherche"
-                              value={searchTermJourne}
-                              onChange={handleSearchJour}
-                            />
-                          </div>
-                          <div className="col-md-3">
-                            <input type="date" className="form-control" />
-                          </div>
-                          <div className="col-md-3">
-                            <input type="date" className="form-control" />
-                          </div>
-                          <div className="col-md-3">
-                            <button className="btn btn-primary">
-                              {" "}
-                              <i className="bx bx-filter"></i> Filtre
-                            </button>
-                          </div>
+            <div className="col-12 col-md-8">
+              <div className="card">
+                <ul className="nav nav-tabs" role="tablist">
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active"
+                      data-bs-toggle="tab"
+                      href="#home"
+                      role="tab"
+                    >
+                      <span className="hidden-sm-up"></span>
+                      <span className="hidden-xs-down">
+                        <i className="fas fa-list"></i>Transaction du jour
+                      </span>
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      data-bs-toggle="tab"
+                      href="#profile"
+                      role="tab"
+                    >
+                      <span className="hidden-sm-up"></span>
+                      <span className="hidden-xs-down">
+                        <i className="fas fa-mobile-alt"></i>Les transactions
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                <div className="tab-content tabcontent-border">
+                  <div className="tab-pane active" id="home" role="tabpanel">
+                    <div className="p-20">
+                      <div className="row">
+                        <div className="col-md-10">
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={searchTerm}
+                            onChange={handleSearch}
+                            placeholder="Recherche"
+                          />
+                        </div>
+                        <div className="col-md-2">
+                          <Link to={`/ImprimerTransactionAll`}><i className="bx bx-printer fs-2 me-1"></i></Link>
                         </div>
                       </div>
-                      <hr />
-                      <div className="card">
-                        {isLoading ? (
-                          <div className="text-center">
-                            <Spinner />
-                          </div>
-                        ) : (
-                          <div className="table-responsive text-nowrap">
-                            <table className="table table-borderless">
-                              <thead>
-                                <tr>
-                                  <th>N°</th>
-                                  <th>Nom_emeteur</th>
-                                  <th>Nom recepeteur</th>
-                                  <th>Matricule</th>
-                                  <th>Actions</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {Array.isArray(etatData) &&
-                                  etatData
-                                    .filter((data) => {
-                                      if (typeof data.matricule !== "string") {
-                                        return false;
-                                      }
-                                      return data.matricule
+                    </div>
+                    <hr />
+                    <div className="card">
+                      {isLoading ? (
+                        <div className="text-center">
+                          <Spinner />
+                        </div>
+                      ) : (
+                        <div className="table-responsive text-nowrap">
+                          <table className="table table-bordered">
+                            <thead>
+                              <tr className="bg-primary">
+                                <th className="text-white">N°</th>
+                                <th className="text-white">Nom_emeteur</th>
+                                <th className="text-white">Nom recepeteur</th>
+                                <th className="text-white">Matricule</th>
+                                <th className="text-white">Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {Array.isArray(etatDataJ) &&
+                                etatDataJ
+                                  .filter((data) => {
+                                    if (
+                                      typeof data.matricule !== "string" ||
+                                      typeof data.nom_emateur !== "string" ||
+                                      typeof data.nom_recepteur !== "string" ||
+                                      typeof data.etat !== "string"
+                                    ) {
+                                      return false;
+                                    }
+                                    return (
+                                      data.matricule
                                         .toLowerCase()
                                         .includes(
                                           searchTermJourne.toLowerCase()
-                                        );
-                                    })
-                                    .map((data, index) => (
-                                      <EntrerTable
-                                        id={data.id}
-                                        nom_emateur={data.nom_emateur}
-                                        nom_recepteur={data.nom_recepteur}
-                                        matricule={data.matricule}
-                                        key={index}
-                                      />
-                                    ))}
-                              </tbody>
-                            </table>
+                                        ) ||
+                                      data.nom_emateur
+                                        .toLowerCase()
+                                        .includes(
+                                          searchTermJourne.toLowerCase()
+                                        ) ||
+                                      data.nom_recepteur
+                                        .toLowerCase()
+                                        .includes(
+                                          searchTermJourne.toLowerCase()
+                                        ) ||
+                                      data.etat
+                                        .toLowerCase()
+                                        .includes(searchTermJourne.toLowerCase())
+                                    );
+                                  })
+                                  .map((data, index) => (
+                                    <EntrerTable
+                                      id={data.id}
+                                      nombre={nombre++}
+                                      nom_emateur={data.nom_emateur}
+                                      nom_recepteur={data.nom_recepteur}
+                                      type={data.etat}
+                                      matricule={data.matricule}
+                                      key={data.id}
+                                    />
+                                  ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="tab-pane p-20" id="profile" role="tabpanel">
+                    <div className="p-20">
+                      <div className="tab-pane active" id="home" role="tabpanel">
+                        <div className="p-20">
+                          <div className="row">
+                            <div className="col-md-3">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Recherche"
+                                value={searchTermJourne}
+                                onChange={handleSearchJour}
+                              />
+                            </div>
+                            <div className="col-md-3">
+                              <input type="date" className="form-control" />
+                            </div>
+                            <div className="col-md-3">
+                              <input type="date" className="form-control" />
+                            </div>
+                            <div className="col-md-3">
+                              <button className="btn btn-primary">
+                                {" "}
+                                <i className="bx bx-filter"></i> Filtre
+                              </button>
+                            </div>
                           </div>
-                        )}
+                        </div>
+                        <hr />
+                        <div className="card">
+                          {isLoading ? (
+                            <div className="text-center">
+                              <Spinner />
+                            </div>
+                          ) : (
+                            <div className="table-responsive text-nowrap">
+                              <table className="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>N°</th>
+                                    <th>Nom_emeteur</th>
+                                    <th>Nom recepeteur</th>
+                                    <th>Matricule</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {Array.isArray(etatData) &&
+                                    etatData
+                                      .filter((data) => {
+                                        if (typeof data.matricule !== "string") {
+                                          return false;
+                                        }
+                                        return data.matricule
+                                          .toLowerCase()
+                                          .includes(
+                                            searchTermJourne.toLowerCase()
+                                          );
+                                      })
+                                      .map((data, index) => (
+                                        <EntrerTable
+                                          id={data.id}
+                                          nom_emateur={data.nom_emateur}
+                                          nom_recepteur={data.nom_recepteur}
+                                          matricule={data.matricule}
+                                          key={index}
+                                        />
+                                      ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="card col-md-4 ml-2">
-              <ul className="nav nav-tabs" role="tablist">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    data-bs-toggle="tab"
-                    href="#home"
-                    role="tab"
-                  >
-                    <span className="hidden-sm-up"></span>
-                    <span className="hidden-xs-down">
-                      <i className="fas fa-list"></i>Les depenses
-                    </span>
-                  </a>
-                </li>
-              </ul>
-              <div className="col-md-10">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Recherche"
-                  value={searchDepense}
-                  onChange={handleSearchDepense}
-                />
-              </div>
-              <hr />
-              {isLoading ? (
-                <div className="text-center">
-                  <Spinner />
+           
+           <div className="col-md-4 ml-2">
+            <div className="card">
+                <ul className="nav nav-tabs" role="tablist">
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active"
+                      data-bs-toggle="tab"
+                      href="#home"
+                      role="tab"
+                    >
+                      <span className="hidden-sm-up"></span>
+                      <span className="hidden-xs-down">
+                        <i className="fas fa-list"></i>Les depenses
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                <div className="tab-content tabcontent-border">
+                  <div className="col-md-10">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Recherche"
+                    value={searchDepense}
+                    onChange={handleSearchDepense}
+                  />
+                  </div>
+                  <hr />
+                  {isLoading ? (
+                  <div className="text-center">
+                    <Spinner />
+                  </div>
+                  ) : (
+                    <div className="table-responsive text-nowrap">
+                      <table className="table table-bordered">
+                        <thead>
+                          <tr className="bg-primary">
+                            <th className="text-white">N°</th>
+                            <th className="text-white">Montant</th>
+                            <th className="text-white">Date</th>
+                            <th className="text-white">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {Array.isArray(depenseData) &&
+                            depenseData
+                              .filter((data) => {
+                                if (typeof data.created_at !== "string") {
+                                  return false;
+                                }
+                                return data.created_at
+                                  .toLowerCase()
+                                  .includes(searchDepense.toLowerCase());
+                              })
+                              .map((data, index) => (
+                                <DepnseTableKinshasa
+                                  id={data.id}
+                                  montant={data.montant}
+                                  created_at={data.created_at}
+                                  key={index}
+                                />
+                              ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  
+                  )}
                 </div>
-              ) : (
-                <table className="table table-borderless">
-                  <thead>
-                    <tr>
-                      <th>Montant</th>
-                      <th>Date</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Array.isArray(depenseData) &&
-                      depenseData
-                        .filter((data) => {
-                          if (typeof data.created_at !== "string") {
-                            return false;
-                          }
-                          return data.created_at
-                            .toLowerCase()
-                            .includes(searchDepense.toLowerCase());
-                        })
-                        .map((data, index) => (
-                          <DepnseTableKinshasa
-                            id={data.id}
-                            montant={data.montant}
-                            created_at={data.created_at}
-                            key={index}
-                          />
-                        ))}
-                  </tbody>
-                </table>
-              )}
+               
             </div>
+           </div>
+            
           </div>
         </div>
       </div>

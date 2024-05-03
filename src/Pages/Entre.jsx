@@ -133,7 +133,7 @@ const Entre = () => {
           <div className="col-md-12 mb-4 order-0">
             <div className="card">
               <div className="d-flex align-items-end row">
-                <div className="col-sm-3">
+                <div className="col-sm-4">
                   <div className="card-body">
                     <h5 className="card-title text-primary">
                       <i className="bx bx-log-in m-1"></i> DXB ABS
@@ -144,7 +144,7 @@ const Entre = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-9 text-center p-2">
+                <div className="col-sm-8 text-center p-2">
                   <div className="row">
                     <div className="card btn btn-sm btn-success col-md-2 m-2">
                       <div className="card-body ">
@@ -344,31 +344,32 @@ const Entre = () => {
                 </li>
               </ul>
               <div className="tab-content tabcontent-border">
-              <div className="col-md-10">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Recherche"
-                  value={searchDepense}
-                  onChange={handleSearchDepense}
-                />
-              </div>
-               <hr />
-                {isLoading ? (
+                <div className="col-md-10">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Recherche"
+                    value={searchDepense}
+                    onChange={handleSearchDepense}
+                  />
+                </div>
+                <hr />
+                  {isLoading ? (
                 <div className="text-center">
                   <Spinner />
                 </div>
-                ) : (
-                <table className="table table-bordered">
-                <thead>
-                  <tr className="bg-primary">
-                    <th className="text-white">N°</th>
-                    <th className="text-white">Montant</th>
-                    <th className="text-white">Date</th>
-                    <th className="text-white">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
+                  ) : (
+                    <div className="table-responsive text-nowrap">
+                       <table className="table table-bordered">
+                        <thead>
+                      <tr className="bg-primary">
+                        <th className="text-white">N°</th>
+                        <th className="text-white">Montant</th>
+                        <th className="text-white">Date</th>
+                        <th className="text-white">Actions</th>
+                      </tr>
+                        </thead>
+                        <tbody>
                   {Array.isArray(depenseData) &&
                     depenseData
                       .filter((data) => {
@@ -395,9 +396,11 @@ const Entre = () => {
                           key={index}
                         />
                       ))}
-                </tbody>
-                </table>
-              )}
+                        </tbody>
+                      </table>
+                    </div>
+                 
+                  )}
               </div>
               
             </div>
