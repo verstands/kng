@@ -128,6 +128,7 @@ const Entre = () => {
 
   return (
     <>
+    <div className="content-wrapper">
       <div className="container-xxl flex-grow-1 container-p-y">
         <div className="row">
           <div className="col-md-12 mb-4 order-0">
@@ -411,6 +412,8 @@ const Entre = () => {
          
         </div>
       </div>
+    </div>
+      
     </>
   );
 };

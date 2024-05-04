@@ -73,9 +73,10 @@ const Parametre = () => {
             </div>
           </div>
         </div>
-        <div className="page-wrapper">
+          <div className="page-wrapper">
           <div className="row">
-            <div className="card col-md-12">
+            <div className="col-12 col-lg-12">
+              <div className="card">
               <ul className="nav nav-tabs" role="tablist">
                 <li className="nav-item">
                   <a
@@ -240,9 +241,11 @@ const Parametre = () => {
                   </div>
                 </div>
               </div>
+              </div>
             </div>
+            
           </div>
-        </div>
+          </div>
       </div>
     </>
   );

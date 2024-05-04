@@ -27,14 +27,15 @@ const DetteClient = () => {
   };
   return (
     <>
-      <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="row">
-          <div class="col-lg-12 mb-4 order-0">
-            <div class="card">
-              <div class="d-flex align-items-end row">
-                <div class="col-sm-7">
-                  <div class="card-body">
-                    <h5 class="card-title text-primary">
+    <div className="content-wrapper">
+      <div className="container-xxl flex-grow-1 container-p-y">
+        <div className="row">
+          <div className="col-lg-12 mb-4 order-0">
+            <div className="card">
+              <div className="d-flex align-items-end row">
+                <div className="col-sm-7">
+                  <div className="card-body">
+                    <h5 className="card-title text-primary">
                       <i className="bx bx-wallet"></i> Les dettes des clients
                     </h5>
                     <Link
@@ -45,15 +46,16 @@ const DetteClient = () => {
                     </Link>
                   </div>
                 </div>
-                <div class="col-sm-5 text-center text-sm-left"></div>
+                <div className="col-sm-5 text-center text-sm-left"></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="page-wrapper">
-          <div className="page-wrapper">
+        <div className="page-wrapper">
+          <div className="col-12">
             <div className="row">
-              <div className="card col-md-12">
+              <div className="col-12 col-lg-12">
+                <div className="card">
                 <ul className="nav nav-tabs" role="tablist">
                   <li className="nav-item">
                     <a
@@ -102,9 +104,7 @@ const DetteClient = () => {
                           <input type="date" className="form-control" />
                         </div>
                         <div className="col-md-3">
-                        
-                        <i className="bx bx-printer me-1"></i>
-                            
+                          <i className="bx bx-printer fs-2 me-1"></i>  
                         </div>
                       </div>
                     </div>
@@ -217,11 +217,15 @@ const DetteClient = () => {
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
+              
             </div>
           </div>
         </div>
       </div>
+    </div>
+      
     </>
   );
 };
