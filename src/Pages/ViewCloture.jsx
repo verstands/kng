@@ -4,6 +4,7 @@ import { getclotureListe } from "../actions/ClotureAction";
 import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
 import ClotureTable from "../Components/ClotureTable";
+import Spinner from "../Components/Spinner";
 
 
 const ViewCloture = () => {
@@ -17,6 +18,7 @@ const ViewCloture = () => {
     getclotureListe()
       .then((membre) => {
         setdatacloture(membre);
+        console.log(membre)
         setLoading(false);
       })
       .catch((error) => {
@@ -31,7 +33,7 @@ const ViewCloture = () => {
     <>
       <div className="container mt-4">
         <div className="card mb-4">
-          <h5 className="card-header">Liste des clutures</h5>
+          <h5 className="card-header">Liste des clotures</h5>
           <div className="card p-3">
             <div className="row">
               <div className="col-md-10">
@@ -45,6 +47,11 @@ const ViewCloture = () => {
               </div>
             </div>
             <br/>
+            {loading ? (
+              <div className="text-center">
+                <Spinner />
+              </div>
+            ) : (
             <div className="table-responsive text-nowrap">
               <table className="table table-bordered">
                 <thead>
@@ -71,7 +78,7 @@ const ViewCloture = () => {
                         return (
                           data.created_at
                             .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
+                            .includes(searchTermJourne.toLowerCase())
                         );
                       })
                       .map((data, index) => (
@@ -88,6 +95,8 @@ const ViewCloture = () => {
                 </tbody>
               </table>
             </div>
+          )}
+
           </div>
         </div>
       </div>
