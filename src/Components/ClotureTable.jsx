@@ -12,10 +12,10 @@ const ClotureTable = ({ entredubai, id, sortidubai, entreKinhsasa, sortiKinhsasa
             <td><i className=""></i> <strong>{sortiKinhsasa}</strong></td>
             <td>
                 <a href="javascript:void(0);"
-                ><i className="bx bx-trash me-1"></i></a
+                ><i className="bx bx-trash fs-2 me-1"></i></a
                 >
                 <Link to={`/depensedetail/${id}`}
-                ><i className="bx bx-file me-1"></i></Link
+                ><i className="bx bx-file fs-2 me-1"></i></Link
                 >
             </td>
         </tr>

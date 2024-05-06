@@ -41,25 +41,25 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
                 <td><strong>{numero}</strong></td>
                 <td><strong>{dateFormat(created_at, 'dd/mm/yyyy')}</strong></td>
                 <td>
-                    <Link to={`/depensedetail/${id}`}><i className="bx bx-trash me-1"></i></Link>
-                    <Link to={`/depenseConteneur/${id}`}><i className='bx bx-dollar me-1'></i></Link>
-                    <Link to={`/listegroupageUser/${id}`}><i className='bx bx-printer me-1'></i></Link>
+                    <Link to={`/depensedetail/${id}`}><i className="bx bx-trash fs-2 me-1"></i></Link>
+                    <Link to={`/depenseConteneur/${id}`}><i className='bx bx-money fs-2 me-1'></i></Link>
+                    <Link to={`/listegroupageUser/${id}`}><i className='bx bx-printer fs-2 me-1'></i></Link>
                 </td>
             </tr>
             {activeTable === id && (
                 <tr key={id} className='container'>
                     <td colSpan={8}>
-                        <table className="table table-borderle">
+                        <table className="table table-bordered">
                             <thead>
-                                <tr>
-                                    <th>N°</th>
-                                    <th>Nom client</th>
-                                    <th>Telephone</th>
-                                    <th>Marchandise</th>
-                                    <th>Qte</th>
-                                    <th>Montant</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
+                                <tr className="bg-primary">
+                                    <th className="text-white">N°</th>
+                                    <th className="text-white">Nom client</th>
+                                    <th className="text-white">Telephone</th>
+                                    <th className="text-white">Marchandise</th>
+                                    <th className="text-white">Qte</th>
+                                    <th className="text-white">Montant</th>
+                                    <th className="text-white">Date</th>
+                                    <th className="text-white">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,9 +78,9 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
                                             <td>{client.montant}</td>
                                             <td>{dateFormat(client.created_at, 'dd/mm/yyyy')}</td>
                                             <td>
-                                                <Link to={`/depensedetail/${id}`}><i className="bx bx-trash me-1"></i></Link>
-                                                <Link to=""><i className='bx bx-dollar-circle me-1'></i></Link>
-                                                <Link to={`/listegroupageUser/${id}`}><i className='bx bx-printer me-1'></i></Link>
+                                                <Link to={`/depensedetail/${id}`}><i className="bx bx-trash me-1 fs-2"></i></Link>
+                                                <Link to=""><i className='bx bx-money me-1 fs-2'></i></Link>
+                                                <Link to={`/listegroupageUser/${id}`}><i className='bx bx-printer fs-2 me-1'></i></Link>
                                             </td>
                                         </tr>
                                     ))

@@ -121,13 +121,13 @@ const Parametre = () => {
                   <hr />
                   <div className="card">
                     <div className="table-responsive text-nowrap">
-                      <table className="table table-borderle">
+                      <table className="table table-bordered">
                         <thead>
-                          <tr>
-                            <th>N°</th>
-                            <th>Intitule</th>
-                            <th>Date</th>
-                            <th>Actions</th>
+                          <tr  className="bg-primary">
+                            <th className="text-white">N°</th>
+                            <th className="text-white">Intitule</th>
+                            <th className="text-white">Date</th>
+                            <th className="text-white">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -155,7 +155,7 @@ const Parametre = () => {
                                         deleteDepenseHandler(data.id)
                                       }
                                     >
-                                      <i class="bx bx-trash me-1"></i>
+                                      <i class="bx bx-trash fs-2 me-1"></i>
                                     </Link>
                                   </td>
                                 </tr>
@@ -182,15 +182,15 @@ const Parametre = () => {
                       </div>
                     </div>
                     <div className="table-responsive text-nowrap"></div>
-                    <table className="table table-borderle">
+                    <table className="table table-bordered">
                       <thead>
-                        <tr>
-                          <th>N°</th>
-                          <th>Nom</th>
-                          <th>Postnom</th>
-                          <th>Email</th>
-                          <th>Date</th>
-                          <th>Actions</th>
+                        <tr className="bg-primary">
+                          <th className="text-white">N°</th>
+                          <th className="text-white">Nom</th>
+                          <th className="text-white">Postnom</th>
+                          <th className="text-white">Email</th>
+                          <th className="text-white">Date</th>
+                          <th className="text-white">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -231,7 +231,7 @@ const Parametre = () => {
                                 </td>
                                 <td>
                                   <a href="javascript:void(0);">
-                                    <i class="bx bx-trash me-1"></i>
+                                    <i class="bx bx-trash fs-2 me-1"></i>
                                   </a>
                                 </td>
                               </tr>

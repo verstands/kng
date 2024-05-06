@@ -44,17 +44,18 @@ const ViewCloture = () => {
                 />
               </div>
             </div>
+            <br/>
             <div className="table-responsive text-nowrap">
-              <table className="table table-borderle">
+              <table className="table table-bordered">
                 <thead>
-                  <tr>
-                    <th>N°</th>
-                    <th>Entre dubai</th>
-                    <th>Entre Kinshasa</th>
-                    <th>Sorti Dubai</th>
-                    <th>Sorti Kinshasa</th>
-                    <th>Date</th>
-                    <th>Action</th>
+                  <tr className="bg-primary">
+                    <th className="text-white">N°</th>
+                    <th className="text-white">Entre dubai</th>
+                    <th className="text-white">Entre Kinshasa</th>
+                    <th className="text-white">Sorti Dubai</th>
+                    <th className="text-white">Sorti Kinshasa</th>
+                    <th className="text-white">Date</th>
+                    <th className="text-white">Action</th>
                   </tr>
                 </thead>
                 <tbody>

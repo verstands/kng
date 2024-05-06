@@ -107,14 +107,14 @@ const Conteneur = () => {
                         <Spinner />
                       </div>
                     ) : (
-                      <table className="table table-borderle">
+                      <table className="table table-bordered">
                         <thead>
-                          <tr>
-                            <th></th>
-                            <th>Nom</th>
-                            <th>Numero</th>
-                            <th>Date</th>
-                            <th>Actions</th>
+                          <tr className="bg-primary">
+                            <th className="text-white"></th>
+                            <th className="text-white">Nom</th>
+                            <th className="text-white">Numero</th>
+                            <th className="text-white">Date</th>
+                            <th className="text-white">Actions</th>
                           </tr>
                         </thead>
                         <tbody>

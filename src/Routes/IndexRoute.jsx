@@ -33,6 +33,7 @@ import PrintGroupageAll from '../Pages/Print/printGroupageAlls'
 import PrintGroupageUsers from '../Pages/Print/PrintGroupageUsers'
 import DepenseConteneur from '../Pages/PayementConteneur'
 import ListPaiementConteneur from '../Pages/ListPaiementConteneur'
+import PaiementDetteUser from '../Pages/PaiementDetteUser'
 
 const IndexRoute = () => {
   return (
@@ -72,6 +73,7 @@ const IndexRoute = () => {
           <Route path="/listecloture" element={<ViewCloture />} />
           <Route path="/depenseConteneur/:id" element={<DepenseConteneur />} />
           <Route path="/ListdepenseConteneur/:id" element={<ListPaiementConteneur />} />
+          <Route path="/paiementDetteClient/:id" element={<PaiementDetteUser />} />
         </Route>
       </Routes>
     </>

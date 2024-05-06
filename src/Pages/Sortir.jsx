@@ -20,6 +20,7 @@ import {
   getCounrDepenseKinshasa,
 } from "../actions/DepenseAction";
 import DepnseTableKinshasa from "../Components/DepenseTableKinshasa";
+import EntrerTableSorti from "../Components/EntrerTableSorti";
 
 const Sortir = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -33,6 +34,9 @@ const Sortir = () => {
   const [countSorti, setCountSorti] = useState(0);
   const [countDepense, setCountDepense] = useState(0);
   const [countTotal, setcountTotal] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   let nombre = 1;
   
   useEffect(() => {
@@ -100,6 +104,7 @@ const Sortir = () => {
     getEntreJourneKinshasa()
       .then((membre) => {
         setetatDataJ(membre);
+        setTotalPages(totalPages); 
         setloading(false);
       })
       .catch((error) => {
@@ -116,6 +121,11 @@ const Sortir = () => {
 
   const handleSearchDepense = (event) => {
     setSearchDepense(event.target.value);
+  };
+
+  
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -272,7 +282,7 @@ const Sortir = () => {
                                     );
                                   })
                                   .map((data, index) => (
-                                    <EntrerTable
+                                    <EntrerTableSorti
                                       id={data.id}
                                       nombre={nombre++}
                                       nom_emateur={data.nom_emateur}
@@ -286,6 +296,24 @@ const Sortir = () => {
                           </table>
                         </div>
                       )}
+                      <br />
+                        <div className="pagination-container">
+                          <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="btn btn-primary mr-2"
+                          >
+                            &laquo; Précédent
+                          </button>
+                          &nbsp;
+                          <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                            className="btn btn-primary"
+                          >
+                            Suivant &raquo;
+                          </button>
+                        </div>
                     </div>
                   </div>
                   <div className="tab-pane p-20" id="profile" role="tabpanel">
@@ -348,13 +376,15 @@ const Sortir = () => {
                                           );
                                       })
                                       .map((data, index) => (
-                                        <EntrerTable
-                                          id={data.id}
-                                          nom_emateur={data.nom_emateur}
-                                          nom_recepteur={data.nom_recepteur}
-                                          matricule={data.matricule}
-                                          key={index}
-                                        />
+                                        <EntrerTableSorti
+                                      id={data.id}
+                                      nombre={nombre++}
+                                      nom_emateur={data.nom_emateur}
+                                      nom_recepteur={data.nom_recepteur}
+                                      type={data.etat}
+                                      matricule={data.matricule}
+                                      key={data.id}
+                                    />
                                       ))}
                                 </tbody>
                               </table>

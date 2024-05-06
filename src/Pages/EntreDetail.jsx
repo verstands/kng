@@ -51,7 +51,7 @@ const EntreDetail = () => {
           <h5 class="card-header">Detail du trasaction</h5>
           <div class="card-body">Matricule : {etatData.matricule}
           <h2 style={{ color: typeColor }}>{typeText}</h2>
-          <Link to={`/depensedetail/${etatData.matricule    }`}><i className='bx bx-printer me-1'></i></Link>
+          <Link to={`/ImprimerTransaction/${etatData.id}`}><i className='bx bx-printer me-1'></i></Link>
           </div>
 
           <hr class="my-0" />

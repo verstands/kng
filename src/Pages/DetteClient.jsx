@@ -98,13 +98,7 @@ const DetteClient = () => {
                           />
                         </div>
                         <div className="col-md-3">
-                          <input type="date" className="form-control" />
-                        </div>
-                        <div className="col-md-3">
-                          <input type="date" className="form-control" />
-                        </div>
-                        <div className="col-md-3">
-                          <i className="bx bx-printer fs-2 me-1"></i>  
+                          <i className="bx bx-printer text-primary fs-2 me-1"></i>  
                         </div>
                       </div>
                     </div>
@@ -115,14 +109,15 @@ const DetteClient = () => {
                           <Spinner />
                         </div>
                       ) : (
-                        <table className="table table-borderle">
+                        <div className="table-responsive text-nowrap">
+                        <table className="table table-bordered">
                           <thead>
-                            <tr>
-                              <th>N°</th>
-                              <th>Nom_emeteur</th>
-                              <th>Nom recepeteur</th>
-                              <th>Matricule</th>
-                              <th>Actions</th>
+                            <tr className="bg-primary">
+                              <th className="text-white">N°</th>
+                              <th className="text-white">Nom_emeteur</th>
+                              <th className="text-white">Nom recepeteur</th>
+                              <th className="text-white">Matricule</th>
+                              <th className="text-white">Actions</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -166,6 +161,7 @@ const DetteClient = () => {
                                 ))}
                           </tbody>
                         </table>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -187,27 +183,20 @@ const DetteClient = () => {
                               />
                             </div>
                             <div className="col-md-3">
-                              <input type="date" className="form-control" />
-                            </div>
-                            <div className="col-md-3">
-                              <input type="date" className="form-control" />
-                            </div>
-                            <div className="col-md-3">
-                            <i className="bx bx-printer me-1"></i>
-
-                            </div>
+                          <i className="bx bx-printer text-primary fs-2 me-1"></i>  
+                        </div>
                           </div>
                         </div>
                         <hr />
                         <div className="card">
-                          <table className="table table-borderless">
+                          <table className="table table-bordered">
                             <thead>
-                              <tr>
-                                <th>N°</th>
-                                <th>Nom_emeteur</th>
-                                <th>Nom recepeteur</th>
-                                <th>Matricule</th>
-                                <th>Actions</th>
+                              <tr className="bg-primary">
+                                <th className="text-white">N°</th>
+                                <th className="text-white">Nom_emeteur</th>
+                                <th className="text-white">Nom recepeteur</th>
+                                <th className="text-white">Matricule</th>
+                                <th className="text-white">Actions</th>
                               </tr>
                             </thead>
                             <tbody></tbody>
