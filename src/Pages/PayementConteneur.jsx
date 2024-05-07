@@ -3,9 +3,11 @@ import { gettypedepense } from "../actions/TypeDepnse";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { postDepenseConteneur } from "../actions/DepenseConteneurAction";
+import { getConteneurID } from "../actions/ConteneurAction";
 
 const DepenseConteneur = () => {
   const [etatData, setetatData] = useState([]);
+  const [dataDetteID, setdataDetteID] = useState([]);
   const form = useRef();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -15,6 +17,17 @@ const DepenseConteneur = () => {
     gettypedepense()
       .then((membre) => {
         setetatData(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  
+  useEffect(() => {
+    getConteneurID(id)
+      .then((membre) => {
+        setdataDetteID(membre);
       })
       .catch((error) => {
         console.log(error);
@@ -44,13 +57,13 @@ const DepenseConteneur = () => {
     <>
       <div className="container mt-4">
         <div class="card mb-4">
-          <h5 class="card-header">Depense de conteneur</h5>
+          <h5 class="card-header">Depense du conteneur : <span style={{color : "red"}}>{dataDetteID.nom_conteneur}</span></h5>
           <div class="card-body">
           <Link
           to={`/ListdepenseConteneur/${id}`}
           className="btn btn-sm btn-outline-primary"
         >
-          Voir les paiements
+          Voir les depenses
         </Link>
           </div>
           <hr class="my-0" />

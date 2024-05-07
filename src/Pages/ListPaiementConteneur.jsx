@@ -1,14 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../Components/Spinner";
 import { Link, useParams } from "react-router-dom";
-import { getDepenseConteneur } from "../actions/DepenseConteneurAction";
+import {
+  deleteDepenseConteneur,
+  getDepenseConteneur,
+  getDepenseConteneurTotal,
+} from "../actions/DepenseConteneurAction";
 import dateFormat from "dateformat";
+import { getConteneurID } from "../actions/ConteneurAction";
+import { useDispatch } from "react-redux";
 
 const ListPaiementConteneur = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [total, setTotal] = useState(0);
   const [dataDette, setdataDette] = useState([]);
+  const [dataDetteID, setdataDetteID] = useState([]);
   const [isLoading, setloading] = useState(true);
   let { id } = useParams();
+  const dispatch = useDispatch();
+  let numero = 1;
+
+  useEffect(() => {
+    getDepenseConteneurTotal(id)
+      .then((membre) => {
+        setTotal(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
 
   useEffect(() => {
     getDepenseConteneur(id)
@@ -19,7 +39,31 @@ const ListPaiementConteneur = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [id]); // Ajouter id comme dépendance
+  }, [id]);
+
+  useEffect(() => {
+    getConteneurID(id)
+      .then((membre) => {
+        setdataDetteID(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleSearchDette = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const deleteDepenseConteneurHandle = async (id) => {
+    try {
+      await dispatch(deleteDepenseConteneur(id));
+
+      reflesh;
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la dépense :", error);
+    }
+  };
 
   return (
     <>
@@ -31,8 +75,13 @@ const ListPaiementConteneur = () => {
                 <div class="col-sm-7">
                   <div class="card-body">
                     <h5 class="card-title text-primary">
-                      <i className="bx bx-moneys"></i> Les paiement de conteneur
-                      :{" "}
+                      <i className="bx bx-moneys"></i> Liste des depenses du
+                      conteneurs :{" "}
+                      <span style={{ color: "red" }}>
+                        {dataDetteID.nom_conteneur}
+                      </span>
+                      <br />
+                      <h2>Total : {total}</h2>
                     </h5>
                   </div>
                 </div>
@@ -64,12 +113,12 @@ const ListPaiementConteneur = () => {
                   <div class="p-20">
                     <div className="row">
                       <div className="col-md-9">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Recherche"
-                          onChange={(e) => setSearchTerm(e.target.value)}
-                        />
+                        <Link to={`/PrintDepenseConteneur/${dataDetteID.id}`}>
+                          <i
+                            className="bx bx-printer me-1"
+                            style={{ fontSize: "40px" }}
+                          ></i>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -81,52 +130,46 @@ const ListPaiementConteneur = () => {
                       <Spinner />
                     </div>
                   ) : (
-                    <table className="table table-borderle">
+                    <table className="table table-bordered">
                       <thead>
-                        <tr>
-                          <th></th>
-                          <th>Nom</th>
-                          <th>Numero</th>
-                          <th>Date</th>
-                          <th>Actions</th>
+                        <tr className="bg-primary">
+                          <th className="text-white">N°</th>
+                          <th className="text-white">Type depense</th>
+                          <th className="text-white">Montant</th>
+                          <th className="text-white">Date</th>
+                          <th className="text-white">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
                         {Array.isArray(dataDette) &&
-                          dataDette
-                            .filter((data) => {
-                              if (typeof data.montant !== "string") {
-                                return false;
-                              }
-                              return data.montant
-                                .toLowerCase()
-                                .includes(searchTerm.toLowerCase());
-                            })
-                            .map((d) => {
-                              return (
-                                <tr key={d.id}>
-                                  <td>
-                                    <button className="btn btn-primary"></button>
-                                  </td>
-                                  <td>
-                                    <strong>nom_conteneur</strong>
-                                  </td>
-                                  <td>
-                                    <strong>numero</strong>
-                                  </td>
-                                  <td>
-                                    <strong>
-                                      {dateFormat(d.created_at, "dd/mm/yyyy")}
-                                    </strong>
-                                  </td>
-                                  <td>
-                                    <Link to={`/depensedetail/${id}`}>
-                                      <i className="bx bx-trash me-1"></i>
-                                    </Link>
-                                  </td>
-                                </tr>
-                              );
-                            })}
+                          dataDette.map((d) => {
+                            return (
+                              <tr>
+                                <td>{numero++}</td>
+                                <td>
+                                  <strong>{d.id_typedepense.intitule}</strong>
+                                </td>
+                                <td>
+                                  <strong>{d.montant}</strong>
+                                </td>
+                                <td>
+                                  <strong>
+                                    {dateFormat(d.created_at, "dd/mm/yyyy")}
+                                  </strong>
+                                </td>
+                                <td>
+                                  <Link
+                                    to=""
+                                    onClick={() =>
+                                      deleteDepenseConteneurHandle(d.id)
+                                    }
+                                  >
+                                    <i className="bx bx-trash me-1"></i>
+                                  </Link>
+                                </td>
+                              </tr>
+                            );
+                          })}
                       </tbody>
                     </table>
                   )}

@@ -15,6 +15,20 @@ export const getDepenseConteneur = (id) => {
     });
 };
 
+export const getDepenseConteneurTotal = (id) => {
+  return axioClient
+    .get(`totaldepenseconteneur/${id}`)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      if (error.response.status === 401) {
+        window.location.href = "/";
+      } else {
+      }
+    });
+};
+
 export const postDepenseConteneur = (formData) => {
   return async (dispatch) => {
     try {
@@ -53,6 +67,8 @@ export const deleteDepenseConteneur = (id) => {
             icon: "success",
             title: `${response.data.message}`,
           });
+          window.location.reload()
+
         } catch (error) {
           Swal.fire({
             icon: "error",
@@ -65,3 +81,5 @@ export const deleteDepenseConteneur = (id) => {
     });
   };
 };
+
+

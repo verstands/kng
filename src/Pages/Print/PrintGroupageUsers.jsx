@@ -194,12 +194,12 @@ const PrintGroupageUsers = () => {
                       <View style={styles.tableCol}>
                         {etatDatas.client.marchandise.map((marchandise, index) => (
                           <Text key={index} style={styles.tableCell}>
-                            {marchandise.montant}
+                            {marchandise.qte}
                           </Text>
                         ))}
                       </View>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{etatDatas.client.qte}</Text>
+                        <Text style={styles.tableCell}>23</Text>
                         <Text style={[styles.tableCell, { color: 'red' }]}>TOTAL : {etatDatas.client.montant}</Text>
                       </View>
                     </View>

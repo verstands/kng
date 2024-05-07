@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import EntrerTable from "../Components/EntrerTable";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import DetteTablea from "../Components/DetteTablea";
-import { getConteneur } from "../actions/ConteneurAction";
+import { getConteneur, getConteneurID } from "../actions/ConteneurAction";
 import Spinner from "../Components/Spinner";
 import ConteneurTable from "../Components/ConteneurTable";
 
@@ -10,6 +10,7 @@ const Conteneur = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [dataDette, setdataDette] = useState([]);
   const [isLoading, setloading] = useState(true);
+  
 
   useEffect(() => {
     getConteneur()

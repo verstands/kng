@@ -35,6 +35,8 @@ import DepenseConteneur from '../Pages/PayementConteneur'
 import ListPaiementConteneur from '../Pages/ListPaiementConteneur'
 import PaiementDetteUser from '../Pages/PaiementDetteUser'
 import DetailCloture from '../Pages/DetailCloture'
+import PrintDepenseConteneur from '../Pages/Print/PrintDepenseConteneur'
+import PayementConteneurUser from '../Pages/PayementConteneurUser'
 
 const IndexRoute = () => {
   return (
@@ -47,6 +49,7 @@ const IndexRoute = () => {
         <Route path="/ImprimerTransactionAlls" element={<PrintTrasanctionAlls />} />
         <Route path="/listegroupage" element={<PrintGroupageAll />} />
         <Route path="/listegroupageUser/:id" element={<PrintGroupageUsers />} />
+        <Route path="/PrintDepenseConteneur/:id" element={<PrintDepenseConteneur />} />
 
         <Route element={<Layout />}>
           <Route path="/dashboad" element={<Dashboad />} />
@@ -76,6 +79,7 @@ const IndexRoute = () => {
           <Route path="/ListdepenseConteneur/:id" element={<ListPaiementConteneur />} />
           <Route path="/paiementDetteClient/:id" element={<PaiementDetteUser />} />
           <Route path="/detailcloture/:id" element={<DetailCloture />} />
+          <Route path="/PayementConteneurUser/:id" element={<PayementConteneurUser />} />
         </Route>
       </Routes>
     </>
