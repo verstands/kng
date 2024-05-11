@@ -97,9 +97,6 @@ const DetteClient = () => {
                             placeholder="Recherche"
                           />
                         </div>
-                        <div className="col-md-3">
-                          <i className="bx bx-printer text-primary fs-2 me-1"></i>  
-                        </div>
                       </div>
                     </div>
                     <hr />
@@ -115,8 +112,10 @@ const DetteClient = () => {
                             <tr className="bg-primary">
                               <th className="text-white">N°</th>
                               <th className="text-white">Nom_emeteur</th>
-                              <th className="text-white">Nom recepeteur</th>
-                              <th className="text-white">Matricule</th>
+                              <th className="text-white">Montant dette</th>
+                              <th className="text-white">Montant payer</th>
+                              <th className="text-white">Date</th>
+                              <th className="text-white">Motif</th>
                               <th className="text-white">Actions</th>
                             </tr>
                           </thead>
@@ -153,9 +152,11 @@ const DetteClient = () => {
                                       data.id_transaction.nom_emateur
                                     }
                                     nom_recepteur={
-                                      data.id_transaction.nom_recepteur
+                                      data.montant_dette
                                     }
-                                    matricule={data.id_transaction.matricule}
+                                    matricule={data.montantpayer}
+                                    date={data.created_at}
+                                    motif={data.motif_dette}
                                     key={index}
                                   />
                                 ))}

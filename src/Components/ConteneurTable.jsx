@@ -6,6 +6,7 @@ import axioClient from "../axiosClient";
 import Spinner from "./Spinner";
 import { deleteConteneur, getConteneuClient } from "../actions/ConteneurAction";
 import { useDispatch } from "react-redux";
+import { deleteUser } from "../actions/ClientAction";
 
 const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
   const [dataClient, setDataClient] = useState([]);
@@ -37,6 +38,14 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
       await dispatch(deleteConteneur(id));
       
    reflesh
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la dépense :", error);
+    }
+  };
+
+  const deleteUserHandler = async (id) => {
+    try {
+      await dispatch(deleteUser(id));
     } catch (error) {
       console.error("Erreur lors de la suppression de la dépense :", error);
     }
@@ -74,6 +83,9 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
           <Link to={`/listegroupageUser/${id}`}>
             <i className="bx bx-printer fs-2 me-1"></i>
           </Link>
+          <Link to={`/ClientConteneur/${id}`}>
+          <i className="bx bx-user fs-2 me-1"></i>
+        </Link>
         </td>
       </tr>
       {activeTable === id && (
@@ -85,6 +97,8 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
                   <th className="text-white">N°</th>
                   <th className="text-white">Nom client</th>
                   <th className="text-white">Telephone</th>
+                  <th className="text-white">Montant Total</th>
+                  <th className="text-white">Montant Payer</th>
                   <th className="text-white">Date</th>
                   <th className="text-white">Actions</th>
                 </tr>
@@ -103,16 +117,17 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
                       <td className="text-danger">{index + 1}</td>
                       <td>{client.nom_client}</td>
                       <td>{client.telephone}</td>
+                      <td>{client.montant}</td>
+                      <td>{client.montantpayer}</td>
                       <td>{dateFormat(client.created_at, "dd/mm/yyyy")}</td>
                       <td>
-                        <Link to={`/depensedetail/${id}`}>
+                        <Link to="" onClick={() =>
+                            deleteUserHandler(client.id)
+                          }>
                           <i className="bx bx-trash me-1 fs-2"></i>
                         </Link>
-                        <Link to={`/PayementConteneurUser/${id}`}>
+                        <Link to={`/PayementConteneurUser/${client.id}`}>
                           <i className="bx bx-money me-1 fs-2"></i>
-                        </Link>
-                        <Link to={`/listegroupageUser/${id}`}>
-                          <i className="bx bx-printer fs-2 me-1"></i>
                         </Link>
                       </td>
                     </tr>

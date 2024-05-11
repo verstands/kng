@@ -37,6 +37,8 @@ import PaiementDetteUser from '../Pages/PaiementDetteUser'
 import DetailCloture from '../Pages/DetailCloture'
 import PrintDepenseConteneur from '../Pages/Print/PrintDepenseConteneur'
 import PayementConteneurUser from '../Pages/PayementConteneurUser'
+import ClientConteneur from '../Pages/ClientConteneur'
+import AddPaiementUser from '../Pages/AddPaiementUser'
 
 const IndexRoute = () => {
   return (
@@ -80,6 +82,8 @@ const IndexRoute = () => {
           <Route path="/paiementDetteClient/:id" element={<PaiementDetteUser />} />
           <Route path="/detailcloture/:id" element={<DetailCloture />} />
           <Route path="/PayementConteneurUser/:id" element={<PayementConteneurUser />} />
+          <Route path="/ClientConteneur/:id" element={<ClientConteneur />} />
+          <Route path="/AddPaiementUser/:id" element={<AddPaiementUser />} />
         </Route>
       </Routes>
     </>

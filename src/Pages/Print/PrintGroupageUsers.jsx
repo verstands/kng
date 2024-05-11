@@ -199,7 +199,7 @@ const PrintGroupageUsers = () => {
                         ))}
                       </View>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>23</Text>
+                        <Text style={styles.tableCell}>{etatDatas.client.montantpayer}</Text>
                         <Text style={[styles.tableCell, { color: 'red' }]}>TOTAL : {etatDatas.client.montant}</Text>
                       </View>
                     </View>
