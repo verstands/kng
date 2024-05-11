@@ -6,27 +6,22 @@ import { postClient } from "../actions/ClientAction";
 const AffecterUser = () => {
   const [dataDette, setdataDette] = useState([]);
   const [isLoading, setloading] = useState(true);
-  const [inputList, setInputList] = useState([
-    { marchandise: "", montant: "" },
+  const [isLoading2, setloading2] = useState(false);
+
+  const [inputListNew, setInputListNew] = useState([
+    { marchandise:'', qte: '' },
   ]);
   const dispatch = useDispatch();
   const form = useRef();
 
-  const handleRemoveClick = (index) => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-  };
-
   const handleAddClick = () => {
-    setInputList([...inputList, { marchandise: "", montant: "" }]);
+    setInputListNew([...inputListNew, { marchandise: '', qte: '' }]);
   };
 
-  const handleChangeInput = (index, event) => {
-    const { name, value } = event.target;
-    const list = [...inputList];
+  const handleInputChange = (index, name, value) => {
+    const list = [...inputListNew];
     list[index][name] = value;
-    setInputList(list);
+    setInputListNew(list);
   };
 
   useEffect(() => {
@@ -40,32 +35,49 @@ const AffecterUser = () => {
       });
   }, []);
 
+ 
+
   const handleSubmitEnvoie = async (e) => {
     e.preventDefault();
-    setloading(true);
-    const formData = {
-      qte: form.current["qte"].value,
-      montantpayer: form.current["montantpayer"].value,
-      montant: form.current["montant"].value,
-      etat: 0,
-      nom_client: form.current["nom_client"].value,
-      telephone: form.current["telephone"].value,
-      id_conteneur:form.current["id_conteneur"].value,
-      marchandises: inputList.map((item) => ({
-        produit: item.marchandise,
-        montant: item.montant
-      }))
-    };
-    await dispatch(postClient(formData))
-      .then(() => {
-        setloading(false);
-        form.current.reset();
-      })
-      .catch(() => {})
-      .finally(() => {
-        setloading(false);
-      });
-  };
+    setloading2(true);
+
+    let etat = 0;
+    if (form.current["montantpayer"].value === form.current["montant"].value) {
+        etat = 1;
+    }
+
+    // Boucle sur chaque élément de inputList
+    inputListNew.forEach(async (item) => {
+        const formData = {
+            qte: item.qte,
+            produit: item.marchandise,
+            montantpayer: form.current["montantpayer"].value,
+            montant: form.current["montant"].value,
+            etat: etat,
+            nom_client: form.current["nom_client"].value,
+            telephone: form.current["telephone"].value,
+            id_conteneur: form.current["id_conteneur"].value,
+        };
+
+        try {
+            // Envoi de l'élément actuel de formData
+            await dispatch(postClient(formData));
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: `${error.response.data.message}`,
+                text: "Veuillez vérifier vos informations de connexion.",
+            });
+            throw error;
+        }
+    });
+
+    // Lorsque toutes les requêtes ont été envoyées
+    setloading(false);
+    form.current.reset();
+    setloading2(false);
+};
+
 
   return (
     <div className="container mt-4">
@@ -106,7 +118,7 @@ const AffecterUser = () => {
               </div>
               <div className="mb-3 col-md-2"></div>
               <div className="mb-3 col-md-5">
-                <label htmlFor="qte" className="form-label">
+                <label htmlFor="montanttotal" className="form-label">
                   Montant Total
                 </label>
                 <input
@@ -120,14 +132,19 @@ const AffecterUser = () => {
                 <label for="firstName" class="form-label">
                   Groupage
                 </label>
-                <select class="form-control" type="number" name="id_conteneur" id="id_conteneur">
+                <select
+                  class="form-control"
+                  type="number"
+                  name="id_conteneur"
+                  id="id_conteneur"
+                >
                   {dataDette.map((dt) => {
                     return <option value={dt.id}>{dt.nom_conteneur}</option>;
                   })}
                 </select>
               </div>
               <div className="mb-3 col-md-5">
-                <label htmlFor="qte" className="form-label">
+                <label htmlFor="monatantpayer" className="form-label">
                   Montant payer
                 </label>
                 <input
@@ -137,53 +154,51 @@ const AffecterUser = () => {
                   name="montantpayer"
                 />
               </div>
-              
-              <div className="mb-3 col-md-12">
-              </div>
-              {inputList.map((x, i) => (
-                <React.Fragment key={i}>
-                  <div className="mb-3 col-md-5">
-                    <label htmlFor={`marchandise-${i}`} className="form-label">
-                      Marchandise
-                    </label>
-                    <input
-                      value={x.marchandise}
-                      className="form-control"
-                      type="text"
-                      id={`marchandise-${i}`}
-                      name={`marchandise-${i}`}
-                      onChange={(e) => handleChangeInput(i, e)}
-                    />
-                  </div>
-                  <div className="mb-3 col-md-5">
-                    <label htmlFor={`montant-${i}`} className="form-label">
-                      Qte
-                    </label>
-                    <input
-                      value={x.montant}
-                      className="form-control"
-                      type="number"
-                      id={`montant-${i}`}
-                      name={`montant-${i}`}
-                      onChange={(e) => handleChangeInput(i, e)}
-                    />
-                  </div>
-                  {inputList.length - 1 === i && (
-                    <div className="mb-3 col-md-2">
+
+              <div className="mb-3 col-md-12"></div>
+              {inputListNew.map((x, i) => {
+                return (
+                  <>
+                    <div className="col-md-5 qte">
                       <br />
-                      <button
-                        className="btn btn-primary"
-                        onClick={handleAddClick}
-                      >
-                        +
-                      </button>
+                      <label for="" className="titre2">
+                        Qte
+                      </label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="0.00"
+                        name="qte"
+                        value={x.qte}
+                        onChange={(e) => handleInputChange(i, "qte", e.target.value)}
+                      />
                     </div>
-                  )}
-                </React.Fragment>
-              ))}
+                    <div className="col-md-5 marc">
+                      <br />
+                      <label for="" className="titre2">
+                        Marchandise
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="marchandise"
+                        value={x.marchandise}
+                        onChange={(e) => handleInputChange(i, "marchandise", e.target.value)}
+                      />
+                    </div>
+                    <div className="col-md-2">
+                      {inputListNew.length - 1 === i && (
+                        <button className="ml10 btn btn-primary" onClick={handleAddClick}>
+                          +
+                        </button>
+                      )}
+                    </div>
+                  </>
+                );
+              })}
             </div>
             <div className="mt-2">
-              {isLoading ? (
+              {isLoading2 ? (
                 <div className="spinner-border mr-4" role="status"></div>
               ) : (
                 <button type="submit" className="btn btn-primary me-2">
