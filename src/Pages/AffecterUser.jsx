@@ -35,8 +35,6 @@ const AffecterUser = () => {
       });
   }, []);
 
- 
-
   const handleSubmitEnvoie = async (e) => {
     e.preventDefault();
     setloading2(true);
@@ -46,37 +44,40 @@ const AffecterUser = () => {
         etat = 1;
     }
 
-    // Boucle sur chaque élément de inputList
-    inputListNew.forEach(async (item) => {
-        const formData = {
-            qte: item.qte,
-            produit: item.marchandise,
-            montantpayer: form.current["montantpayer"].value,
-            montant: form.current["montant"].value,
-            etat: etat,
-            nom_client: form.current["nom_client"].value,
-            telephone: form.current["telephone"].value,
-            id_conteneur: form.current["id_conteneur"].value,
-        };
+    const formDataBase = {
+        montantpayer: form.current["montantpayer"].value,
+        montant: form.current["montant"].value,
+        etat: etat,
+        nom_client: form.current["nom_client"].value,
+        telephone: form.current["telephone"].value,
+        id_conteneur: form.current["id_conteneur"].value,
+    };
+    
+    try {
+       inputListNew.map((item) => {
+            const formData = {
+              qte: item.qte,
+                produit:item.marchandise,
+                
+            };
+           dispatch(postMarchandise(formData));
+        });
 
-        try {
-            // Envoi de l'élément actuel de formData
-            await dispatch(postClient(formData));
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: `${error.response.data.message}`,
-                text: "Veuillez vérifier vos informations de connexion.",
-            });
-            throw error;
-        }
-    });
-
-    // Lorsque toutes les requêtes ont été envoyées
-    setloading(false);
-    form.current.reset();
-    setloading2(false);
+        Swal.fire({
+            icon: "success",
+            title: "L'opération a réussi avec succès",
+        });
+    } catch (error) {
+        Swal.fire({
+            icon: "error",
+            title: `${error.response.data.message}`,
+            text: "Veuillez vérifier vos informations de connexion.",
+        });
+        throw error;
+    }
 };
+
+
 
 
   return (
@@ -198,13 +199,11 @@ const AffecterUser = () => {
               })}
             </div>
             <div className="mt-2">
-              {isLoading2 ? (
-                <div className="spinner-border mr-4" role="status"></div>
-              ) : (
+             
                 <button type="submit" className="btn btn-primary me-2">
                   <i className="bx bx-plus"></i> Ajouter
                 </button>
-              )}
+            
               <button type="reset" className="btn btn-outline-secondary">
                 Annuler
               </button>
