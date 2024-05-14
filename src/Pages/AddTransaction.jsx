@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react'
 import { getVille } from '../actions/PaysAction';
 import { postTransaction } from '../actions/EntreAction';
@@ -67,70 +68,70 @@ const AddTransaction = () => {
     return (
         <>
             <div className='container mt-4'>
-                <div class="card mb-4">
-                    <h5 class="card-header">Faire une transaction</h5>
-                    <div class="card-body">
+                <div className="card mb-4">
+                    <h5 className="card-header">Faire une transaction</h5>
+                    <div className="card-body">
 
                     </div>
-                    <hr class="my-0" />
-                    <div class="card-body">
+                    <hr className="my-0" />
+                    <div className="card-body">
                         <form id="formAccountSettings" ref={form} method="POST" onSubmit={handleSubmit}>
-                            <div class="row">
-                                <div class="mb-3 col-md-6">
-                                    <label for="timeZones" class="form-label">Type de transaction</label>
-                                    <select id="country" class="select2 form-select">
+                            <div className="row">
+                                <div className="mb-3 col-md-6">
+                                    <label htmlFor="timeZones" className="form-label">Type de transaction</label>
+                                    <select id="country" className="select2 form-select">
                                         <option value="0">Selectionnez le type de transaction</option>
                                         <option value="1">Entrer</option>
                                         <option value="2">Sorti</option>
-                                        <option value="2">Special</option>
+                                        <option value="3">Special</option>
                                     </select>
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="firstName" class="form-label">NOM EMETEUR</label>
+                                <div className="mb-3 col-md-6">
+                                    <label htmlFor="firstName" className="form-label">NOM EMETEUR</label>
                                     <input
-                                        class="form-control"
+                                        className="form-control"
                                         type="text"
                                         id="firstName"
                                         name="firstName"
-                                        autofocus
+                                        autoFocus
                                     />
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="email" class="form-label">NOM RECEPETEUR</label>
+                                <div className="mb-3 col-md-6">
+                                    <label htmlFor="email" className="form-label">NOM RECEPETEUR</label>
                                     <input
-                                        class="form-control"
+                                        className="form-control"
                                         type="text"
                                         id="email"
                                         placeholder=""
                                     />
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="organization" class="form-label">MATRICULE</label>
+                                <div className="mb-3 col-md-6">
+                                    <label htmlFor="organization" className="form-label">MATRICULE</label>
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        className="form-control"
                                         id="organization"
                                         name="organization"
                                         value={generateMatricule()}
                                         readOnly
                                     />
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="phoneNumber">TELEPHONE</label>
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text">RDC (+243)</span>
+                                <div className="mb-3 col-md-6">
+                                    <label className="form-label" htmlFor="phoneNumber">TELEPHONE</label>
+                                    <div className="input-group input-group-merge">
+                                        <span className="input-group-text">RDC (+243)</span>
                                         <input
                                             type="text"
                                             id="phoneNumber"
                                             name="phoneNumber"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder=""
                                         />
                                     </div>
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="address" class="form-label">PAYS PROVENANCE</label>
-                                    <select id="country"  class="select2 form-select">
+                                <div className="mb-3 col-md-6">
+                                    <label htmlFor="address" className="form-label">PAYS PROVENANCE</label>
+                                    <select id="country"  className="select2 form-select">
                                         <option value="">Select</option>
                                         {
                                             etatData.map((d) => {
@@ -141,9 +142,9 @@ const AddTransaction = () => {
                                         }
                                     </select>
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="zipCode" class="form-label">PAYS DESTINATEUR</label>
-                                    <select id="country"  class="select2 form-select">
+                                <div className="mb-3 col-md-6">
+                                    <label htmlFor="zipCode" className="form-label">PAYS DESTINATEUR</label>
+                                    <select id="country"  className="select2 form-select">
                                         <option value="">Select</option>
                                         {
                                             etatData.map((d) => {
@@ -154,50 +155,50 @@ const AddTransaction = () => {
                                         }
                                     </select>
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="language" class="form-label">MONTANT</label>
+                                <div className="mb-3 col-md-6">
+                                    <label htmlFor="language" className="form-label">MONTANT</label>
                                     <input
                                         type="number"
-                                        class="form-control"
+                                        className="form-control"
                                         id="organization"
                                         name="organization"
                                     />
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="timeZones" class="form-label">MOTIF</label>
-                                    <textarea id="organization" name="" class="form-control" cols="10" rows="2"></textarea>
+                                <div className="mb-3 col-md-6">
+                                    <label htmlFor="timeZones" className="form-label">MOTIF</label>
+                                    <textarea id="organization" name="" className="form-control" cols="10" rows="2"></textarea>
                                 </div>
                             </div>
                             <div className=' col-md-12'>
 
-                                <div class="form-check form-switch">
+                                <div className="form-check form-switch">
                                     <input
-                                        class="form-check-input"
+                                        className="form-check-input"
                                         type="checkbox"
                                         id="flexSwitchCheckDefault"
                                         checked={showForm}
                                         onChange={toggleForm}
                                     />
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Dette</label>
+                                    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Dette</label>
                                 </div>
                             </div>
                             {
                                 showForm && (
                                     <div className='row'>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="timeZones" class="form-label">Montant</label>
+                                        <div className="mb-3 col-md-6">
+                                            <label htmlFor="timeZones" className="form-label">Montant</label>
                                             <input
                                                 type="number"
-                                                class="form-control"
+                                                className="form-control"
                                                 id="organization"
                                                 name="organization"
                                             />
                                         </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="timeZones" class="form-label">Type dette</label>
+                                        <div className="mb-3 col-md-6">
+                                            <label htmlFor="timeZones" className="form-label">Type dette</label>
                                             <input
                                                 type="number"
-                                                class="form-control"
+                                                className="form-control"
                                                 id="organization"
                                                 name="organization"
                                             
@@ -206,15 +207,15 @@ const AddTransaction = () => {
                                     </div>
                                 )
                             }
-                            <div class="mt-2">
+                            <div className="mt-2">
                                 {loading ? (
                                     <center>
                                         <div className="spinner-border" role="status"></div>
                                     </center>
                                 ) : (
-                                    <button type="submit" class="btn btn-primary me-2">Enregistrer</button>
+                                    <button type="submit" className="btn btn-primary me-2">Enregistrer</button>
                                 )}
-                                <button type="reset" class="btn btn-outline-secondary">Annuler</button>
+                                <button type="reset" className="btn btn-outline-secondary">Annuler</button>
                             </div>
                         </form>
                     </div>
