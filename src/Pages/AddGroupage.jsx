@@ -18,6 +18,7 @@ const AddGroupage = () => {
         setConteneur(uniqueNumber);
     }
 
+    // eslint-disable-next-line no-unused-vars
     const handleSubmit = (e) => {
         e.preventDefault();
     };
@@ -27,7 +28,9 @@ const AddGroupage = () => {
         setLoading(true);
         const formData = {
             nom_conteneur: form.current[0].value,
+            date_creation: form.current[2].value,
             numero: form.current[1].value,
+
         };
         await dispatch(postConteneur(formData))
             .then(() => {
@@ -60,8 +63,7 @@ const AddGroupage = () => {
                                         name="nom"
                                         autoFocus
                                     />
-                                </div>
-                                <div className="mb-3 col-md-6">
+
                                     <label htmlFor="numero" className="form-label">Numero</label>
                                     <input
                                         className="form-control"
@@ -71,7 +73,14 @@ const AddGroupage = () => {
                                         value={conteneur}
                                         autoFocus
                                     />
-                                    <button type="button" className="btn btn-secondary mt-2" onClick={generateUniqueNumber}>
+                                </div>
+                                <div className="mb-3 col-md-6">
+                                    
+                                    <label htmlFor="nom" className="form-label">Date de création</label>
+                                    <input type="date" className="form-control"  id="date_creation" name="date_creation" autoFocus />
+
+                                    <label></label>
+                                    <button type="button" className="btn btn-secondary w-100 mt-4" onClick={generateUniqueNumber}>
                                         Générer Numéro Unique
                                     </button>
                                 </div>

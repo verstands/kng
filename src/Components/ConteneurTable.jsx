@@ -71,7 +71,7 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
           <strong>{numero}</strong>
         </td>
         <td>
-          <strong>{dateFormat(created_at, "dd/mm/yyyy")}</strong>
+          <strong>{created_at}</strong>
         </td>
         <td>
           <Link to="" onClick={() => deleteConteneurHandle(id)}>
