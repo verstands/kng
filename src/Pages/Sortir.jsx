@@ -336,12 +336,7 @@ const Sortir = () => {
                             <div className="col-md-3">
                               <input type="date" className="form-control" />
                             </div>
-                            <div className="col-md-3">
-                              <button className="btn btn-primary">
-                                {" "}
-                                <i className="bx bx-filter"></i> Filtre
-                              </button>
-                            </div>
+                            
                           </div>
                         </div>
                         <hr />
