@@ -39,6 +39,7 @@ import PrintDepenseConteneur from '../Pages/Print/PrintDepenseConteneur'
 import PayementConteneurUser from '../Pages/PayementConteneurUser'
 import ClientConteneur from '../Pages/ClientConteneur'
 import AddPaiementUser from '../Pages/AddPaiementUser'
+import ViewDette from '../Pages/ViewDette'
 
 const IndexRoute = () => {
   return (
@@ -84,6 +85,7 @@ const IndexRoute = () => {
           <Route path="/PayementConteneurUser/:id" element={<PayementConteneurUser />} />
           <Route path="/ClientConteneur/:id" element={<ClientConteneur />} />
           <Route path="/AddPaiementUser/:id" element={<AddPaiementUser />} />
+          <Route path="/vieuwDetteClient/:id" element={<ViewDette />} />
         </Route>
       </Routes>
     </>

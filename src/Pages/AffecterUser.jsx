@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { getConteneur } from "../actions/ConteneurAction";
 import { useDispatch } from "react-redux";
 import { postClient } from "../actions/ClientAction";
+import Swal from "sweetalert2";
 
 const AffecterUser = () => {
   const [dataDette, setdataDette] = useState([]);
@@ -56,10 +57,10 @@ const AffecterUser = () => {
     try {
        inputListNew.map((item) => {
             const formData = {
-              qte: item.qte,
-                produit:item.marchandise,
-                
+                qte: item.qte,
+                produit:item.marchandise, 
             };
+            
            dispatch(postMarchandise(formData));
         });
 
