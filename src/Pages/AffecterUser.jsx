@@ -10,13 +10,13 @@ const AffecterUser = () => {
   const [isLoading2, setloading2] = useState(false);
 
   const [inputListNew, setInputListNew] = useState([
-    { marchandise:'', qte: '' },
+    { marchandise: "", qte: "" },
   ]);
   const dispatch = useDispatch();
   const form = useRef();
 
   const handleAddClick = () => {
-    setInputListNew([...inputListNew, { marchandise: '', qte: '' }]);
+    setInputListNew([...inputListNew, { marchandise: "", qte: "" }]);
   };
 
   const handleInputChange = (index, name, value) => {
@@ -36,37 +36,39 @@ const AffecterUser = () => {
       });
   }, []);
 
+  
+  const initialMarchandisesState = [{ marchandise: '', qte: '' }];
+
   const handleSubmitEnvoie = async (e) => {
     e.preventDefault();
     setloading2(true);
 
     let etat = 0;
     if (form.current["montantpayer"].value === form.current["montant"].value) {
-        etat = 1;
+      etat = 1;
     }
 
-    const formDataBase = {
-        montantpayer: form.current["montantpayer"].value,
-        montant: form.current["montant"].value,
-        etat: etat,
-        nom_client: form.current["nom_client"].value,
-        telephone: form.current["telephone"].value,
-        id_conteneur: form.current["id_conteneur"].value,
+    const clientData = {
+      montantpayer: form.current["montantpayer"].value,
+      montant: form.current["montant"].value,
+      etat: etat,
+      nom_client: form.current["nom_client"].value,
+      telephone: form.current["telephone"].value,
+      id_conteneur: form.current["id_conteneur"].value,
     };
-    
+
+    const marchandises = inputListNew.map((item) => ({
+      produit: item.marchandise,
+      qte: item.qte,
+    }));
+
+    const formData = {
+      ...clientData,
+      marchandises,
+    };
+
     try {
-      const response = await dispatch(postClient(formDataBase));
-      const clientId = response.data.clientId;
-
-      await Promise.all(inputListNew.map((item) => {
-        const marchandiseData = {
-          qte: item.qte,
-          produit: item.marchandise,
-          id_client: clientId,
-        };
-        return dispatch(postClient(marchandiseData));
-      }));
-
+      await dispatch(postClient(formData));
       Swal.fire({
         icon: "success",
         title: "L'opération a réussi avec succès",
@@ -79,12 +81,10 @@ const AffecterUser = () => {
       });
       throw error;
     } finally {
+      setInputListNew(initialMarchandisesState);
       setloading2(false);
     }
-};
-
-
-
+  };
 
   return (
     <div className="container mt-4">
@@ -177,7 +177,9 @@ const AffecterUser = () => {
                         placeholder="0.00"
                         name="qte"
                         value={x.qte}
-                        onChange={(e) => handleInputChange(i, "qte", e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange(i, "qte", e.target.value)
+                        }
                       />
                     </div>
                     <div className="col-md-5 marc">
@@ -190,12 +192,17 @@ const AffecterUser = () => {
                         className="form-control"
                         name="marchandise"
                         value={x.marchandise}
-                        onChange={(e) => handleInputChange(i, "marchandise", e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange(i, "marchandise", e.target.value)
+                        }
                       />
                     </div>
                     <div className="col-md-2">
                       {inputListNew.length - 1 === i && (
-                        <button className="ml10 btn btn-primary" onClick={handleAddClick}>
+                        <button
+                          className="ml10 btn btn-primary"
+                          onClick={handleAddClick}
+                        >
                           +
                         </button>
                       )}
@@ -205,11 +212,10 @@ const AffecterUser = () => {
               })}
             </div>
             <div className="mt-2">
-             
-                <button type="submit" className="btn btn-primary me-2">
-                  <i className="bx bx-plus"></i> Ajouter
-                </button>
-            
+              <button type="submit" className="btn btn-primary me-2">
+                <i className="bx bx-plus"></i> Ajouter
+              </button>
+
               <button type="reset" className="btn btn-outline-secondary">
                 Annuler
               </button>

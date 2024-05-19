@@ -65,9 +65,9 @@ const ClientConteneur = () => {
                 <div className="col-sm-7">
                   <div className="card-body">
                     <h5 className="card-title text-primary">
-                      <i className="bx bx-moneys"></i> Liste des... :
+                      <i className="bx bx-moneys"></i> Detail du conteneur  :
                       <span style={{ color: "red" }}>
-                        {dataDetteID.nom_conteneur}
+                        { dataDetteID.nom_conteneur}
                       </span>
                     </h5>
                   </div>
@@ -147,7 +147,7 @@ const ClientConteneur = () => {
                           <th className="bg-warning text-black">
                             <strong>{sommeMontantPaye}</strong>
                           </th>
-                          <th className=" bg-danger text-black">
+                          <th className=" bg-danger text-white">
                             <strong>{sommereste}</strong>
                           </th>
                         </tr>
@@ -157,7 +157,7 @@ const ClientConteneur = () => {
                             <strong>Depenses</strong>
                           </th>
                           <th className="text-black"></th>
-                          <th className="bg-warning text-black">
+                          <th className="bg-success text-black">
                             <strong>{total}</strong>
                           </th>
                           <th className="">
@@ -180,8 +180,8 @@ const ClientConteneur = () => {
                             className="text-white"
                           ></th>
                           <th
-                            style={{ backgroundColor: "success" }}
-                            className="text-success"
+                            style={{ backgroundColor: "black" }}
+                            className="text-white"
                           >
                             <strong>{sommeMontantPaye - total}</strong>
                           </th>
