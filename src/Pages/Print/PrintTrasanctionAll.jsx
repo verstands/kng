@@ -122,7 +122,7 @@ const PrintTrasanctionAlls = () => {
                        
                         <View style={styles.body}>
                             <View className="text-center">
-                                <Text style={{fontSize : 15}}>Liste des transactions </Text>
+                                <Text style={{fontSize : 15, textDecoration: 'underline'}}>Transactions du jour </Text>
                                 <Text> </Text>
                             </View>
                             <View>
