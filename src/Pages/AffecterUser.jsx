@@ -55,26 +55,31 @@ const AffecterUser = () => {
     };
     
     try {
-       inputListNew.map((item) => {
-            const formData = {
-                qte: item.qte,
-                produit:item.marchandise, 
-            };
-            
-           dispatch(postMarchandise(formData));
-        });
+      const response = await dispatch(postClient(formDataBase));
+      const clientId = response.data.clientId;
 
-        Swal.fire({
-            icon: "success",
-            title: "L'opération a réussi avec succès",
-        });
+      await Promise.all(inputListNew.map((item) => {
+        const marchandiseData = {
+          qte: item.qte,
+          produit: item.marchandise,
+          id_client: clientId,
+        };
+        return dispatch(postClient(marchandiseData));
+      }));
+
+      Swal.fire({
+        icon: "success",
+        title: "L'opération a réussi avec succès",
+      });
     } catch (error) {
-        Swal.fire({
-            icon: "error",
-            title: `${error.response.data.message}`,
-            text: "Veuillez vérifier vos informations de connexion.",
-        });
-        throw error;
+      Swal.fire({
+        icon: "error",
+        title: `${error.response.data.message}`,
+        text: "Veuillez vérifier vos informations de connexion.",
+      });
+      throw error;
+    } finally {
+      setloading2(false);
     }
 };
 

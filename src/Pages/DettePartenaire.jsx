@@ -21,8 +21,25 @@ const DettePartenaire = () => {
   }, []);
 
   const handleSubmit = async (e) => {
-    
-    
+    e.preventDefault();
+    setLoading(true);
+    const formData = {
+      intitule: form.current[1].value,
+      montant: form.current[0].value,
+      montantpayer: 0,
+      etat: 0,
+      transaction_id: form.current[2].value,
+    };
+
+    await dispatch(postDettePartenaire(formData))
+      .then(() => {
+        form.current.reset();
+        setLoading(false);
+      })
+      .catch(() => {})
+      .finally(() => {
+        setLoading(false);
+      });
   };
   return (
     <>

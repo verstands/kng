@@ -40,6 +40,9 @@ import PayementConteneurUser from '../Pages/PayementConteneurUser'
 import ClientConteneur from '../Pages/ClientConteneur'
 import AddPaiementUser from '../Pages/AddPaiementUser'
 import ViewDette from '../Pages/ViewDette'
+import PaiementDettePartenaireView from '../Pages/PaimentDettePartenaire'
+import ViewDettePartenaires from '../Pages/ViewDettePartenaire'
+import AddUser from '../Pages/AddUser'
 
 const IndexRoute = () => {
   return (
@@ -86,6 +89,9 @@ const IndexRoute = () => {
           <Route path="/ClientConteneur/:id" element={<ClientConteneur />} />
           <Route path="/AddPaiementUser/:id" element={<AddPaiementUser />} />
           <Route path="/vieuwDetteClient/:id" element={<ViewDette />} />
+          <Route path="/paiementDettePartenaire/:id" element={<PaiementDettePartenaireView />} />
+          <Route path="/vpp/:id" element={<ViewDettePartenaires />} />
+          <Route path="/utilisateur" element={<AddUser />} />
         </Route>
       </Routes>
     </>

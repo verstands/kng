@@ -277,7 +277,7 @@ const DetteClient = () => {
                                             <i className="bx bx-trash fs-2 me-1"></i>
                                           </Link>
                                           <Link
-                                            to={`/paiementDetteClient/${data.id}`}
+                                            to={`/paiementDettePartenaire/${data.id}`}
                                           >
                                             <i className="bx bx-money fs-2 me-1"></i>
                                           </Link>
