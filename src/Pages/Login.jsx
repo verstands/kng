@@ -37,32 +37,13 @@ const Login = () => {
   return (
     <div className="container">
      <br />
-     <br />
-     <br />
-     <br />
-     <br />
+    
       <div className="authentication-wrapper authentication-basic container-p-y">
         <div className="authentication-inner">
           <div className="card" style={{ maxWidth: '400px', margin: '0 auto' }}>
             <div className="card-body">
-              <div className="app-brand justify-content-center" style={{ textAlign: 'center' }}>
-                <a href="index.html" className="app-brand-link gap-2">
-                  <span className="app-brand-logo demo" style={{ width: '50px' }}> {/* Réduire la taille */}
-                    <svg
-                      width="25"
-                      viewBox="0 0 25 42"
-                      version="1.1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                    >
-                    </svg>
-                  </span>
-                  <span className="app-brand-text demo text-body fw-bolder"></span>
-                </a>
-              </div>
-              <h4 className="mb-2">Bienvenue chez  abg! 👋</h4>
-              <p className="mb-4">Veuillez vous connecter à votre compte et commencer l'aventure</p>
-
+              
+              <img src='ab.jpg' width="100%" height=""/>
               <form id="formAuthentication" onSubmit={handleSubmit} className="mb-3" action="index.html" method="POST">
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label">Email</label>

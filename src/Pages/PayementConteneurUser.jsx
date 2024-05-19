@@ -38,10 +38,9 @@ const PayementConteneurUser = () => {
       });
   }, [id]);
 
-  const sommeMontant = etatData.reduce(
-    (acc, curr) => acc + curr.montant,
-    0
-  );
+  const sommeMontantsPayes = etatData.reduce((acc, current) => acc + parseFloat(current.montant), 0);
+
+
 
   const deletePaiementHandler = async (id) => {
     try {
@@ -74,7 +73,7 @@ const PayementConteneurUser = () => {
                 <div className="card btn btn-sm btn-success col-md-2 m-2">
                   <div className="card-body ">
                     <p className="font-weight-bold">Total</p>
-                    <span className="font-weight-bold">{sommeMontant}</span>
+                    <span className="font-weight-bold">{sommeMontantsPayes}</span>
                   </div>
                 </div>
                 <div class="col-sm-5 text-center text-sm-left"></div>

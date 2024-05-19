@@ -75,14 +75,8 @@ const AddGroupage = () => {
                                     />
                                 </div>
                                 <div className="mb-3 col-md-6">
-                                    
                                     <label htmlFor="nom" className="form-label">Date de création</label>
                                     <input type="date" className="form-control"  id="date_creation" name="date_creation" autoFocus />
-
-                                    <label></label>
-                                    <button type="button" className="btn btn-secondary w-100 mt-4" onClick={generateUniqueNumber}>
-                                        Générer Numéro Unique
-                                    </button>
                                 </div>
                             </div>
                             <div className="mt-2">

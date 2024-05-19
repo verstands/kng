@@ -6,6 +6,7 @@ import {
     View,
     StyleSheet,
     PDFViewer,
+    Image
 } from "@react-pdf/renderer";
 import dateFormat from 'dateformat';
 import { useParams } from "react-router-dom";
@@ -112,22 +113,13 @@ const PrintTrasanctionAlls = () => {
                 <Document>
                     <Page size="A4" style={styles.page}>
                         <View style={styles.section}>
-                            <View className="row">
+                            <View style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <View className="col-md-6">
-                                    <Text>Image</Text>
-                                </View>
-                                <View className="col-md-6">
-                                    <Text style={{fontSize : 15}}>ABG</Text>
-                                    <Text style={{fontSize : 15}}>Kinshasa/Gombe</Text>
-                                    <Text style={{fontSize : 15}}>Republique Dem du Congo</Text>
+                                    <Image src="ab.jpg" style={{ width: 200, height: 100 }}/>
                                 </View>
                             </View>
                         </View>
-                        <View style={styles.Titre}>
-                            <View className="text-center">
-                                <Text></Text>
-                            </View>
-                        </View>
+                       
                         <View style={styles.body}>
                             <View className="text-center">
                                 <Text style={{fontSize : 15}}>Liste des transactions </Text>
