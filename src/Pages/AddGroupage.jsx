@@ -70,8 +70,6 @@ const AddGroupage = () => {
                                         type="text"
                                         id="numero"
                                         name="numero"
-                                        value={conteneur}
-                                        autoFocus
                                     />
                                 </div>
                                 <div className="mb-3 col-md-6">

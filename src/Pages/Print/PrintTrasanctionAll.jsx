@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
         width: "15%", 
         borderStyle: "solid", 
         borderColor: "#bfbfbf", 
-        borderBottomWidth: 1 
+        borderRightWidth: 1 /* Ajoute une ligne verticale à droite de chaque cellule */,
+        borderBottomWidth: 1,
     },
     tableCellHeader: { 
         margin: 5, 

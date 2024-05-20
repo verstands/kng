@@ -43,6 +43,7 @@ import ViewDette from '../Pages/ViewDette'
 import PaiementDettePartenaireView from '../Pages/PaimentDettePartenaire'
 import ViewDettePartenaires from '../Pages/ViewDettePartenaire'
 import AddUser from '../Pages/AddUser'
+import Profil from '../Pages/Profil'
 
 const IndexRoute = () => {
   return (
@@ -92,6 +93,7 @@ const IndexRoute = () => {
           <Route path="/paiementDettePartenaire/:id" element={<PaiementDettePartenaireView />} />
           <Route path="/vpp/:id" element={<ViewDettePartenaires />} />
           <Route path="/utilisateur" element={<AddUser />} />
+          <Route path="/profileUser" element={<Profil />} />
         </Route>
       </Routes>
     </>

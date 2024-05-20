@@ -101,7 +101,7 @@ const Layout = () => {
                                     <li class="nav-item lh-1 me-3">
                                         <a
                                             class="github-button"
-                                            href="https://github.com/themeselection/sneat-html-admin-template-free"
+                                            href=""
                                             data-icon="octicon-star"
                                             data-size="large"
                                             data-show-count="true"
@@ -127,7 +127,7 @@ const Layout = () => {
                                                             </div>
                                                         </div>
                                                         <div class="flex-grow-1">
-                                                            <span class="fw-semibold d-block">{profileData.nom} {profileData.postnom}</span>
+                                                            <span class="fw-semibold d-block">{profileData.postnom} {profileData.nom}</span>
                                                             <small class="text-muted">Adminstrateur</small>
                                                         </div>
                                                     </div>
@@ -137,10 +137,10 @@ const Layout = () => {
                                                 <div class="dropdown-divider"></div>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="#">
+                                                <Link class="dropdown-item" to="/profileUser">
                                                     <i class="bx bx-user me-2"></i>
                                                     <span class="align-middle">Mon profile</span>
-                                                </a>
+                                                </Link>
                                             </li>
                                             
                                             <li>

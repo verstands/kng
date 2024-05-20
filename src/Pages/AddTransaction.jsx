@@ -36,7 +36,8 @@ const AddTransaction = () => {
             etat:  form.current[0].value,
             montant_dette:  form.current[10].value,
             motif_dette:  form.current[11].value,
-            id_transaction:  ""
+            montantpayer:  0,
+            "etat_dette":0
         };
       
       await dispatch(postTransaction(formData))
@@ -197,7 +198,7 @@ const AddTransaction = () => {
                                         <div className="mb-3 col-md-6">
                                             <label htmlFor="timeZones" className="form-label">Type dette</label>
                                             <input
-                                                type="number"
+                                                type="text"
                                                 className="form-control"
                                                 id="organization"
                                                 name="organization"

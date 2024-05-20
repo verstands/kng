@@ -51,6 +51,25 @@ export const getUsers = () => {
     });
 };
 
+export const getProfile = () => {
+  return axioClient
+    .get(`profile`)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      if (error.response.status === 401) {
+        alert("ok");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Erreur lors de la récupération des données",
+          text: `${error}`,
+        });
+      }
+    });
+};
+
 
 export const postUser = (formData) => {
   return async (dispatch) => {
@@ -60,6 +79,26 @@ export const postUser = (formData) => {
         icon: "success",
         title: `${response.data.message}`,
       });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Erreur lors de la suppression de la dépense",
+        text: `${error.response.data.message}`,
+      });
+      throw error;
+    }
+  };
+};
+
+export const puttUser = (formData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axioClient.put(`profileMod`, formData);
+      Swal.fire({
+        icon: "success",
+        title: `${response.data.message}`,
+      });
+      window.location.href = "/deconnextion"
     } catch (error) {
       Swal.fire({
         icon: "error",

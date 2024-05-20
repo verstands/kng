@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   PDFViewer,
+  Image,
 } from "@react-pdf/renderer";
 import dateFormat from "dateformat";
 import { useParams } from "react-router-dom";
@@ -41,7 +42,6 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#bfbfbf",
     borderWidth: 1,
-   
   },
   tableRow: {
     flexDirection: "row",
@@ -95,27 +95,26 @@ const PrintGroupageUsers = () => {
   if (isLoading) {
     return <Text>Loading...</Text>;
   }
-
+  const sommeMontantsPayes = client.reduce((acc, current) => acc + current.client.montantpayer, 0);
   return (
     <>
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
         <Document>
           <Page size="A4" style={styles.page}>
             <View style={styles.section}>
-              <View className="row">
+              <View
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
                 <View className="col-md-6">
-                  <Text>Image</Text>
-                </View>
-                <View className="col-md-6">
-                  <Text style={{ fontSize: 15 }}>ABG</Text>
-                  <Text style={{ fontSize: 15 }}>Kinshasa/Gombe</Text>
-                  <Text style={{ fontSize: 15 }}>Republique Dem du Congo</Text>
+                  <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
                 </View>
               </View>
             </View>
             <View style={styles.Titre}>
               <View className="text-center">
-                <Text>Liste de manifeste</Text>
+                <Text style={{ fontSize: 15, textDecoration: "underline" }}>
+                  Liste de manifeste
+                </Text>
               </View>
             </View>
             <View style={styles.body}>
@@ -146,7 +145,7 @@ const PrintGroupageUsers = () => {
                   </View>
                   <View style={styles.tableCol}>
                     <Text style={styles.tableCell}>
-                      {dateFormat(etatData.created_at, "dd/mm/yyyy")}
+                    Le {etatData.date_creation}
                     </Text>
                   </View>
                 </View>
@@ -179,32 +178,49 @@ const PrintGroupageUsers = () => {
                         <Text style={styles.tableCell}>{number++}</Text>
                       </View>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{etatDatas.client.nom_client}</Text>
+                        <Text style={styles.tableCell}>
+                          {etatDatas.client.nom_client}
+                        </Text>
                       </View>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{etatDatas.client.telephone}</Text>
+                        <Text style={styles.tableCell}>
+                          {etatDatas.client.telephone}
+                        </Text>
                       </View>
                       <View style={styles.tableCol}>
-                        {etatDatas.client.marchandise.map((marchandise, index) => (
-                          <Text key={index} style={styles.tableCell}>
-                            {marchandise.produit}
-                          </Text>
-                        ))}
+                        {etatDatas.client.marchandise.map(
+                          (marchandise, index) => (
+                            <Text key={index} style={styles.tableCell}>
+                              {marchandise.produit}
+                            </Text>
+                          )
+                        )}
                       </View>
                       <View style={styles.tableCol}>
-                        {etatDatas.client.marchandise.map((marchandise, index) => (
-                          <Text key={index} style={styles.tableCell}>
-                            {marchandise.qte}
-                          </Text>
-                        ))}
+                        {etatDatas.client.marchandise.map(
+                          (marchandise, index) => (
+                            <Text key={index} style={styles.tableCell}>
+                              {marchandise.qte}
+                            </Text>
+                          )
+                        )}
                       </View>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{etatDatas.client.montantpayer}</Text>
-                        <Text style={[styles.tableCell, { color: 'red' }]}>TOTAL : {etatDatas.client.montant}</Text>
+                        <Text style={styles.tableCell}>
+                          {etatDatas.client.montantpayer}
+                        </Text>
+                        <Text style={[styles.tableCell, { color: etatDatas.client.etat === 0 ? "red" : "black" }]}>
+                          TOTAL : {etatDatas.client.montant}
+                        </Text>
                       </View>
                     </View>
                   </React.Fragment>
-                ))}                
+                ))}
+                <View style={styles.tableCol}>
+                  <Text style={[styles.tableCell, { color: "red" }]}>
+                    TOTAL : {sommeMontantsPayes}
+                  </Text>
+                </View>
               </View>
             </View>
           </Page>
