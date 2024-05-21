@@ -23,6 +23,16 @@ import DepnseTableKinshasa from "../Components/DepenseTableKinshasa";
 import EntrerTableSorti from "../Components/EntrerTableSorti";
 
 const Sortir = () => {
+  const getFiveDaysAgo = () => {
+    const today = new Date();
+    const fiveDaysAgo = new Date(today);
+    fiveDaysAgo.setDate(today.getDate() - 5);
+    const year = fiveDaysAgo.getFullYear();
+    const month = String(fiveDaysAgo.getMonth() + 1).padStart(2, '0');
+    const day = String(fiveDaysAgo.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTermJourne, setSearchTermJourne] = useState("");
   const [searchDepense, setSearchDepense] = useState("");
@@ -34,7 +44,7 @@ const Sortir = () => {
   const [countSorti, setCountSorti] = useState(0);
   const [countDepense, setCountDepense] = useState(0);
   const [countTotal, setcountTotal] = useState(0);
-  const [dateDebut, setDateDebut] = useState("2024-04-01");
+  const [dateDebut, setDateDebut] = useState(getFiveDaysAgo());
   const [dateFin, setDateFin] = useState(
     new Date().toISOString().split("T")[0]
   );

@@ -5,11 +5,21 @@ import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 
 const LesTransaction = ({ isLoading, setLoading }) => {
+  const getFiveDaysAgo = () => {
+    const today = new Date();
+    const fiveDaysAgo = new Date(today);
+    fiveDaysAgo.setDate(today.getDate() - 5);
+    const year = fiveDaysAgo.getFullYear();
+    const month = String(fiveDaysAgo.getMonth() + 1).padStart(2, '0');
+    const day = String(fiveDaysAgo.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+  
   const [etatData, setEtatData] = useState([]);
   const [searchTermJourne, setSearchTermJourne] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [dateDebut, setDateDebut] = useState("2024-04-01");
+  const [dateDebut, setDateDebut] = useState(getFiveDaysAgo());
   const [dateFin, setDateFin] = useState(new Date().toISOString().split('T')[0]);
   const [loadDate, setTosetloadDatetalPages] = useState(false);
 
@@ -22,6 +32,7 @@ const LesTransaction = ({ isLoading, setLoading }) => {
       setTosetloadDatetalPages(false);
     }, 1000);
   };
+  
 
   const handleDateDebutChange = (event) => {
     setTosetloadDatetalPages(true);
