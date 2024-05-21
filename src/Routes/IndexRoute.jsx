@@ -44,6 +44,11 @@ import PaiementDettePartenaireView from '../Pages/PaimentDettePartenaire'
 import ViewDettePartenaires from '../Pages/ViewDettePartenaire'
 import AddUser from '../Pages/AddUser'
 import Profil from '../Pages/Profil'
+import PrintTrasanctionAllKink from '../Pages/Print/PrintTransactionAllKin'
+import PrintTransactionKin from '../Pages/Print/PrintTransactionAllsKin'
+import UpdateClient from '../Pages/UpdateClient'
+
+
 
 const IndexRoute = () => {
   return (
@@ -53,11 +58,12 @@ const IndexRoute = () => {
         <Route path='/*' element={<Page404 />} />
         <Route path="/ImprimerTransaction/:id" element={<PrintTransaction />} />
         <Route path="/ImprimerTransactionAll" element={<PrintTrasanctionAll />} />
-        <Route path="/ImprimerTransactionAlls" element={<PrintTrasanctionAlls />} />
+        <Route path="/ImprimerTransactionAllKin" element={<PrintTrasanctionAllKink />} />
+        <Route path="/ImprimerTransactionAlls/:datadebut/:datefin" element={<PrintTrasanctionAlls />} />
+        <Route path="/ImprimerTransactionAllsKin/:datadebut/:datefin" element={<PrintTransactionKin />} />
         <Route path="/listegroupage" element={<PrintGroupageAll />} />
         <Route path="/listegroupageUser/:id" element={<PrintGroupageUsers />} />
         <Route path="/PrintDepenseConteneur/:id" element={<PrintDepenseConteneur />} />
-
         <Route element={<Layout />}>
           <Route path="/dashboad" element={<Dashboad />} />
           <Route path="/entrer" element={<Entre />} />
@@ -94,6 +100,7 @@ const IndexRoute = () => {
           <Route path="/vpp/:id" element={<ViewDettePartenaires />} />
           <Route path="/utilisateur" element={<AddUser />} />
           <Route path="/profileUser" element={<Profil />} />
+          <Route path="/UpdateClient/:id" element={<UpdateClient />} />
         </Route>
       </Routes>
     </>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import EntrerTable from "./EntrerTable";
 import { getEntre } from "../actions/EntreAction";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 const LesTransaction = ({ isLoading, setLoading }) => {
   const [etatData, setEtatData] = useState([]);
@@ -10,14 +11,24 @@ const LesTransaction = ({ isLoading, setLoading }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [dateDebut, setDateDebut] = useState("2024-04-01");
   const [dateFin, setDateFin] = useState(new Date().toISOString().split('T')[0]);
+  const [loadDate, setTosetloadDatetalPages] = useState(false);
+
   let nombre  = 1;
 
   const handleSearchJour = (event) => {
+    setTosetloadDatetalPages(true);
     setSearchTermJourne(event.target.value);
+    setTimeout(() => {
+      setTosetloadDatetalPages(false);
+    }, 1000);
   };
 
   const handleDateDebutChange = (event) => {
+    setTosetloadDatetalPages(true);
     setDateDebut(event.target.value);
+    setTimeout(() => {
+      setTosetloadDatetalPages(false);
+    }, 1000);
   };
 
   const handleDateFinChange = (event) => {
@@ -73,8 +84,8 @@ const LesTransaction = ({ isLoading, setLoading }) => {
               </div>
             </div>
           </div>
-          <Link to={`/ImprimerTransactionAlls`} title="Tous les transactions"><i className='bx bx-printer me-1'></i></Link>
-
+          <Link to={`/ImprimerTransactionAlls/${dateDebut}/${dateFin}`} title="Tous les transactions"><i className='bx bx-printer me-1'></i></Link>
+          <center>{loadDate ? <Spinner /> : ""}</center>
           <hr />
           <div className="card">
             {isLoading ? (

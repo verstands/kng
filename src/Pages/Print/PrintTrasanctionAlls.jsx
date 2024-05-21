@@ -11,9 +11,9 @@ import {
 import dateFormat from "dateformat";
 import { useParams } from "react-router-dom";
 import {
-  getEntreJourneAll,
   getEntreJourneAlls,
 } from "../../actions/EntreAction";
+
 
 const styles = StyleSheet.create({
   page: {
@@ -76,10 +76,10 @@ const PrintTransaction = () => {
   const [etatData, setEtatData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [typeText, setTypeText] = useState("");
-  let { id } = useParams();
+  let {id,  datadebut, datefin } = useParams();
 
   useEffect(() => {
-    getEntreJourneAlls(id)
+    getEntreJourneAlls(datadebut, datefin)
       .then((membre) => {
         setEtatData(membre);
         setLoading(false);
@@ -121,14 +121,14 @@ const PrintTransaction = () => {
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
                 <View className="col-md-6">
-                  <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
+                  <Image src="../ab.jpg" style={{ width: 200, height: 100 }} />
                 </View>
               </View>
             </View>
             <View style={styles.body}>
               <View className="text-center">
                 <Text style={{ fontSize: 15, textDecoration: "underline" }}>
-                  Liste des transactions{" "}
+                  Liste des transactions Dubai({` Du ${dateFormat(datadebut, 'dd/mm/yyyy')} Au ${dateFormat(datefin, 'dd/mm/yyyy')}`})
                 </Text>
                 <Text> </Text>
               </View>

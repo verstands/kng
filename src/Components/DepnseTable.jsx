@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { deleteDepense } from "../actions/DepenseAction";
 import { useDispatch } from "react-redux";
 
-const DepnseTable = ({ montant, id, created_at }) => {
+const DepnseTable = ({ montant, id, created_at, number }) => {
   const dispatch = useDispatch();
 
   const deleteDepenseHandler = async (id) => {
@@ -19,8 +19,11 @@ const DepnseTable = ({ montant, id, created_at }) => {
 
   return (
     <tr>
+    <td>
+    <i class=""></i> <strong>{number}</strong>
+  </td>
       <td>
-        <i class=""></i> <strong>{montant}$</strong>
+        <i class=""></i> <strong>{montant}</strong>
       </td>
       <td>
         <i class=""></i> <strong>{dateFormat(created_at, "dd/mm/yyyy")}</strong>

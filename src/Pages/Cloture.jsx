@@ -203,7 +203,7 @@ const Cloture = () => {
                     type="number"
                     id="firstName"
                     name="firstName"
-                    value={datacloture.detteclient}
+                    value={datacloture.transactionspecial}
                     autofocus
                   />
                 </div>

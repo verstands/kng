@@ -24,11 +24,9 @@ const DepenseDetail = () => {
                     <h5 class="card-header">Detail du depense</h5>
                     <div class="card-body">
                       <p className='text-danger'>
-                        <Link to={`/depenseupdate/${etatData.id}`}>
-                        MODIFIER <i className='bx bx-edit'></i>
-                        </Link>
+                        
                       </p>
-                      <p className='text-danger'>Date : {dateFormat(etatData.created_at, 'dd-mm-yyyy')}</p>
+                      <p className='text-danger'>Date : {dateFormat(etatData.created_at, 'dd/mm/yyyy')}</p>
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">

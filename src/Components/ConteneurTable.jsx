@@ -89,7 +89,13 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
         </Link>
         </td>
       </tr>
-      {activeTable === id && (
+      {
+        isLoading ? (
+          <center>
+            <Spinner />
+          </center>
+        ) : (
+        activeTable === id && (
         <tr key={id} className="container">
           <td colSpan={8}>
             <table className="table table-bordered">
@@ -130,6 +136,9 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
                         <Link to={`/PayementConteneurUser/${client.id}`}>
                           <i className="bx bx-money me-1 fs-2"></i>
                         </Link>
+                        <Link to={`/UpdateClient/${client.id}`}>
+                          <i className="bx bx-edit me-1 fs-2"></i>
+                        </Link>
                       </td>
                     </tr>
                   ))
@@ -138,6 +147,7 @@ const ConteneurTable = ({ nom_conteneur, id, created_at, numero }) => {
             </table>
           </td>
         </tr>
+      )
       )}
     </>
   );

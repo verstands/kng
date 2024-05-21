@@ -32,6 +32,7 @@ const Entre = () => {
   const [totalPages, setTotalPages] = useState(1);
 
   let nombre = 1;
+  let numberdepense = 1;
 
   useEffect(() => {
     totalaJourCount()
@@ -422,6 +423,7 @@ const Entre = () => {
                                   })
                                   .map((data, index) => (
                                     <DepnseTable
+                                      number={numberdepense++}
                                       id={data.id}
                                       montant={data.montant}
                                       created_at={data.created_at}

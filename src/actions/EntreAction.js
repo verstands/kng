@@ -73,9 +73,9 @@ export const getEntreJourneAll = () => {
       });
   };
 
-  export const getEntreJourneAlls = () => {
+  export const getEntreJourneAlls = (datadebut, datefin) => {
     return axioClient
-      .get(`EntreJourDubaiAlls`)
+      .get(`EntreJourDubaiAlls/${datadebut}/${datefin}`)
       .then((response) => {
         return response.data.data;
       })
@@ -113,11 +113,14 @@ export const getEntreDetail = (id) => {
 };
 
 //kinshasa
-export const getEntreKinshasa = () => {
+export const getEntreKinshasa = (page, dateDebut, dateFin) => {
   return axioClient
-    .get(`EntreKinshasa`)
+    .get(`EntreKinshasa/${dateDebut}/${dateFin}?page=${page}}`)
     .then((response) => {
-      return response.data.data.data;
+      return {
+        membres: response.data.data.data,
+        totalPages: response.data.data.last_page,
+      };
     })
     .catch((error) => {
       if (error.response.status === 401) {

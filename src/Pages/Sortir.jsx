@@ -34,11 +34,33 @@ const Sortir = () => {
   const [countSorti, setCountSorti] = useState(0);
   const [countDepense, setCountDepense] = useState(0);
   const [countTotal, setcountTotal] = useState(0);
+  const [dateDebut, setDateDebut] = useState("2024-04-01");
+  const [dateFin, setDateFin] = useState(
+    new Date().toISOString().split("T")[0]
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loadDate, setTosetloadDatetalPages] = useState(false);
 
   let nombre = 1;
-  
+  let nombreDepense = 1;
+
+  const handleDateDebutChange = (event) => {
+    setTosetloadDatetalPages(true);
+    setDateDebut(event.target.value);
+    setTimeout(() => {
+      setTosetloadDatetalPages(false);
+    }, 1000);
+  };
+
+  const handleDateFinChange = (event) => {
+    setTosetloadDatetalPages(true);
+    setDateFin(event.target.value);
+    setTimeout(() => {
+      setTosetloadDatetalPages(false);
+    }, 1000);
+  };
+
   useEffect(() => {
     ListeKinshasaJourCountTotal()
       .then((membre) => {
@@ -90,21 +112,22 @@ const Sortir = () => {
   }, []);
 
   useEffect(() => {
-    getEntreKinshasa()
-      .then((membre) => {
-        setetatData(membre);
+    getEntreKinshasa(currentPage, dateDebut, dateFin)
+      .then((data, totalPages) => {
+        setetatData(data.membres);
+        setTotalPages(totalPages);
         setloading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [currentPage, dateDebut, dateFin, setloading]);
 
   useEffect(() => {
     getEntreJourneKinshasa()
       .then((membre) => {
         setetatDataJ(membre);
-        setTotalPages(totalPages); 
+        setTotalPages(totalPages);
         setloading(false);
       })
       .catch((error) => {
@@ -123,7 +146,6 @@ const Sortir = () => {
     setSearchDepense(event.target.value);
   };
 
-  
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -141,8 +163,19 @@ const Sortir = () => {
                       <i className="bx bx-log-out m-1"></i>FIH ABS
                     </h5>
                     <div className="col-md-12">
-                      <Link to="/Addentrer" className="btn btn-sm btn-outline-primary m-2">Faire une transaction</Link>
-                      <Link to="/addDepenseKinshasa" className="btn btn-sm btn-outline-primary"> Depense</Link>
+                      <Link
+                        to="/Addentrer"
+                        className="btn btn-sm btn-outline-primary m-2"
+                      >
+                        Faire une transaction
+                      </Link>
+                      <Link
+                        to="/addDepenseKinshasa"
+                        className="btn btn-sm btn-outline-primary"
+                      >
+                        {" "}
+                        Depense
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -226,7 +259,9 @@ const Sortir = () => {
                           />
                         </div>
                         <div className="col-md-2">
-                          <Link to={`/ImprimerTransactionAll`}><i className="bx bx-printer fs-2 me-1"></i></Link>
+                          <Link to={`/ImprimerTransactionAllKin`}>
+                            <i className="bx bx-printer fs-2 me-1"></i>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -245,6 +280,7 @@ const Sortir = () => {
                                 <th className="text-white">Nom_emeteur</th>
                                 <th className="text-white">Nom recepeteur</th>
                                 <th className="text-white">Matricule</th>
+                                <th className="text-white">Type trasanction</th>
                                 <th className="text-white">Actions</th>
                               </tr>
                             </thead>
@@ -278,7 +314,9 @@ const Sortir = () => {
                                         ) ||
                                       data.etat
                                         .toLowerCase()
-                                        .includes(searchTermJourne.toLowerCase())
+                                        .includes(
+                                          searchTermJourne.toLowerCase()
+                                        )
                                     );
                                   })
                                   .map((data, index) => (
@@ -297,28 +335,32 @@ const Sortir = () => {
                         </div>
                       )}
                       <br />
-                        <div className="pagination-container">
-                          <button
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 1}
-                            className="btn btn-primary mr-2"
-                          >
-                            &laquo; Précédent
-                          </button>
-                          &nbsp;
-                          <button
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={currentPage === totalPages}
-                            className="btn btn-primary"
-                          >
-                            Suivant &raquo;
-                          </button>
-                        </div>
+                      <div className="pagination-container">
+                        <button
+                          onClick={() => handlePageChange(currentPage - 1)}
+                          disabled={currentPage === 1}
+                          className="btn btn-primary mr-2"
+                        >
+                          &laquo; Précédent
+                        </button>
+                        &nbsp;
+                        <button
+                          onClick={() => handlePageChange(currentPage + 1)}
+                          disabled={currentPage === totalPages}
+                          className="btn btn-primary"
+                        >
+                          Suivant &raquo;
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className="tab-pane p-20" id="profile" role="tabpanel">
                     <div className="p-20">
-                      <div className="tab-pane active" id="home" role="tabpanel">
+                      <div
+                        className="tab-pane active"
+                        id="home"
+                        role="tabpanel"
+                      >
                         <div className="p-20">
                           <div className="row">
                             <div className="col-md-3">
@@ -331,12 +373,27 @@ const Sortir = () => {
                               />
                             </div>
                             <div className="col-md-3">
-                              <input type="date" className="form-control" />
+                              <input
+                                type="date"
+                                className="form-control"
+                                value={dateDebut}
+                                onChange={handleDateDebutChange}
+                              />
                             </div>
                             <div className="col-md-3">
-                              <input type="date" className="form-control" />
+                              <input
+                                type="date"
+                                className="form-control"
+                                value={dateFin}
+                                onChange={handleDateFinChange}
+                              />
                             </div>
-                            
+                            <div className="col-md-2">
+                              <Link to={`/ImprimerTransactionAllsKin/${dateDebut}/${dateFin}`}>
+                                <i className="bx bx-printer fs-2 me-1"></i>
+                              </Link>
+                            </div>
+                            <center>{loadDate ? <Spinner /> : ""}</center>
                           </div>
                         </div>
                         <hr />
@@ -349,37 +406,62 @@ const Sortir = () => {
                             <div className="table-responsive text-nowrap">
                               <table className="table table-bordered">
                                 <thead>
-                                  <tr>
-                                    <th>N°</th>
-                                    <th>Nom_emeteur</th>
-                                    <th>Nom recepeteur</th>
-                                    <th>Matricule</th>
-                                    <th>Actions</th>
+                                  <tr className="bg-primary">
+                                    <th className="text-white">N°</th>
+                                    <th className="text-white">Nom_emeteur</th>
+                                    <th className="text-white">
+                                      Nom recepeteur
+                                    </th>
+                                    <th className="text-white">Matricule</th>
+                                    <th className="text-white">
+                                      Type trasanction
+                                    </th>
+                                    <th className="text-white">Actions</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   {Array.isArray(etatData) &&
                                     etatData
                                       .filter((data) => {
-                                        if (typeof data.matricule !== "string") {
-                                          return false;
-                                        }
-                                        return data.matricule
-                                          .toLowerCase()
-                                          .includes(
-                                            searchTermJourne.toLowerCase()
-                                          );
+                                        return (
+                                          typeof data.matricule === "string" &&
+                                          typeof data.nom_emateur ===
+                                            "string" &&
+                                          typeof data.nom_recepteur ===
+                                            "string" &&
+                                          typeof data.etat === "string" &&
+                                          (data.matricule
+                                            .toLowerCase()
+                                            .includes(
+                                              searchTermJourne.toLowerCase()
+                                            ) ||
+                                            data.nom_emateur
+                                              .toLowerCase()
+                                              .includes(
+                                                searchTermJourne.toLowerCase()
+                                              ) ||
+                                            data.nom_recepteur
+                                              .toLowerCase()
+                                              .includes(
+                                                searchTermJourne.toLowerCase()
+                                              ) ||
+                                            data.etat
+                                              .toLowerCase()
+                                              .includes(
+                                                searchTermJourne.toLowerCase()
+                                              ))
+                                        );
                                       })
                                       .map((data, index) => (
                                         <EntrerTableSorti
-                                      id={data.id}
-                                      nombre={nombre++}
-                                      nom_emateur={data.nom_emateur}
-                                      nom_recepteur={data.nom_recepteur}
-                                      type={data.etat}
-                                      matricule={data.matricule}
-                                      key={data.id}
-                                    />
+                                          id={data.id}
+                                          nombre={nombre++}
+                                          nom_emateur={data.nom_emateur}
+                                          nom_recepteur={data.nom_recepteur}
+                                          type={data.etat}
+                                          matricule={data.matricule}
+                                          key={data.id}
+                                        />
                                       ))}
                                 </tbody>
                               </table>
@@ -387,14 +469,32 @@ const Sortir = () => {
                           )}
                         </div>
                       </div>
+                      <br />
+                      <div className="pagination-container">
+                        <button
+                          onClick={() => handlePageChange(currentPage - 1)}
+                          disabled={currentPage === 1}
+                          className="btn btn-secondary mr-2"
+                        >
+                          &laquo; Précédent
+                        </button>
+                        &nbsp;
+                        <button
+                          onClick={() => handlePageChange(currentPage + 1)}
+                          disabled={currentPage === totalPages}
+                          className="btn btn-secondary"
+                        >
+                          Suivant &raquo;
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-           
-           <div className="col-md-4 ml-2">
-            <div className="card">
+
+            <div className="col-md-4 ml-2">
+              <div className="card">
                 <ul className="nav nav-tabs" role="tablist">
                   <li className="nav-item">
                     <a
@@ -412,19 +512,19 @@ const Sortir = () => {
                 </ul>
                 <div className="tab-content tabcontent-border">
                   <div className="col-md-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Recherche"
-                    value={searchDepense}
-                    onChange={handleSearchDepense}
-                  />
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Recherche"
+                      value={searchDepense}
+                      onChange={handleSearchDepense}
+                    />
                   </div>
                   <hr />
                   {isLoading ? (
-                  <div className="text-center">
-                    <Spinner />
-                  </div>
+                    <div className="text-center">
+                      <Spinner />
+                    </div>
                   ) : (
                     <div className="table-responsive text-nowrap">
                       <table className="table table-bordered">
@@ -449,6 +549,7 @@ const Sortir = () => {
                               })
                               .map((data, index) => (
                                 <DepnseTableKinshasa
+                                  numero={nombreDepense++}
                                   id={data.id}
                                   montant={data.montant}
                                   created_at={data.created_at}
@@ -458,13 +559,10 @@ const Sortir = () => {
                         </tbody>
                       </table>
                     </div>
-                  
                   )}
                 </div>
-               
+              </div>
             </div>
-           </div>
-            
           </div>
         </div>
       </div>

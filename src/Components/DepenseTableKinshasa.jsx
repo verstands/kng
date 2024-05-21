@@ -2,9 +2,10 @@ import React from 'react'
 import dateFormat from 'dateformat'
 import { Link } from 'react-router-dom'
 
-const DepnseTableKinshasa = ({ montant, id, created_at, }) => {
+const DepnseTableKinshasa = ({ montant, id, created_at,  numero}) => {
     return (
         <tr>
+            <td><i class=""></i> <strong>{numero}</strong></td>
             <td><i class=""></i> <strong>{montant}$</strong></td>
             <td><i class=""></i> <strong>{dateFormat(created_at, 'dd/mm/yyyy')}</strong></td>
             <td>

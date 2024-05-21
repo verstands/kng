@@ -40,6 +40,36 @@ export const getSortiJourne = (page) => {
     });
 };
 
+export const getEntreJourneAllKin = () => {
+  return axioClient
+    .get(`EntreJourDubaiAllKin`)
+    .then((response) => {
+        return response.data.data;
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Erreur lors de la récupération des données",
+        text: error.message,
+      });
+    });
+};
+
+export const getEntreJourneAllsKin = (datadebut, datefin) => {
+  return axioClient
+    .get(`EntreJourDubaiAllsKin/${datadebut}/${datefin}`)
+    .then((response) => {
+        return response.data.data;
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Erreur lors de la récupération des données",
+        text: error.message,
+      });
+    });
+};
+
 export const getCounrDepotKinshasa = () => {
   return axioClient
     .get(`EntreKinshasaJourCountEntre`)
