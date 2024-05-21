@@ -47,6 +47,7 @@ import Profil from '../Pages/Profil'
 import PrintTrasanctionAllKink from '../Pages/Print/PrintTransactionAllKin'
 import PrintTransactionKin from '../Pages/Print/PrintTransactionAllsKin'
 import UpdateClient from '../Pages/UpdateClient'
+import UpdateMr from '../Pages/UpdateMr'
 
 
 
@@ -101,6 +102,7 @@ const IndexRoute = () => {
           <Route path="/utilisateur" element={<AddUser />} />
           <Route path="/profileUser" element={<Profil />} />
           <Route path="/UpdateClient/:id" element={<UpdateClient />} />
+          <Route path="/UpdateMarchandise/:id" element={<UpdateMr />} />
         </Route>
       </Routes>
     </>

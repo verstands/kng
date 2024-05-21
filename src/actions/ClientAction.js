@@ -92,3 +92,24 @@ export const postClient = (formData) => {
       });
     };
   };
+
+
+  export const putClient = (formData, id) => {
+    return async (dispatch) => {
+      try {
+        const response = await axioClient.put(`PutClient/${id}`, formData);
+        Swal.fire({
+          icon: "success",
+          title: `${response.data.message}`,
+        });
+        window.location.href = "/conteneur"
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Erreur lors de la suppression de la dépense",
+          text: `${error.response.data.message}`,
+        });
+        throw error;
+      }
+    };
+  };
