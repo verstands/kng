@@ -142,7 +142,7 @@ const DetteClient = () => {
                                 <thead>
                                   <tr className="bg-primary">
                                     <th className="text-white">N°</th>
-                                    <th className="text-white">Nom_emeteur</th>
+                                    <th className="text-white">Nom Récepteur</th>
                                     <th className="text-white">
                                       Montant dette
                                     </th>
@@ -160,7 +160,7 @@ const DetteClient = () => {
                                       .filter((data) => {
                                         if (
                                           typeof data.id_transaction
-                                            .nom_emateur !== "string" ||
+                                            .nom_recepteur !== "string" ||
                                           typeof data.id_transaction
                                             .nom_recepteur !== "string" ||
                                           typeof data.id_transaction
@@ -169,7 +169,7 @@ const DetteClient = () => {
                                           return false;
                                         }
                                         return (
-                                          data.id_transaction.nom_emateur
+                                          data.id_transaction.nom_recepteur
                                             .toLowerCase()
                                             .includes(
                                               searchTerm.toLowerCase()
@@ -188,7 +188,7 @@ const DetteClient = () => {
                                         <DetteTablea
                                           id={data.id}
                                           nom_emateur={
-                                            data.id_transaction.nom_emateur
+                                            data.id_transaction.nom_recepteur
                                           }
                                           nom_recepteur={data.montant_dette}
                                           matricule={data.montantpayer}

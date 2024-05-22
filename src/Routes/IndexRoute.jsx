@@ -48,6 +48,7 @@ import PrintTrasanctionAllKink from '../Pages/Print/PrintTransactionAllKin'
 import PrintTransactionKin from '../Pages/Print/PrintTransactionAllsKin'
 import UpdateClient from '../Pages/UpdateClient'
 import UpdateMr from '../Pages/UpdateMr'
+import PrintClienConteneur from '../Pages/Print/PrintClienConteneur'
 
 
 
@@ -65,6 +66,7 @@ const IndexRoute = () => {
         <Route path="/listegroupage" element={<PrintGroupageAll />} />
         <Route path="/listegroupageUser/:id" element={<PrintGroupageUsers />} />
         <Route path="/PrintDepenseConteneur/:id" element={<PrintDepenseConteneur />} />
+        <Route path="/PrintClientConteneur/:id" element={<PrintClienConteneur />} />
         <Route element={<Layout />}>
           <Route path="/dashboad" element={<Dashboad />} />
           <Route path="/entrer" element={<Entre />} />
