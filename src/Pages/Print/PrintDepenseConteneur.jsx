@@ -121,9 +121,9 @@ const PrintDepenseConteneur = () => {
           <Page size="A4" style={styles.page}>
             <View style={styles.section}>
               <View className="row">
-                <View className="col-md-6">
-                  <Text>Image</Text>
-                </View>
+              <View className="col-md-6">
+              <Image src="../../public/ab.jpg" style={{ width: 200, height: 100 }} />
+            </View>
                 <View className="col-md-6">
                   <Text style={{ fontSize: 15 }}>ABG</Text>
                   <Text style={{ fontSize: 15 }}>Kinshasa/Gombe</Text>

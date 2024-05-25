@@ -166,9 +166,9 @@ const UpdateClient = () => {
                             onClick={() => deleteClientHandle(d.id)}
                           ></i>
                         </Link>
-                        <Link to="ss">
+                        <Link to={`/UpdateMarchandise/${d.id}`}>
                           <i className="bx bx-edit fs-2 me-1"></i>
-                        </Link>
+                        </Link>
                       </td>
                     </tr>
                   ))}

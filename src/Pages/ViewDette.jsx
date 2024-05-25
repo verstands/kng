@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Spinner from '../Components/Spinner';
-import { getDetteClientPaiement, getDetteIdd } from '../actions/DetteClientAction';
+import { getDetteClientPaiement, getDetteIdd, getDetteIddTransaction } from '../actions/DetteClientAction';
 import { useParams } from 'react-router-dom';
 import DetteClientPaimentTable from '../Components/DetteClientPaimentTable';
 import { getEntreDetail } from '../actions/EntreAction';
@@ -17,7 +17,7 @@ const ViewDette = () => {
     getDetteClientPaiement(id)
       .then((membre) => {
         setdatacloture(membre);
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -35,7 +35,7 @@ const ViewDette = () => {
   }, [])
 
   useEffect(() => {
-    getDetteIdd(id)
+    getDetteIddTransaction(id)
       .then((membre) => {
         setdetteid(membre);
       })
@@ -43,7 +43,8 @@ const ViewDette = () => {
         console.log(error);
       });
   }, [])
-  const sommeMontantsPayes = datacloture.reduce((acc, current) => acc + current.montant_paye, 0);
+  const sommeMontantsPayes = datacloture.reduce((acc, current) => acc + Number(current.montant_paye), 0);
+
 
   return (
     <div className="container-xxl flex-grow-1 container-p-y">
@@ -65,19 +66,19 @@ const ViewDette = () => {
                     <div className="row">
                       <div className="card btn btn-sm btn-success col-md-2 m-2">
                         <div className="card-body ">
-                          <p className="font-weight-bold">Dépôt</p>
+                          <p className="font-weight-bold">Montant  initial</p>
                           <span className="font-weight-bold">{detteid.montant_dette}</span>
                         </div>
                       </div>
-                      <div className="card btn btn-sm btn-danger col-md-2 m-2">
+                      <div className="card btn btn-sm btn-warning col-md-2 m-2">
                         <div className="card-body ">
-                          <p className="font-weight-bold">Somme de dette</p>
+                          <p className="font-weight-bold">Evolution dette</p>
                           <span className="font-weight-bold">
                             {sommeMontantsPayes}
                           </span>
                         </div>
                       </div>
-                      <div className="card btn btn-sm btn-primary col-md-2 m-2">
+                      <div className="card btn btn-sm btn-danger col-md-2 m-2">
                         <div className="card-body ">
                           <p className="font-weight-bold">Reste</p>
                           <span className="font-weight-bold">{detteid.montant_dette - sommeMontantsPayes}</span>
@@ -118,7 +119,7 @@ const ViewDette = () => {
                   <hr />
                 </div>
                 <div className="card">
-                  {!isLoading ? (
+                  {isLoading ? (
                     <div className="text-center">
                       <Spinner />
                     </div>

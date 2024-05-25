@@ -4,30 +4,63 @@ import { Link } from "react-router-dom";
 import DetteTablea from "../Components/DetteTablea";
 import { getDette } from "../actions/DetteClientAction";
 import Spinner from "../Components/Spinner";
-import { deleteDettePartenaire, getDettePartenanre } from "../actions/DettePartenanire";
+import {
+  deleteDettePartenaire,
+  getDettePartenanre,
+} from "../actions/DettePartenanire";
 import dateFormat from "dateformat";
 import { useDispatch } from "react-redux";
 
 const DetteClient = () => {
+  const getFiveDaysAgo = () => {
+    const today = new Date();
+    const fiveDaysAgo = new Date(today);
+    fiveDaysAgo.setDate(today.getDate() - 5);
+    const year = fiveDaysAgo.getFullYear();
+    const month = String(fiveDaysAgo.getMonth() + 1).padStart(2, "0");
+    const day = String(fiveDaysAgo.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const [searchTerm, setSearchTerm] = useState("");
   const [dataDette, setdataDette] = useState([]);
   const [dataDettePartenaire, setdataDettePartenanire] = useState([]);
   const [isLoading, setloading] = useState(true);
   const dispatch = useDispatch();
+  const [loadDate, setTosetloadDatetalPages] = useState(false);
+  const [dateDebut, setDateDebut] = useState(getFiveDaysAgo());
+  const [dateFin, setDateFin] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+  const [searchTermJourne, setSearchTermJourne] = useState("");
 
+  const handleDateDebutChange = (event) => {
+    setTosetloadDatetalPages(true);
+    setDateDebut(event.target.value);
+    setTimeout(() => {
+      setTosetloadDatetalPages(false);
+    }, 1000);
+  };
+
+  const handleDateFinChange = (event) => {
+    setTosetloadDatetalPages(true);
+    setDateFin(event.target.value);
+    setTimeout(() => {
+      setTosetloadDatetalPages(false);
+    }, 1000);
+  };
 
   let numpartenaire = 1;
   useEffect(() => {
-    getDette()
+    getDette(dateDebut, dateFin)
       .then((membre) => {
         setdataDette(membre);
-
         setloading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [dateDebut, dateFin]);
 
   useEffect(() => {
     getDettePartenanre()
@@ -42,7 +75,6 @@ const DetteClient = () => {
   const handleSearchDette = (event) => {
     setSearchTerm(event.target.value);
   };
-
 
   const deleteDettePartenaireP = async (id) => {
     try {
@@ -128,8 +160,30 @@ const DetteClient = () => {
                                 placeholder="Recherche"
                               />
                             </div>
+                            <div className="col-md-3">
+                              <input
+                                type="date"
+                                className="form-control"
+                                value={dateDebut}
+                                onChange={handleDateDebutChange}
+                              />
+                            </div>
+                            <div className="col-md-3">
+                              <input
+                                type="date"
+                                className="form-control"
+                                value={dateFin}
+                                onChange={handleDateFinChange}
+                              />
+                            </div>
+                            <div className="col-md-2">
+                          <Link to={`/PrintDetteClient/${dateDebut}/${dateFin}`}>
+                            <i className="bx bx-printer fs-2 me-1"></i>
+                          </Link>
+                        </div>
                           </div>
                         </div>
+                        <center>{loadDate ? <Spinner /> : ""}</center>
                         <hr />
                         <div className="card">
                           {isLoading ? (
@@ -142,7 +196,9 @@ const DetteClient = () => {
                                 <thead>
                                   <tr className="bg-primary">
                                     <th className="text-white">N°</th>
-                                    <th className="text-white">Nom Récepteur</th>
+                                    <th className="text-white">
+                                      Nom Récepteur
+                                    </th>
                                     <th className="text-white">
                                       Montant dette
                                     </th>
@@ -186,7 +242,7 @@ const DetteClient = () => {
                                       })
                                       .map((data, index) => (
                                         <DetteTablea
-                                          id={data.id}
+                                          id={data.id_transaction.id}
                                           nom_emateur={
                                             data.id_transaction.nom_recepteur
                                           }
@@ -215,9 +271,7 @@ const DetteClient = () => {
                             role="tabpanel"
                           >
                             <div className="p-20">
-                              <div className="row">
-                  
-                              </div>
+                              <div className="row"></div>
                             </div>
                             <hr />
                             <div className="card">
@@ -225,11 +279,15 @@ const DetteClient = () => {
                                 <thead>
                                   <tr className="bg-primary">
                                     <th className="text-white">N°</th>
-                                    <th className="text-white">Nom partenanire</th>
+                                    <th className="text-white">
+                                      Nom partenanire
+                                    </th>
                                     <th className="text-white">
                                       Montant total
                                     </th>
-                                    <th className="text-white">Montant total</th>
+                                    <th className="text-white">
+                                      Montant total
+                                    </th>
                                     <th className="text-white">Matricule</th>
                                     <th className="text-white">Date</th>
                                     <th className="text-white">Actions</th>
@@ -253,19 +311,23 @@ const DetteClient = () => {
                                         </td>
                                         <td>
                                           <i className=""></i>
+                                          <strong>{data.montantpayer}</strong>
+                                        </td>
+                                        <td>
+                                          <i className=""></i>
                                           <strong>
-                                          {data.montantpayer}
+                                            {data.transaction_id &&
+                                              data.transaction_id.matricule}
                                           </strong>
                                         </td>
                                         <td>
                                           <i className=""></i>
                                           <strong>
-                                          {data.transaction_id && data.transaction_id.matricule}
+                                            {dateFormat(
+                                              data.created_at,
+                                              "dd/mm/yyyy"
+                                            )}
                                           </strong>
-                                        </td>
-                                        <td>
-                                          <i className=""></i>
-                                          <strong>{dateFormat(data.created_at, "dd/mm/yyyy")}</strong>
                                         </td>
                                         <td>
                                           <Link

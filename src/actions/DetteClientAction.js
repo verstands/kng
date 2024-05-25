@@ -7,9 +7,9 @@ export const GET_ENTRE_JOURNEE = "GET_ENTRE_JOURNEE";
 export const DELETE_ENTRE = "DELETE_ENTRE";
 
 //const ville = localStorage.getItem('ville');
-export const getDette = (dataId) => {
+export const getDette = (datadebut, datefin) => {
   return axioClient
-    .get(`Dette`)
+    .get(`indexDette/${datadebut}/${datefin}`)
     .then((response) => {
       return response.data.data;
     })
@@ -25,6 +25,21 @@ export const getDette = (dataId) => {
 export const getDetteIdd = (id) => {
   return axioClient
     .get(`Dette/${id}`)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Erreur lors de la récupération des données",
+        text: `Entre/${dataId}`,
+      });
+    });
+};
+
+export const getDetteIddTransaction = (id) => {
+  return axioClient
+    .get(`detteIdTransation/${id}`)
     .then((response) => {
       return response.data.data;
     })
@@ -126,11 +141,18 @@ export const postDetteClientPaiement = (formData) => {
         title: `${response.data.message}`,
       });
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Erreur lors de la suppression de la dépense",
-        text: `${error.response.data.message}`,
-      });
+      if(error.response.status === 400){
+        Swal.fire({
+          icon: "error",
+          text: `${error.response.data.message}`,
+        });
+      }else{
+        Swal.fire({
+          icon: "error",
+          title: "",
+          text: `${error.response.data.message}`,
+        });
+      }
       throw error;
     }
   };

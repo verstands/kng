@@ -49,6 +49,8 @@ import PrintTransactionKin from '../Pages/Print/PrintTransactionAllsKin'
 import UpdateClient from '../Pages/UpdateClient'
 import UpdateMr from '../Pages/UpdateMr'
 import PrintClienConteneur from '../Pages/Print/PrintClienConteneur'
+import PrintDetteClient from '../Pages/Print/PrintDetteClient'
+import Visa from '../Pages/Visa'
 
 
 
@@ -67,6 +69,7 @@ const IndexRoute = () => {
         <Route path="/listegroupageUser/:id" element={<PrintGroupageUsers />} />
         <Route path="/PrintDepenseConteneur/:id" element={<PrintDepenseConteneur />} />
         <Route path="/PrintClientConteneur/:id" element={<PrintClienConteneur />} />
+        <Route path="/PrintDetteClient/:datadebut/:datefin" element={<PrintDetteClient />} />
         <Route element={<Layout />}>
           <Route path="/dashboad" element={<Dashboad />} />
           <Route path="/entrer" element={<Entre />} />
@@ -105,6 +108,7 @@ const IndexRoute = () => {
           <Route path="/profileUser" element={<Profil />} />
           <Route path="/UpdateClient/:id" element={<UpdateClient />} />
           <Route path="/UpdateMarchandise/:id" element={<UpdateMr />} />
+          <Route path="/visa" element={<Visa />} />
         </Route>
       </Routes>
     </>

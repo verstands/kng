@@ -23,30 +23,46 @@ export const getMarchaniseId = (id) => {
       return response.data.data;
     })
     .catch((error) => {
-        if(error.response.status === 404){
-            
-        }else{
-            Swal.fire({
-                icon: "error",
-                title: "Erreur lors de la récupération des données",
-                text: `Entre/${error}`,
-              });
-        }
+      if (error.response.status === 404) {
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Erreur lors de la récupération des données",
+          text: `Entre/${error}`,
+        });
+      }
     });
 };
-
+export const showClientUpdateKgb = (id) => {
+  return axioClient
+    .get(`showClientUpdate/${id}`)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      if (error.response.status === 404) {
+        /* empty */
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Erreur lors de la récupération des données",
+          text: `Entre/${error}`,
+        });
+      }
+    });
+};
 
 export const deletemarchandise = (id) => {
   return async (dispatch) => {
     Swal.fire({
-      title: 'Êtes-vous sûr?',
+      title: "Êtes-vous sûr?",
       text: "Vous ne pourrez pas revenir en arrière!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimer!',
-      cancelButtonText: 'Annuler'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Oui, supprimer!",
+      cancelButtonText: "Annuler",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -55,7 +71,7 @@ export const deletemarchandise = (id) => {
             icon: "success",
             title: `${response.data.message}`,
           });
-          window.location.reload()
+          window.location.reload();
         } catch (error) {
           Swal.fire({
             icon: "error",
