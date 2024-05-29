@@ -14,14 +14,15 @@ const ClientConteneur = () => {
   const [total, setTotal] = useState(0);
   const [dataDetteID, setdataDetteID] = useState([]);
 
-  const sommeMontantPaye = dataClient.reduce(
-    (acc, curr) => acc + curr.montantpayer,
+  const sommeMontantPaye = Math.round(dataClient.reduce(
+    (acc, curr) => acc + Math.round(curr.montantpayer),
     0
-  );
-  const sommeMontantPayeRecu = dataClient.reduce(
-    (acc, curr) => acc + curr.montant,
+  ));
+  
+  const sommeMontantPayeRecu = Math.round(dataClient.reduce(
+    (acc, curr) => acc + Math.round(curr.montant),
     0
-  );
+  ));
   const sommereste = sommeMontantPayeRecu - sommeMontantPaye;
 
   useEffect(() => {
@@ -65,7 +66,7 @@ const ClientConteneur = () => {
                 <div className="col-sm-7">
                   <div className="card-body">
                     <h5 className="card-title text-primary">
-                      <i className="bx bx-moneys"></i> Detail du conteneur  :
+                      <i className="bx bx-moneys"></i> Detail du conteneur  : {" "}
                       <span style={{ color: "red" }}>
                         { dataDetteID.nom_conteneur}
                       </span>

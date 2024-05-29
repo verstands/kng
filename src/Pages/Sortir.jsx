@@ -206,6 +206,12 @@ const Sortir = () => {
                     <div className="card btn btn-sm btn-primary col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Balance</p>
+                        <span className="font-weight-bold">{countDepot + countSorti}$</span>
+                      </div>
+                    </div>
+                    <div className="card btn btn-sm btn-primary col-md-2 m-2">
+                      <div className="card-body ">
+                        <p className="font-weight-bold">Reste</p>
                         <span className="font-weight-bold">{countTotal}$</span>
                       </div>
                     </div>

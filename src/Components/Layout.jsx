@@ -3,27 +3,18 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   let profileData = localStorage.getItem("data");
   profileData = JSON.parse(profileData);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    console.log("Menu State:", isMenuOpen);
-  };
-
   return (
     <>
       <div className="layout-wrapper layout-content-navbar">
         <div className="layout-container">
           <aside
             id="layout-menu"
-            className={`layout-menu menu-vertical menu bg-menu-theme ${
-              isMenuOpen ? "d-block" : "d-none d-xl-block"
-            }`}
+            className="layout-menu menu-vertical menu bg-menu-theme d-none d-xl-block"
           >
-            <a href="index.html" className="app-brand-link">
-              <img src="../public/ab.jpg" width="100%" height="" alt="Logo" />
+            <a href="" className="app-brand-link">
+              <img src={`../public/ab.jpg`} width="100%" height="" alt="Logo" />
               <br />
               <br />
               <br />
@@ -132,7 +123,7 @@ const Layout = () => {
               <div className="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                 <button
                   className="nav-item nav-link px-0 me-xl-4 btn"
-                  onClick={toggleMenu}
+                  
                 >
                   <i className="bx bx-menu bx-sm"></i>
                 </button>

@@ -121,7 +121,7 @@ const PrintTransaction = () => {
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
                 <View className="col-md-6">
-                  <Image src="../../public/ab.jpg" style={{ width: 200, height: 100 }} />
+                  <Image src="../public/ab.jpg" style={{ width: 200, height: 100 }} />
                 </View>
               </View>
             </View>

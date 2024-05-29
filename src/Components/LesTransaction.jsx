@@ -51,7 +51,6 @@ const LesTransaction = ({ isLoading, setLoading }) => {
       .then(({ data, totalPages }) => {
         setEtatData(data);
         setTotalPages(totalPages);
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
