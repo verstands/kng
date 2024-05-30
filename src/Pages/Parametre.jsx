@@ -82,6 +82,12 @@ const Parametre = () => {
                       >
                         + Ajouter un utilisateur
                       </Link>
+                      <Link
+                        to="/ListeUser"
+                        className="btn btn-sm btn-outline-primary"
+                      >
+                        Liste des uilisateurs
+                      </Link>
                     </div>
                   </div>
                 </div>

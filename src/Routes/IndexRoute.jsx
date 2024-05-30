@@ -51,6 +51,10 @@ import UpdateMr from '../Pages/UpdateMr'
 import PrintClienConteneur from '../Pages/Print/PrintClienConteneur'
 import PrintDetteClient from '../Pages/Print/PrintDetteClient'
 import Visa from '../Pages/Visa'
+import ListeUser from '../Pages/Print/ListeUser'
+import ListDettePartenaire from '../Pages/ListDettePartenaire'
+import ListeTransactionKinshasa from '../Pages/ListeTransactionKinshasa'
+import ListTransactionDubai from '../Pages/ListTransactionDubai'
 
 
 
@@ -109,6 +113,10 @@ const IndexRoute = () => {
           <Route path="/UpdateClient/:id" element={<UpdateClient />} />
           <Route path="/UpdateMarchandise/:id" element={<UpdateMr />} />
           <Route path="/visa" element={<Visa />} />
+          <Route path="/ListeUser" element={<ListeUser />} />
+          <Route path="/ListDettePartenaire" element={<ListDettePartenaire />} />
+          <Route path="/ListeTransactionKinshasa" element={<ListeTransactionKinshasa />} />
+          <Route path="/ListTransactionDubai" element={<ListTransactionDubai />} />
         </Route>
       </Routes>
     </>

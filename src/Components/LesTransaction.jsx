@@ -4,26 +4,28 @@ import { getEntre } from "../actions/EntreAction";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 
-const LesTransaction = ({ isLoading, setLoading }) => {
+const LesTransaction = () => {
   const getFiveDaysAgo = () => {
     const today = new Date();
     const fiveDaysAgo = new Date(today);
     fiveDaysAgo.setDate(today.getDate() - 5);
     const year = fiveDaysAgo.getFullYear();
-    const month = String(fiveDaysAgo.getMonth() + 1).padStart(2, '0');
-    const day = String(fiveDaysAgo.getDate()).padStart(2, '0');
+    const month = String(fiveDaysAgo.getMonth() + 1).padStart(2, "0");
+    const day = String(fiveDaysAgo.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
-  
+
   const [etatData, setEtatData] = useState([]);
   const [searchTermJourne, setSearchTermJourne] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [dateDebut, setDateDebut] = useState(getFiveDaysAgo());
-  const [dateFin, setDateFin] = useState(new Date().toISOString().split('T')[0]);
+  const [dateFin, setDateFin] = useState(
+    new Date().toISOString().split("T")[0]
+  );
   const [loadDate, setTosetloadDatetalPages] = useState(false);
 
-  let nombre  = 1;
+  let nombre = 1;
 
   const handleSearchJour = (event) => {
     setTosetloadDatetalPages(true);
@@ -32,7 +34,6 @@ const LesTransaction = ({ isLoading, setLoading }) => {
       setTosetloadDatetalPages(false);
     }, 1000);
   };
-  
 
   const handleDateDebutChange = (event) => {
     setTosetloadDatetalPages(true);
@@ -55,7 +56,7 @@ const LesTransaction = ({ isLoading, setLoading }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [currentPage, dateDebut, dateFin, setLoading]);
+  }, [currentPage, dateDebut, dateFin]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -77,82 +78,83 @@ const LesTransaction = ({ isLoading, setLoading }) => {
                 />
               </div>
               <div className="col-md-3">
-                <input 
-                  type="date" 
-                  className="form-control" 
+                <input
+                  type="date"
+                  className="form-control"
                   value={dateDebut}
                   onChange={handleDateDebutChange}
                 />
               </div>
               <div className="col-md-3">
-                <input 
-                  type="date" 
-                  className="form-control" 
+                <input
+                  type="date"
+                  className="form-control"  
                   value={dateFin}
                   onChange={handleDateFinChange}
                 />
               </div>
+              <div className="col-md-2">
+            <Link
+              to={`/ImprimerTransactionAlls/${dateDebut}/${dateFin}`}
+              title="Tous les transactions"
+            >
+              <i className="bx bx-printer fs-2 me-1"></i>
+            </Link>
+          </div>
             </div>
           </div>
-          <Link to={`/ImprimerTransactionAlls/${dateDebut}/${dateFin}`} title="Tous les transactions"><i className='bx bx-printer me-1'></i></Link>
           <center>{loadDate ? <Spinner /> : ""}</center>
           <hr />
           <div className="card">
-            {isLoading ? (
-              <div className="text-center">
-                <Spinner />
-              </div>
-            ) : (
-              <div className="table-responsive text-nowrap">
-                <table className="table table-bordered">
-                  <thead>
-                    <tr className="bg-primary">
-                      <th className="text-white">N°</th>
-                      <th className="text-white">Nom_emeteur</th>
-                      <th className="text-white">Nom recepeteur</th>
-                      <th className="text-white">Matricule</th>
-                      <th className="text-white">Type transaction</th>
-                      <th className="text-white">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Array.isArray(etatData) &&
-                      etatData
-                        .filter((data) => {
-                          return (
-                            typeof data.matricule === "string" &&
-                            typeof data.nom_emateur === "string" &&
-                            typeof data.nom_recepteur === "string" &&
-                            typeof data.etat === "string" &&
-                            (data.matricule
+            <div className="table-responsive text-nowrap">
+              <table className="table table-bordered">
+                <thead>
+                  <tr className="bg-primary">
+                    <th className="text-white">N°</th>
+                    <th className="text-white">Nom_emeteur</th>
+                    <th className="text-white">Nom recepeteur</th>
+                    <th className="text-white">Matricule</th>
+                    <th className="text-white">Type transaction</th>
+                    <th className="text-white">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Array.isArray(etatData) &&
+                    etatData
+                      .filter((data) => {
+                        return (
+                          typeof data.matricule === "string" &&
+                          typeof data.nom_emateur === "string" &&
+                          typeof data.nom_recepteur === "string" &&
+                          typeof data.etat === "string" &&
+                          (data.matricule
+                            .toLowerCase()
+                            .includes(searchTermJourne.toLowerCase()) ||
+                            data.nom_emateur
                               .toLowerCase()
                               .includes(searchTermJourne.toLowerCase()) ||
-                              data.nom_emateur
-                                .toLowerCase()
-                                .includes(searchTermJourne.toLowerCase()) ||
-                              data.nom_recepteur
-                                .toLowerCase()
-                                .includes(searchTermJourne.toLowerCase()) ||
-                              data.etat
-                                .toLowerCase()
-                                .includes(searchTermJourne.toLowerCase()))
-                          );
-                        })
-                        .map((data) => (
-                          <EntrerTable
-                            id={data.id}
-                            nombre={nombre++}
-                            nom_emateur={data.nom_emateur}
-                            nom_recepteur={data.nom_recepteur}
-                            type={data.etat}
-                            matricule={data.matricule}
-                            key={data.id} // Utilisation de l'ID comme clé
-                          />
-                        ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                            data.nom_recepteur
+                              .toLowerCase()
+                              .includes(searchTermJourne.toLowerCase()) ||
+                            data.etat
+                              .toLowerCase()
+                              .includes(searchTermJourne.toLowerCase()))
+                        );
+                      })
+                      .map((data) => (
+                        <EntrerTable
+                          id={data.id}
+                          nombre={nombre++}
+                          nom_emateur={data.nom_emateur}
+                          nom_recepteur={data.nom_recepteur}
+                          type={data.etat}
+                          matricule={data.matricule}
+                          key={data.id} // Utilisation de l'ID comme clé
+                        />
+                      ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

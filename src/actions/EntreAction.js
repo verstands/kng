@@ -118,7 +118,7 @@ export const getEntreKinshasa = (page, dateDebut, dateFin) => {
     .get(`EntreKinshasa/${dateDebut}/${dateFin}?page=${page}}`)
     .then((response) => {
       return {
-        membres: response.data.data.data,
+        data: response.data.data.data,
         totalPages: response.data.data.last_page,
       };
     })

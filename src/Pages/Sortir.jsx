@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Spinner from "../Components/Spinner";
 import { Link } from "react-router-dom";
 import {
-  getEntre,
-  getEntreJourne,
   getEntreJourneKinshasa,
   getEntreKinshasa,
 } from "../actions/EntreAction";
@@ -28,8 +26,8 @@ const Sortir = () => {
     const fiveDaysAgo = new Date(today);
     fiveDaysAgo.setDate(today.getDate() - 5);
     const year = fiveDaysAgo.getFullYear();
-    const month = String(fiveDaysAgo.getMonth() + 1).padStart(2, '0');
-    const day = String(fiveDaysAgo.getDate()).padStart(2, '0');
+    const month = String(fiveDaysAgo.getMonth() + 1).padStart(2, "0");
+    const day = String(fiveDaysAgo.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
 
@@ -124,7 +122,7 @@ const Sortir = () => {
   useEffect(() => {
     getEntreKinshasa(currentPage, dateDebut, dateFin)
       .then((data, totalPages) => {
-        setetatData(data.membres);
+        setetatData(data);
         setTotalPages(totalPages);
         setloading(false);
       })
@@ -186,6 +184,13 @@ const Sortir = () => {
                         {" "}
                         Depense
                       </Link>
+                      <Link
+                      to="/ListeTransactionKinshasa"
+                      className="btn btn-sm btn-outline-primary"
+                    >
+                      {" "}
+                      Liste des transaction
+                    </Link>
                     </div>
                   </div>
                 </div>
@@ -206,7 +211,9 @@ const Sortir = () => {
                     <div className="card btn btn-sm btn-primary col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Balance</p>
-                        <span className="font-weight-bold">{countDepot + countSorti}$</span>
+                        <span className="font-weight-bold">
+                          {parseInt(countDepot) + parseInt(countSorti)}$
+                        </span>
                       </div>
                     </div>
                     <div className="card btn btn-sm btn-primary col-md-2 m-2">
@@ -405,7 +412,9 @@ const Sortir = () => {
                               />
                             </div>
                             <div className="col-md-2">
-                              <Link to={`/ImprimerTransactionAllsKin/${dateDebut}/${dateFin}`}>
+                              <Link
+                                to={`/ImprimerTransactionAllsKin/${dateDebut}/${dateFin}`}
+                              >
                                 <i className="bx bx-printer fs-2 me-1"></i>
                               </Link>
                             </div>

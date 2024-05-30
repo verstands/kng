@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
@@ -14,7 +14,7 @@ const Layout = () => {
             className="layout-menu menu-vertical menu bg-menu-theme d-none d-xl-block"
           >
             <a href="" className="app-brand-link">
-              <img src={`../public/ab.jpg`} width="100%" height="" alt="Logo" />
+              <img src="/../public/ab.jpg" width="100%" height="" alt="Logo" />
               <br />
               <br />
               <br />
@@ -113,6 +113,16 @@ const Layout = () => {
                   <div data-i18n="Analytics">Parametre</div>
                 </Link>
               </li>
+              <li
+                className={`menu-item ${
+                  location.pathname === "/deconnextion" ? "active" : ""
+                }`}
+              >
+                <Link to="/deconnextion" className="menu-link">
+                  <i className="menu-icon tf-icons bx bx-user"></i>
+                  <div data-i18n="Analytics">Se decoonecter</div>
+                </Link>
+              </li>
             </ul>
           </aside>
           <div className="layout-page">
@@ -162,10 +172,9 @@ const Layout = () => {
                   </li>
 
                   <li className="nav-item navbar-dropdown dropdown-user dropdown">
-                    <a
+                    <Link
                       className="nav-link dropdown-toggle hide-arrow"
-                      href="javascript:void(0);"
-                      data-bs-toggle="dropdown"
+                      to="/profileUser"
                     >
                       <div className="avatar avatar-online">
                         <i
@@ -173,7 +182,7 @@ const Layout = () => {
                           style={{ fontSize: 40 }}
                         ></i>
                       </div>
-                    </a>
+                    </Link>
                     <ul className="dropdown-menu dropdown-menu-end">
                       <li>
                         <a className="dropdown-item" href="#">

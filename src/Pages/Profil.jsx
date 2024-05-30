@@ -104,12 +104,7 @@ const handleSubmit = async (e) => {
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <center>
-                    <i
-                      className="bx bx-user-circle"
-                      style={{ fontSize: "100px" }}
-                    ></i>
-                  </center>
+                  
                 </div>
               </div>
               <div className="mt-2">

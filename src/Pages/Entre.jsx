@@ -152,6 +152,12 @@ const Entre = () => {
                         >
                           Depense
                         </Link>
+                        <Link
+                        to="/ListTransactionDubai"
+                        className="btn btn-sm btn-outline-primary"
+                      >
+                        Liste des transactions
+                      </Link>
                       </div>
                     </div>
                   </div>
@@ -164,11 +170,13 @@ const Entre = () => {
                         </div>
                       </div>
                       <div className="card btn btn-sm btn-warning col-md-2 m-2">
-                      <div className="card-body ">
-                        <p className="font-weight-bold">Balance</p>
-                        <span className="font-weight-bold">{coutndepot - coutnretrait - total }</span>
+                        <div className="card-body ">
+                          <p className="font-weight-bold">Balance</p>
+                          <span className="font-weight-bold">
+                            {coutndepot - coutnretrait - total}
+                          </span>
+                        </div>
                       </div>
-                    </div>
                       <div className="card btn btn-sm btn-danger col-md-2 m-2">
                         <div className="card-body ">
                           <p className="font-weight-bold">Sorti</p>
@@ -183,10 +191,23 @@ const Entre = () => {
                           <span className="font-weight-bold">{total}</span>
                         </div>
                       </div>
-                      <div className="card btn btn-sm btn col-md-2 m-2" style={{ backgroundColor: "purple"}}>
+                      <div
+                        className="card btn btn-sm btn col-md-2 m-2"
+                        style={{ backgroundColor: "purple" }}
+                      >
                         <div className="card-body ">
-                          <p className="font-weight-bold" style={{ color: "white"}}>Solde</p>
-                          <span className="font-weight-bold" style={{ color: "white"}}>{balance}</span>
+                          <p
+                            className="font-weight-bold"
+                            style={{ color: "white" }}
+                          >
+                            Solde
+                          </p>
+                          <span
+                            className="font-weight-bold"
+                            style={{ color: "white" }}
+                          >
+                            {balance}
+                          </span>
                         </div>
                       </div>
                     </div>
