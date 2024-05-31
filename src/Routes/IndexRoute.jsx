@@ -55,6 +55,9 @@ import ListeUser from '../Pages/Print/ListeUser'
 import ListDettePartenaire from '../Pages/ListDettePartenaire'
 import ListeTransactionKinshasa from '../Pages/ListeTransactionKinshasa'
 import ListTransactionDubai from '../Pages/ListTransactionDubai'
+import EntrerVisa from '../Pages/EntrerVisa'
+import SortieVisa from '../Pages/SortirVisa'
+import SuiviVisa from '../Pages/SuiviVisa'
 
 
 
@@ -112,11 +115,14 @@ const IndexRoute = () => {
           <Route path="/profileUser" element={<Profil />} />
           <Route path="/UpdateClient/:id" element={<UpdateClient />} />
           <Route path="/UpdateMarchandise/:id" element={<UpdateMr />} />
-          <Route path="/visa" element={<Visa />} />
           <Route path="/ListeUser" element={<ListeUser />} />
           <Route path="/ListDettePartenaire" element={<ListDettePartenaire />} />
           <Route path="/ListeTransactionKinshasa" element={<ListeTransactionKinshasa />} />
           <Route path="/ListTransactionDubai" element={<ListTransactionDubai />} />
+          <Route path="/visa" element={<Visa />} />
+          <Route path="/EntreVisa" element={<EntrerVisa />}/>
+          <Route path="/SortieVisa" element={<SortieVisa />}/>
+          <Route path="/SuiviVisa" element={<SuiviVisa />}/>
         </Route>
       </Routes>
     </>

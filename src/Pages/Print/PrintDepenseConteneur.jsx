@@ -122,7 +122,7 @@ const PrintDepenseConteneur = () => {
             <View style={styles.section}>
               <View className="row">
               <View className="col-md-6">
-              <Image src="../../public/ab.jpg" style={{ width: 200, height: 100 }} />
+              <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
             </View>
                 <View className="col-md-6">
                   <Text style={{ fontSize: 15 }}>ABG</Text>

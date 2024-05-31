@@ -14,7 +14,7 @@ const Layout = () => {
             className="layout-menu menu-vertical menu bg-menu-theme d-none d-xl-block"
           >
             <a href="" className="app-brand-link">
-              <img src="/../public/ab.jpg" width="100%" height="" alt="Logo" />
+              <img src="ab.jpg" width="100%" height="" alt="Logo" />
               <br />
               <br />
               <br />
