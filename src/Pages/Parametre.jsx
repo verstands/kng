@@ -4,6 +4,7 @@ import { deleteUser, getUsers } from "../actions/Login.action";
 import dateFormat from "dateformat";
 import { deleteTypeDepense, gettypedepense } from "../actions/TypeDepnse";
 import { useDispatch } from "react-redux";
+import Spinner from "../Components/Spinner";
 
 const Parametre = () => {
   const [isLoading, setloading] = useState(true);
@@ -83,11 +84,12 @@ const Parametre = () => {
                         + Ajouter un utilisateur
                       </Link>
                       <Link
-                        to="/ListeUser"
+                        to="/Addtypevisa"
                         className="btn btn-sm btn-outline-primary"
                       >
-                        Liste des uilisateurs
+                        + Ajouter type visa
                       </Link>
+                      
                     </div>
                   </div>
                 </div>
@@ -101,30 +103,37 @@ const Parametre = () => {
               <div className="card">
                 <ul className="nav nav-tabs" role="tablist">
                   <li className="nav-item">
-                    <a
+                    <Link
                       className="nav-link active"
-                      data-bs-toggle="tab"
-                      href="#home"
-                      role="tab"
+                      to="/Parametre"
                     >
                       <span className="hidden-sm-up"></span>
                       <span className="hidden-xs-down">
                         <i className="fas fa-list"></i>Type depense
                       </span>
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a
+                    <Link
                       className="nav-link"
-                      data-bs-toggle="tab"
-                      href="#profile"
-                      role="tab"
+                      to="/ListeUser"
                     >
                       <span className="hidden-sm-up"></span>
                       <span className="hidden-xs-down">
-                        <i className="fas fa-mobile-alt"></i>profile
+                        <i className="fas fa-mobile-alt"></i>Liste des utilisateurs
                       </span>
-                    </a>
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link"
+                      to="/Typevisa"
+                    >
+                      <span className="hidden-sm-up"></span>
+                      <span className="hidden-xs-down">
+                        <i className="fas fa-mobile-alt"></i>Liste des type de visa
+                      </span>
+                    </Link>
                   </li>
                 </ul>
                 <div className="tab-content tabcontent-border">
@@ -132,11 +141,7 @@ const Parametre = () => {
                     <div className="p-20">
                       <div className="row">
                         <div className="col-md-10">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Recherche"
-                          />
+                          
                         </div>
                       </div>
                     </div>
@@ -187,6 +192,7 @@ const Parametre = () => {
                                 ))}
                           </tbody>
                         </table>
+                        <center>{isLoading ? <Spinner /> : ""}</center>
                       </div>
                     </div>
                     <br />

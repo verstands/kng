@@ -58,6 +58,10 @@ import ListTransactionDubai from '../Pages/ListTransactionDubai'
 import EntrerVisa from '../Pages/EntrerVisa'
 import SortieVisa from '../Pages/SortirVisa'
 import SuiviVisa from '../Pages/SuiviVisa'
+import TypeVisa from '../Pages/TypeVisa'
+import AddTypeVisa from '../Pages/AddTypeVisa'
+import UpdateTypeVisa from '../Pages/UpdateTypeVisa'
+import PrintVisa from '../Pages/Print/PrintVisa'
 
 
 
@@ -77,6 +81,7 @@ const IndexRoute = () => {
         <Route path="/PrintDepenseConteneur/:id" element={<PrintDepenseConteneur />} />
         <Route path="/PrintClientConteneur/:id" element={<PrintClienConteneur />} />
         <Route path="/PrintDetteClient/:datadebut/:datefin" element={<PrintDetteClient />} />
+        <Route path="/PrintVisa/:datadebut/:datefin" element={<PrintVisa/>} />
         <Route element={<Layout />}>
           <Route path="/dashboad" element={<Dashboad />} />
           <Route path="/entrer" element={<Entre />} />
@@ -107,7 +112,7 @@ const IndexRoute = () => {
           <Route path="/detailcloture/:id" element={<DetailCloture />} />
           <Route path="/PayementConteneurUser/:id" element={<PayementConteneurUser />} />
           <Route path="/ClientConteneur/:id" element={<ClientConteneur />} />
-          <Route path="/AddPaiementUser/:id" element={<AddPaiementUser />} />
+          <Route path="/AddPaiementUser/:id" element={<AddPaiementUser />} />created_at updated_at
           <Route path="/vieuwDetteClient/:id" element={<ViewDette />} />
           <Route path="/paiementDettePartenaire/:id" element={<PaiementDettePartenaireView />} />
           <Route path="/vpp/:id" element={<ViewDettePartenaires />} />
@@ -123,6 +128,9 @@ const IndexRoute = () => {
           <Route path="/EntreVisa" element={<EntrerVisa />}/>
           <Route path="/SortieVisa" element={<SortieVisa />}/>
           <Route path="/SuiviVisa" element={<SuiviVisa />}/>
+          <Route path="/Typevisa" element={<TypeVisa />}/>
+          <Route path="/Addtypevisa" element={<AddTypeVisa />}/>
+          <Route path="/UpdateTypeVisa/:id" element={<UpdateTypeVisa />}/>
         </Route>
       </Routes>
     </>

@@ -33,6 +33,9 @@ const Cloture = () => {
       detteclient: form.current[9].value,
       balanceDubai: form.current[0].value,
       balanceKinshasa: form.current[4].value,
+      depenseVisa: form.current[11].value,
+      entreVisa: form.current[12].value,
+      sortiVisa: form.current[13].value,
     };
     await dispatch(postCloture(formData))
       .then(() => {
@@ -204,6 +207,45 @@ const Cloture = () => {
                     id="firstName"
                     name="firstName"
                     value={datacloture.transactionspecial}
+                    autofocus
+                  />
+                </div>
+                <div class="mb-3 col-md-3">
+                  <label for="firstName" class="form-label">
+                    Depense Visa
+                  </label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="firstName"
+                    name="firstName"
+                    value={datacloture.depenseVisa}
+                    autofocus
+                  />
+                </div>
+                <div class="mb-3 col-md-3">
+                  <label for="firstName" class="form-label">
+                    Entre Visa
+                  </label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="firstName"
+                    name="firstName"
+                    value={datacloture.entreVisa}
+                    autofocus
+                  />
+                </div>
+                <div class="mb-3 col-md-3">
+                  <label for="firstName" class="form-label">
+                    Sorti Visa
+                  </label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="firstName"
+                    name="firstName"
+                    value={datacloture.sortiVisa}
                     autofocus
                   />
                 </div>

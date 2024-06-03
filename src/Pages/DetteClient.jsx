@@ -102,12 +102,6 @@ const DetteClient = () => {
                       >
                         + Ajouter dette partenaire
                       </Link>
-                      <Link
-                      to="/ListDettePartenaire"
-                      className="btn btn-sm btn-outline-primary"
-                    >
-                      Liste de dettes partenaires
-                    </Link>
                     </div>
                   </div>
                   <div className="col-sm-5 text-center text-sm-left"></div>
@@ -135,17 +129,15 @@ const DetteClient = () => {
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a
+                        <Link
                           className="nav-link"
-                          data-bs-toggle="tab"
-                          href="#profile"
-                          role="tab"
+                          to="/ListDettePartenaire"
                         >
                           <span className="hidden-sm-up"></span>
                           <span className="hidden-xs-down">
-                            <i className="fas fa-mobile-alt"></i>
+                            <i className="fas fa-mobile-alt"></i>Dette partenaire
                           </span>
-                        </a>
+                        </Link>
                       </li>
                       
                     </ul>

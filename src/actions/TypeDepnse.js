@@ -53,6 +53,7 @@ export const postTypedepense = (formData) => {
               icon: "success",
               title: `${response.data.message}`,
             });
+            window.location.reload();
           } catch (error) {
             Swal.fire({
               icon: "error",

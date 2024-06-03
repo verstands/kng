@@ -184,13 +184,6 @@ const Sortir = () => {
                         {" "}
                         Depense
                       </Link>
-                      <Link
-                      to="/ListeTransactionKinshasa"
-                      className="btn btn-sm btn-outline-primary"
-                    >
-                      {" "}
-                      Liste des transaction
-                    </Link>
                     </div>
                   </div>
                 </div>
@@ -255,17 +248,15 @@ const Sortir = () => {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a
+                    <Link
                       className="nav-link"
-                      data-bs-toggle="tab"
-                      href="#profile"
-                      role="tab"
+                      to="/ListeTransactionKinshasa"
                     >
                       <span className="hidden-sm-up"></span>
                       <span className="hidden-xs-down">
                         <i className="fas fa-mobile-alt"></i>Les transactions
                       </span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 <div className="tab-content tabcontent-border">
