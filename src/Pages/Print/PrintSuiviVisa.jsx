@@ -10,7 +10,8 @@ import {
 } from "@react-pdf/renderer";
 import dateFormat from "dateformat";
 import { useParams } from "react-router-dom";
-import { getEntreJourneAllsKin } from "../../actions/SortieAction";
+import { getEntreJourneAlls } from "../../actions/EntreAction";
+import { getVisa } from "../../actions/VisaAction";
 
 const styles = StyleSheet.create({
   page: {
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PrintTransactionKin = () => {
+const PrintSuiviVisa = () => {
   const [etatData, setEtatData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [typeText, setTypeText] = useState("");
@@ -81,7 +82,7 @@ const PrintTransactionKin = () => {
   }/${today.getFullYear()}`;
 
   useEffect(() => {
-    getEntreJourneAllsKin(datadebut, datefin)
+    getVisa(datadebut, datefin)
       .then((membre) => {
         setEtatData(membre);
         setLoading(false);
@@ -93,21 +94,6 @@ const PrintTransactionKin = () => {
   }, [id]);
 
   const datanow = new Date();
-  const formattedDate = dateFormat(datanow, "dd/mm/yyyy");
-
-  const getTypeText = (etat) => {
-    let typeText = "";
-    if (etat === "1") {
-      typeText = "Entre";
-    } else if (etat === "2") {
-      typeText = "Sorti";
-    } else if (etat === "3") {
-      typeText = "Transaction spacial";
-    } else {
-      typeText = etat;
-    }
-    return typeText;
-  };
 
   if (isLoading) {
     return <Text>Loading...</Text>;
@@ -138,7 +124,7 @@ const PrintTransactionKin = () => {
             <View style={styles.body}>
               <View className="text-center">
                 <Text style={{ fontSize: 15, textDecoration: "underline" }}>
-                  Liste des transactions Kinshasa(
+                  Liste des visa(
                   {` Du ${dateFormat(datadebut, "dd/mm/yyyy")} Au ${dateFormat(
                     datefin,
                     "dd/mm/yyyy"
@@ -151,43 +137,54 @@ const PrintTransactionKin = () => {
                 <View style={styles.table}>
                   <View style={styles.tableRow}>
                     <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>Emeteur</Text>
+                      <Text style={styles.tableCellHeader}>Nom</Text>
                     </View>
                     <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>Recepteur</Text>
+                      <Text style={styles.tableCellHeader}>Postnom</Text>
+                    </View>
+                    <View style={styles.tableColHeader}>
+                      <Text style={styles.tableCellHeader}>Prenom</Text>
+                    </View>
+                    <View style={styles.tableColHeader}>
+                      <Text style={styles.tableCellHeader}>Nationalite</Text>
+                    </View>
+                    <View style={styles.tableColHeader}>
+                      <Text style={styles.tableCellHeader}>Adresse</Text>
                     </View>
                     <View style={styles.tableColHeader}>
                       <Text style={styles.tableCellHeader}>Telephone</Text>
                     </View>
                     <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>
-                        Pays provenance
-                      </Text>
-                    </View>
-                    <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>
-                        Pays destinaaire
-                      </Text>
-                    </View>
-                    <View style={styles.tableColHeader}>
                       <Text style={styles.tableCellHeader}>Montant</Text>
                     </View>
                     <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>
-                        Type transaction
-                      </Text>
+                      <Text style={styles.tableCellHeader}>Etat</Text>
                     </View>
+                    <View style={styles.tableColHeader}>
+                    <Text style={styles.tableCellHeader}>Date</Text>
+                  </View>
                   </View>
                   {etatData.map((etatDatas) => (
                     <View style={styles.tableRow}>
                       <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{etatDatas.nom}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>
-                          {etatDatas.nom_emateur}
+                          {etatDatas.postnom}
+                        </Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{etatDatas.prenm}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>
+                          {etatDatas.nationalite}
                         </Text>
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>
-                          {etatDatas.nom_recepteur}
+                          {etatDatas.adresse}
                         </Text>
                       </View>
                       <View style={styles.tableCol}>
@@ -197,26 +194,18 @@ const PrintTransactionKin = () => {
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>
-                          {`${
-                            etatDatas.pays_provenance?.id_pays?.intitule || ""
-                          } - ${etatDatas.pays_provenance?.intitule || ""}`}
+                          {etatDatas.id_typevisa &&
+                            etatDatas.id_typevisa.montant}
                         </Text>
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>
-                          {`${
-                            etatDatas.pays_destinateut?.id_pays?.intitule || ""
-                          } - ${etatDatas.pays_destinateut?.intitule || ""}`}
+                        {etatDatas.etat === 1 ? "Acceter" : "Refusé"}
                         </Text>
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>
-                          {etatDatas.montant}
-                        </Text>
-                      </View>
-                      <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>
-                          {getTypeText(etatDatas.etat)}
+                          {dateFormat(etatDatas.created_at, "dd/mm/yyyy")}
                         </Text>
                       </View>
                     </View>
@@ -231,4 +220,4 @@ const PrintTransactionKin = () => {
   );
 };
 
-export default PrintTransactionKin;
+export default PrintSuiviVisa;

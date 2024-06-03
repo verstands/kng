@@ -270,7 +270,7 @@ const Visa = () => {
                                 <td>{data.nationalite}</td>
                                 <td>{data.adresse}</td>
                                 <td>{data.telephone}</td>
-                                <td>{data.id_typevisa && data.id_typevisa.montant } </td>
+                                <td>{data.id_typevisa && data.id_typevisa.montant} </td>
                                 <td>
                                 {dateFormat(data.created_at, "dd/mm/yyyy")}
                               </td>

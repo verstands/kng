@@ -10,10 +10,7 @@ import {
 } from "@react-pdf/renderer";
 import dateFormat from "dateformat";
 import { useParams } from "react-router-dom";
-import {
-  getEntreJourneAlls,
-} from "../../actions/EntreAction";
-
+import { getEntreJourneAlls } from "../../actions/EntreAction";
 
 const styles = StyleSheet.create({
   page: {
@@ -76,7 +73,12 @@ const PrintTransaction = () => {
   const [etatData, setEtatData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [typeText, setTypeText] = useState("");
-  let {id,  datadebut, datefin } = useParams();
+  let { id, datadebut, datefin } = useParams();
+
+  const today = new Date();
+  const dateNow = `${today.getDate()}/${
+    today.getMonth() + 1
+  }/${today.getFullYear()}`;
 
   useEffect(() => {
     getEntreJourneAlls(datadebut, datefin)
@@ -118,17 +120,30 @@ const PrintTransaction = () => {
           <Page size="A4" style={styles.page}>
             <View style={styles.section}>
               <View
-                style={{ display: "flex", justifyContent: "space-between" }}
+                style={{
+                  display: "flex", // corrected from "d-flex" to "flex"
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center", // added to vertically align items in the center
+                }}
               >
                 <View className="col-md-6">
                   <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text>{`Le ${dateNow}`}</Text>
                 </View>
               </View>
             </View>
             <View style={styles.body}>
               <View className="text-center">
                 <Text style={{ fontSize: 15, textDecoration: "underline" }}>
-                  Liste des transactions Dubai({` Du ${dateFormat(datadebut, 'dd/mm/yyyy')} Au ${dateFormat(datefin, 'dd/mm/yyyy')}`})
+                  Liste des transactions Dubai(
+                  {` Du ${dateFormat(datadebut, "dd/mm/yyyy")} Au ${dateFormat(
+                    datefin,
+                    "dd/mm/yyyy"
+                  )}`}
+                  )
                 </Text>
                 <Text> </Text>
               </View>

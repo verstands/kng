@@ -199,7 +199,7 @@ const SuiviVisa = () => {
                           </div>
                         </div>
                         <div className="col-md-2">
-                          <Link to="/listegroupage">
+                          <Link to={`/PrintVisaSuivi/${dateDebut}/${dateFin}`}>
                             <i
                               className="bx bx-printer me-1"
                               style={{ fontSize: "40px" }}

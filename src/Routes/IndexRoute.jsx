@@ -62,6 +62,7 @@ import TypeVisa from '../Pages/TypeVisa'
 import AddTypeVisa from '../Pages/AddTypeVisa'
 import UpdateTypeVisa from '../Pages/UpdateTypeVisa'
 import PrintVisa from '../Pages/Print/PrintVisa'
+import PrintSuiviVisa from '../Pages/Print/PrintSuiviVisa'
 
 
 
@@ -82,6 +83,7 @@ const IndexRoute = () => {
         <Route path="/PrintClientConteneur/:id" element={<PrintClienConteneur />} />
         <Route path="/PrintDetteClient/:datadebut/:datefin" element={<PrintDetteClient />} />
         <Route path="/PrintVisa/:datadebut/:datefin" element={<PrintVisa/>} />
+        <Route path="/PrintVisaSuivi/:datadebut/:datefin" element={<PrintSuiviVisa/>} />
         <Route element={<Layout />}>
           <Route path="/dashboad" element={<Dashboad />} />
           <Route path="/entrer" element={<Entre />} />

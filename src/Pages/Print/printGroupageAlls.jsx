@@ -86,6 +86,11 @@ const PrintGroupageAll = () => {
   const [typeText, setTypeText] = useState("");
   let { id } = useParams();
 
+  const today = new Date();
+  const dateNow = `${today.getDate()}/${
+    today.getMonth() + 1
+  }/${today.getFullYear()}`;
+
   useEffect(() => {
     getConteneur()
       .then((membre) => {
@@ -109,17 +114,27 @@ const PrintGroupageAll = () => {
           <Page size="A4" style={styles.page}>
             <View style={styles.section}>
               <View
-                style={{ display: "flex", justifyContent: "space-between" }}
+                style={{
+                  display: "flex", // corrected from "d-flex" to "flex"
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center", // added to vertically align items in the center
+                }}
               >
                 <View className="col-md-6">
                   <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text>{`Le ${dateNow}`}</Text>
                 </View>
               </View>
             </View>
 
             <View style={styles.body}>
               <View className="text-center">
-                <Text style={{ fontSize: 15,  textDecoration: "underline" }}>Liste des groupages </Text>
+                <Text style={{ fontSize: 15, textDecoration: "underline" }}>
+                  Liste des groupages{" "}
+                </Text>
                 <Text> </Text>
               </View>
               <View>
@@ -132,7 +147,9 @@ const PrintGroupageAll = () => {
                       <Text style={styles.tableCellHeader}>Numero</Text>
                     </View>
                     <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>Date de chargement</Text>
+                      <Text style={styles.tableCellHeader}>
+                        Date de chargement
+                      </Text>
                     </View>
                   </View>
                   {etatData.map((etatDatas) => (

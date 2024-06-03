@@ -79,6 +79,11 @@ const PrintGroupageUsers = () => {
   let { id } = useParams();
   let number = 1;
 
+  const today = new Date();
+  const dateNow = `${today.getDate()}/${
+    today.getMonth() + 1
+  }/${today.getFullYear()}`;
+
   useEffect(() => {
     getAllgroupage(id)
       .then((membre) => {
@@ -95,7 +100,11 @@ const PrintGroupageUsers = () => {
   if (isLoading) {
     return <Text>Loading...</Text>;
   }
-  const sommeMontantsPayes = client.reduce((acc, current) => acc + current.client.montantpayer, 0);
+  const sommeMontantsPayes = client.reduce((acc, current) => {
+    const montantPayer = parseInt(current.client.montantpayer, 10);
+    return acc + (isNaN(montantPayer) ? 0 : montantPayer);
+  }, 0);
+
   return (
     <>
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
@@ -103,10 +112,18 @@ const PrintGroupageUsers = () => {
           <Page size="A4" style={styles.page}>
             <View style={styles.section}>
               <View
-                style={{ display: "flex", justifyContent: "space-between" }}
+                style={{
+                  display: "flex", // corrected from "d-flex" to "flex"
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center", // added to vertically align items in the center
+                }}
               >
                 <View className="col-md-6">
                   <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text>{`Le ${dateNow}`}</Text>
                 </View>
               </View>
             </View>
@@ -145,7 +162,7 @@ const PrintGroupageUsers = () => {
                   </View>
                   <View style={styles.tableCol}>
                     <Text style={styles.tableCell}>
-                    Le {etatData.date_creation}
+                      Le {etatData.date_creation}
                     </Text>
                   </View>
                 </View>
@@ -209,7 +226,15 @@ const PrintGroupageUsers = () => {
                         <Text style={styles.tableCell}>
                           {etatDatas.client.montantpayer}
                         </Text>
-                        <Text style={[styles.tableCell, { color: etatDatas.client.etat === 0 ? "red" : "black" }]}>
+                        <Text
+                          style={[
+                            styles.tableCell,
+                            {
+                              color:
+                                etatDatas.client.etat === 0 ? "red" : "black",
+                            },
+                          ]}
+                        >
                           TOTAL : {etatDatas.client.montant}
                         </Text>
                       </View>

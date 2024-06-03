@@ -14,7 +14,10 @@ import {
   getEntreJourneAlls,
 } from "../../actions/EntreAction";
 import { getConteneur } from "../../actions/ConteneurAction";
-import { getDepenseConteneur, getDepenseConteneurTotal } from "../../actions/DepenseConteneurAction";
+import {
+  getDepenseConteneur,
+  getDepenseConteneurTotal,
+} from "../../actions/DepenseConteneurAction";
 
 const styles = StyleSheet.create({
   page: {
@@ -89,6 +92,11 @@ const PrintDepenseConteneur = () => {
   let { id } = useParams();
   let numero = 1;
 
+  const today = new Date();
+  const dateNow = `${today.getDate()}/${
+    today.getMonth() + 1
+  }/${today.getFullYear()}`;
+  
   useEffect(() => {
     getDepenseConteneur(id)
       .then((membre) => {
@@ -119,18 +127,23 @@ const PrintDepenseConteneur = () => {
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
         <Document>
           <Page size="A4" style={styles.page}>
-            <View style={styles.section}>
-              <View className="row">
-              <View className="col-md-6">
+          <View style={styles.section}>
+          <View
+            style={{
+              display: "flex", // corrected from "d-flex" to "flex"
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center", // added to vertically align items in the center
+            }}
+          >
+            <View className="col-md-6">
               <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
             </View>
-                <View className="col-md-6">
-                  <Text style={{ fontSize: 15 }}>ABG</Text>
-                  <Text style={{ fontSize: 15 }}>Kinshasa/Gombe</Text>
-                  <Text style={{ fontSize: 15 }}>Republique Dem du Congo</Text>
-                </View>
-              </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text>{`Le ${dateNow}`}</Text>
             </View>
+          </View>
+        </View>
             <View style={styles.Titre}>
               <View className="text-center">
                 <Text></Text>
@@ -181,12 +194,14 @@ const PrintDepenseConteneur = () => {
                   ))}
                   <View style={styles.tableRow}>
                     <View style={styles.tableColHeader}>
-                      <Text style={styles.tableCellHeader}>TOTAL : {total} </Text>
+                      <Text style={styles.tableCellHeader}>
+                        TOTAL : {total}{" "}
+                      </Text>
                     </View>
                     <View>
                       <Text></Text>
                     </View>
-                    <View >
+                    <View>
                       <Text></Text>
                     </View>
                     <View>

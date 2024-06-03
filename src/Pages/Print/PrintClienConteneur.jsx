@@ -86,24 +86,24 @@ const styles = StyleSheet.create({
   },
 
   blackText: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
   },
 
   redText: {
-    backgroundColor: 'red',
+    backgroundColor: "red",
   },
 
   greenText: {
-    backgroundColor: 'green',
+    backgroundColor: "green",
   },
 
   yellowText: {
-    backgroundColor: 'yellow',
+    backgroundColor: "yellow",
   },
 
   whiteText: {
-    color: 'white',
-    fontWeight: "bold"
+    color: "white",
+    fontWeight: "bold",
   },
 });
 
@@ -116,15 +116,22 @@ const PrintClienConteneur = () => {
   const [dataDetteID, setdataDetteID] = useState([]);
   let { id } = useParams();
 
-  const sommeMontantPaye = dataClient.reduce(
-    (acc, curr) => acc + curr.montantpayer,
-    0
-  );
-  const sommeMontantPayeRecu = dataClient.reduce(
-    (acc, curr) => acc + curr.montant,
-    0
-  );
+  const sommeMontantPaye = dataClient.reduce((acc, curr) => {
+    const montantPayer = parseInt(curr.montantpayer, 10);
+    return acc + (isNaN(montantPayer) ? 0 : montantPayer);
+  }, 0);
+
+  const sommeMontantPayeRecu = dataClient.reduce((acc, curr) => {
+    const montantRecu = parseInt(curr.montant, 10);
+    return acc + (isNaN(montantRecu) ? 0 : montantRecu);
+  }, 0);
+
   const sommereste = sommeMontantPayeRecu - sommeMontantPaye;
+
+  const today = new Date();
+  const dateNow = `${today.getDate()}/${
+    today.getMonth() + 1
+  }/${today.getFullYear()}`;
 
   useEffect(() => {
     getConteneuClient(id)
@@ -169,10 +176,18 @@ const PrintClienConteneur = () => {
           <Page size="A4" style={styles.page}>
             <View style={styles.section}>
               <View
-                style={{ display: "flex", justifyContent: "space-between" }}
+                style={{
+                  display: "flex", // corrected from "d-flex" to "flex"
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center", // added to vertically align items in the center
+                }}
               >
                 <View className="col-md-6">
                   <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text>{`Le ${dateNow}`}</Text>
                 </View>
               </View>
             </View>
@@ -180,7 +195,7 @@ const PrintClienConteneur = () => {
             <View style={styles.body}>
               <View className="text-center">
                 <Text style={{ fontSize: 15, textDecoration: "underline" }}>
-                   Détail du groupage {" "} { dataDetteID.nom_conteneur}
+                  Détail du groupage {dataDetteID.nom_conteneur}
                 </Text>
                 <Text> </Text>
               </View>
@@ -248,7 +263,9 @@ const PrintClienConteneur = () => {
                       <Text style={styles.tableCell}>{sommeMontantPaye}</Text>
                     </View>
                     <View style={[styles.tableCol, styles.redText]}>
-                      <Text style={[styles.tableCell, styles.whiteText]}>{sommereste}</Text>
+                      <Text style={[styles.tableCell, styles.whiteText]}>
+                        {sommereste}
+                      </Text>
                     </View>
                   </View>
 
@@ -266,30 +283,31 @@ const PrintClienConteneur = () => {
                       <Text style={styles.tableCell}>{total}</Text>
                     </View>
                     <View style={styles.tableCol}>
-                      <Text style={styles.tableCell}>
-                      </Text>
+                      <Text style={styles.tableCell}></Text>
                     </View>
                   </View>
 
                   <View style={styles.tableRow}>
-                  <View style={[styles.tableCol, styles.blackText]}>
-                    <Text style={styles.tableCell}></Text>
+                    <View style={[styles.tableCol, styles.blackText]}>
+                      <Text style={styles.tableCell}></Text>
+                    </View>
+                    <View style={[styles.tableCol, styles.blackText]}>
+                      <Text style={[styles.tableCell, styles.whiteText]}>
+                        Total
+                      </Text>
+                    </View>
+                    <View style={[styles.tableCol, styles.blackText]}>
+                      <Text style={styles.tableCell}></Text>
+                    </View>
+                    <View style={[styles.tableCol, styles.blackText]}>
+                      <Text style={[styles.tableCell, styles.whiteText]}>
+                        {sommeMontantPaye - total}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}></Text>
+                    </View>
                   </View>
-                  <View style={[styles.tableCol, styles.blackText]}>
-                    <Text style={[styles.tableCell, styles.whiteText]}>Total</Text>
-                  </View>
-                  <View style={[styles.tableCol, styles.blackText]}>
-                    <Text style={styles.tableCell}></Text>
-                  </View>
-                  <View style={[styles.tableCol, styles.blackText]}>
-                    <Text style={[styles.tableCell, styles.whiteText]}>{sommeMontantPaye - total}</Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>
-                    
-                    </Text>
-                  </View>
-                </View>
                 </View>
               </View>
             </View>

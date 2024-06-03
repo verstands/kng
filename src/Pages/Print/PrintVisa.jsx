@@ -79,6 +79,11 @@ const PrintVisa = () => {
   const [typeText, setTypeText] = useState("");
   let {id,  datadebut, datefin } = useParams();
 
+  const today = new Date();
+  const dateNow = `${today.getDate()}/${
+    today.getMonth() + 1
+  }/${today.getFullYear()}`;
+
   useEffect(() => {
     getVisa(datadebut, datefin)
       .then((membre) => {
@@ -93,22 +98,32 @@ const PrintVisa = () => {
 
   const datanow = new Date();
 
-
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
 
   return (
     <>
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
         <Document>
           <Page size="A4" style={styles.page}>
-            <View style={styles.section}>
-              <View
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
-                <View className="col-md-6">
-                  <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
-                </View>
-              </View>
+          <View style={styles.section}>
+          <View
+            style={{
+              display: "flex", // corrected from "d-flex" to "flex"
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center", // added to vertically align items in the center
+            }}
+          >
+            <View className="col-md-6">
+              <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
             </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text>{`Le ${dateNow}`}</Text>
+            </View>
+          </View>
+        </View>
             <View style={styles.body}>
               <View className="text-center">
                 <Text style={{ fontSize: 15, textDecoration: "underline" }}>

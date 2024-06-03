@@ -82,11 +82,16 @@ const PrintDetteClient = () => {
   const [typeText, setTypeText] = useState("");
   let { datadebut, datefin } = useParams();
 
+  const today = new Date();
+  const dateNow = `${today.getDate()}/${
+    today.getMonth() + 1
+  }/${today.getFullYear()}`;
+
   useEffect(() => {
     getDette(datadebut, datefin)
       .then((membre) => {
         setEtatData(membre);
-        console.log(datefin)
+        console.log(datefin);
         setLoading(false);
       })
       .catch((error) => {
@@ -106,10 +111,18 @@ const PrintDetteClient = () => {
           <Page size="A4" style={styles.page}>
             <View style={styles.section}>
               <View
-                style={{ display: "flex", justifyContent: "space-between" }}
+                style={{
+                  display: "flex", // corrected from "d-flex" to "flex"
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center", // added to vertically align items in the center
+                }}
               >
                 <View className="col-md-6">
                   <Image src="ab.jpg" style={{ width: 200, height: 100 }} />
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text>{`Le ${dateNow}`}</Text>
                 </View>
               </View>
             </View>
@@ -118,7 +131,7 @@ const PrintDetteClient = () => {
               <View className="text-center">
                 <Text style={{ fontSize: 15, textDecoration: "underline" }}>
                   {" "}
-                  Liste des dettes(
+                  Liste des dettes client(
                   {` Du ${dateFormat(datadebut, "dd/mm/yyyy")} Au ${dateFormat(
                     datefin,
                     "dd/mm/yyyy"
@@ -154,7 +167,9 @@ const PrintDetteClient = () => {
                         </Text>
                       </View>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{etatDatas.montant_dette}</Text>
+                        <Text style={styles.tableCell}>
+                          {etatDatas.montant_dette}
+                        </Text>
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>

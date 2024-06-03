@@ -79,7 +79,7 @@ const Login = () => {
                 <div className="mb-3">
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" id="remember-me" />
-                    <label className="form-check-label" htmlFor="remember-me"> Souviens-toi de moi </label>
+                    <label className="form-check-label" htmlFor="remember-me">Mot de passe oubliée </label>
                   </div>
                 </div>
                 <div className="mb-3">
