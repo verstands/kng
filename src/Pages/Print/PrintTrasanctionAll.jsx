@@ -11,8 +11,12 @@ import {
 import dateFormat from "dateformat";
 import { useParams } from "react-router-dom";
 import {
+  depenseDubaiJourCountSortiTs,
+  getCounrDepotDoubai,
+  getCounrRetraitDoubai,
   getEntreJourneAll,
   getEntreJourneAlls,
+  totalaJourCount,
 } from "../../actions/EntreAction";
 
 const styles = StyleSheet.create({
@@ -76,6 +80,12 @@ const PrintTrasanctionAlls = () => {
   const [etatData, setEtatData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [typeText, setTypeText] = useState("");
+  const [coutndepot, setcountdepot] = useState(0);
+  const [coutntst, setcountts] = useState(0);
+  const [coutnretrait, setcountretrait] = useState(0);
+  const [total, settotal] = useState(0);
+
+
   let { id } = useParams();
 
   const today = new Date();
@@ -94,6 +104,46 @@ const PrintTrasanctionAlls = () => {
         setLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    getCounrRetraitDoubai()
+      .then((membre) => {
+        setcountretrait(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    depenseDubaiJourCountSortiTs()
+      .then((membre) => {
+        setcountts(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    totalaJourCount()
+      .then((membre) => {
+        settotal(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    getCounrDepotDoubai()
+      .then((membre) => {
+        setcountdepot(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const datanow = new Date();
   const formattedDate = dateFormat(datanow, "dd/mm/yyyy");
@@ -141,7 +191,7 @@ const PrintTrasanctionAlls = () => {
             <View style={styles.body}>
               <View className="text-center">
                 <Text style={{ fontSize: 15, textDecoration: "underline" }}>
-                  Transactions du jour{" "}
+                  Transactions du jour{" "}(Dubai)
                 </Text>
                 <Text> </Text>
               </View>
@@ -219,6 +269,38 @@ const PrintTrasanctionAlls = () => {
                       </View>
                     </View>
                   ))}
+                  <View style={styles.tableRow}>
+                     <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>TOTAL ENTRE</Text>
+                    </View>
+                    <View style={[styles.tableCol,  {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>{coutndepot}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View  style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>TOTAL SORTIE</Text>
+                    </View>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text  style={[styles.tableCell, { color: "white" }]}>{coutnretrait}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View  style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>TOTAL TS</Text>
+                    </View>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text  style={[styles.tableCell, { color: "white" }]}>{coutntst}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text  style={[styles.tableCell, { color: "white" }]}>BALANCE</Text>
+                    </View>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>{coutndepot - coutnretrait - total}</Text>
+                    </View>
+                  </View>
                 </View>
               </View>
             </View>

@@ -211,6 +211,25 @@ export const getCounrRetraitDoubai = () => {
     });
 };
 
+export const depenseDubaiJourCountSortiTs = () => {
+  return axioClient
+    .get(`depenseDubaiJourCountSortiTs`)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      if (error.response.status === 401) {
+        alert("ok");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Erreur lors de la récupération des données",
+          text: `${error}`,
+        });
+      }
+    });
+};
+
 export const balanceDubai = () => {
   return axioClient
     .get(`balanceDubai2`)

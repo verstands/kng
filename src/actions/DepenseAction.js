@@ -57,7 +57,7 @@ export const postDepenseDubai = (formData) => {
             } else {
                 Swal.fire({
                     icon: "error",
-                    title: "Erreur lors de la récupération des donnéessssss",
+                    title: "Erreur lors de la récupération des donné",
                     text: `${error}`
                 });
             }

@@ -233,6 +233,7 @@ const PrintGroupageUsers = () => {
                               color:
                                 etatDatas.client.etat === 0 ? "red" : "black",
                             },
+                            
                           ]}
                         >
                           TOTAL : {etatDatas.client.montant}

@@ -108,6 +108,25 @@ export const getCounrRetraitKinshasa = () => {
     });
 };
 
+export const SortiKinshasaJourCountSortiTs = () => {
+  return axioClient
+    .get(`SortiKinshasaJourCountSortiTs`)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      if (error.response.status === 401) {
+        alert("ok");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Erreur lors de la récupération des données",
+          text: `${error}`,
+        });
+      }
+    });
+};
+
 export const getBalancetKinshasa = () => {
   return axioClient
     .get(`balanceKinsha`)
