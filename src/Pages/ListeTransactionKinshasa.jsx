@@ -73,6 +73,7 @@ const ListeTransactionKinshasa = () => {
     ListeKinshasaJourCountTotal()
       .then((membre) => {
         setdepenseData(membre);
+        console.log()
       })
       .catch((error) => {
         console.log(error);
@@ -122,7 +123,7 @@ const ListeTransactionKinshasa = () => {
   useEffect(() => {
     getEntreKinshasa(currentPage, dateDebut, dateFin)
       .then((data, totalPages) => {
-        setetatData(data);
+        setetatData(data.data);
         setTotalPages(totalPages);
         setloading(false);
       })
@@ -192,34 +193,34 @@ const ListeTransactionKinshasa = () => {
                     <div className="card btn btn-sm btn-success col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Dépôt</p>
-                        <span className="font-weight-bold">{countDepot}$</span>
+                        <span className="font-weight-bold">{countDepot}</span>
                       </div>
                     </div>
                     <div className="card btn btn-sm btn-danger col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Sorti</p>
-                        <span className="font-weight-bold">{countSorti}$</span>
+                        <span className="font-weight-bold">{countSorti}</span>
                       </div>
                     </div>
                     <div className="card btn btn-sm btn-primary col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Balance</p>
                         <span className="font-weight-bold">
-                          {parseInt(countDepot) + parseInt(countSorti)}$
+                          {parseInt(countDepot) + parseInt(countSorti)}
                         </span>
                       </div>
                     </div>
                     <div className="card btn btn-sm btn-primary col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Reste</p>
-                        <span className="font-weight-bold">{countTotal}$</span>
+                        <span className="font-weight-bold">{countTotal}</span>
                       </div>
                     </div>
                     <div className="card btn btn-sm btn-warning col-md-2 m-2">
                       <div className="card-body ">
                         <p className="font-weight-bold">Total depense</p>
                         <span className="font-weight-bold">
-                          {countDepense}$
+                          {countDepense}
                         </span>
                       </div>
                     </div>

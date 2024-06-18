@@ -11,6 +11,8 @@ import {
 import dateFormat from "dateformat";
 import { useParams } from "react-router-dom";
 import {
+  TransactionSpecialDubai,
+  balanceDubai,
   depenseDubaiJourCountSortiTs,
   getCounrDepotDoubai,
   getCounrRetraitDoubai,
@@ -84,6 +86,12 @@ const PrintTrasanctionAlls = () => {
   const [coutntst, setcountts] = useState(0);
   const [coutnretrait, setcountretrait] = useState(0);
   const [total, settotal] = useState(0);
+  const [balance, setbalance] = useState(0);
+  const [transactiospecial, settransactiospecial] = useState(0);
+  const [depense, setdepense] = useState(0);
+
+
+
 
 
   let { id } = useParams();
@@ -104,6 +112,26 @@ const PrintTrasanctionAlls = () => {
         setLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    TransactionSpecialDubai()
+      .then((membre) => {
+        settransactiospecial(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    balanceDubai()
+      .then((membre) => {
+        setbalance(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     getCounrRetraitDoubai()
@@ -290,15 +318,31 @@ const PrintTrasanctionAlls = () => {
                       <Text style={[styles.tableCell, { color: "white" }]}>TOTAL TS</Text>
                     </View>
                     <View style={[styles.tableCol, {backgroundColor : "black"}]}>
-                      <Text  style={[styles.tableCell, { color: "white" }]}>{coutntst}</Text>
+                      <Text  style={[styles.tableCell, { color: "white" }]}>{transactiospecial}</Text>
                     </View>
                   </View>
                   <View style={styles.tableRow}>
                     <View style={[styles.tableCol, {backgroundColor : "black"}]}>
-                      <Text  style={[styles.tableCell, { color: "white" }]}>BALANCE</Text>
+                      <Text  style={[styles.tableCell, { color: "white" }]}>DEPENSE</Text>
                     </View>
                     <View style={[styles.tableCol, {backgroundColor : "black"}]}>
-                      <Text style={[styles.tableCell, { color: "white" }]}>{coutndepot - coutnretrait - total}</Text>
+                      <Text style={[styles.tableCell, { color: "white" }]}>{total}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text  style={[styles.tableCell, { color: "white" }]}>RESTE</Text>
+                    </View>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>{balance}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text  style={[styles.tableCell, { color: "white" }]}>MONTANT PRECEDENT</Text>
+                    </View>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>{(parseInt(transactiospecial) - parseInt(coutndepot) -parseInt(coutnretrait)) + parseInt(balance)}</Text>
                     </View>
                   </View>
                 </View>

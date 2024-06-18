@@ -79,6 +79,11 @@ const PrintTrasanctionAllKink = () => {
   const [countSorti, setCountSorti] = useState(0);
   const [countTotal, setcountTotal] = useState(0);
   const [countTS, setcountTs] = useState(0);
+  const [countREST, setcountRest] = useState(0);
+  const [countDepense, setCountDepense] = useState(0);
+
+
+
 
   let { id } = useParams();
 
@@ -98,6 +103,16 @@ const PrintTrasanctionAllKink = () => {
         setLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    getBalancetKinshasa()
+      .then((membre) => {
+        setcountRest(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     getCounrDepotKinshasa()
@@ -133,6 +148,16 @@ const PrintTrasanctionAllKink = () => {
     SortiKinshasaJourCountSortiTs()
       .then((membre) => {
         setcountTs(membre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    getCounrDepenseKinshasa()
+      .then((membre) => {
+        setCountDepense(membre);
       })
       .catch((error) => {
         console.log(error);
@@ -290,10 +315,26 @@ const PrintTrasanctionAllKink = () => {
                   </View>
                   <View style={styles.tableRow}>
                     <View style={[styles.tableCol, {backgroundColor : "black"}]}>
-                      <Text style={[styles.tableCell, { color: "white" }]}>BALANCE</Text>
+                      <Text style={[styles.tableCell, { color: "white" }]}>DEPENSE</Text>
                     </View>
                     <View style={[styles.tableCol,  {backgroundColor : "black"}]}>
-                      <Text style={[styles.tableCell, { color: "white" }]}>{parseInt(countDepot) - (parseInt(countSorti) - parseInt(countTotal))}</Text>
+                      <Text style={[styles.tableCell, { color: "white" }]}>{countDepense}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>RESTE</Text>
+                    </View>
+                    <View style={[styles.tableCol,  {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>{countREST}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View style={[styles.tableCol, {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>MONTANT PRECEDENT</Text>
+                    </View>
+                    <View style={[styles.tableCol,  {backgroundColor : "black"}]}>
+                      <Text style={[styles.tableCell, { color: "white" }]}>{(parseInt(countTotal) - parseInt(countDepot) - parseInt(countSorti)) + parseInt(countREST)}</Text>
                     </View>
                   </View>
                 </View>
